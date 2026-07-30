@@ -234,7 +234,7 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('home') }}">
                 <!-- Logo Emblem -->
-                <img src="{{ asset('storage/logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain; flex-shrink: 0;">
+                <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain; flex-shrink: 0;">
                 <!-- Brand text -->
                 <span class="fw-bold" style="color: #E74C3C; font-size: 1.15rem; letter-spacing: -0.5px;">Sertifikat</span>
                 <span class="fw-bold px-1 text-muted" style="font-size: 1.15rem;">|</span>

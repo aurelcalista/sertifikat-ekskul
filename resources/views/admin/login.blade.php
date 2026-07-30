@@ -399,7 +399,7 @@
             <!-- Brand -->
             <div>
                 <a href="{{ route('home') }}" class="brand-header">
-                    <img src="{{ asset('storage/logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain;">
+                    <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain;">
                     <div>
                         <div class="d-flex align-items-center">
                             <span class="brand-text-large">Sertifikat</span>
@@ -546,7 +546,7 @@
                 <div class="card-header-custom text-center">
                     <!-- School Logo (Replacing text and emblem box) -->
                     <div class="mb-3">
-                        <img src="{{ asset('storage/logos/logo-rakitai.png') }}" alt="Logo" width="70" height="70" style="object-fit: contain;">
+                        <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="70" height="70" style="object-fit: contain;">
                     </div>
                     <div class="d-flex align-items-center justify-content-center mb-2">
                         <span class="fw-bold" style="color: #E74C3C; font-size: 1.55rem; letter-spacing: -0.5px;">Sertifikat</span>

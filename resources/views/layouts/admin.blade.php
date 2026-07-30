@@ -371,7 +371,7 @@
 
         <a href="{{ route('admin.dashboard') }}" class="sidebar-brand d-flex align-items-center gap-2 mb-4 py-2 text-decoration-none">
             <!-- Logo Emblem -->
-            <img src="{{ asset('storage/logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain; flex-shrink: 0;">
+            <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain; flex-shrink: 0;">
             <!-- Brand text -->
             <div class="d-flex align-items-center">
                 <span class="fw-bold text-dark" style="font-size: 1.1rem; letter-spacing: -0.5px; line-height: 1;">Sertifikat</span>
