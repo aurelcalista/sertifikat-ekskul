@@ -226,6 +226,37 @@
             box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
         }
 
+        /* Bootstrap Pagination Styling to Match Theme */
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: #FFFFFF !important;
+        }
+        .pagination .page-link {
+            color: var(--primary-color) !important;
+            border-color: var(--border-color);
+            transition: all 0.2s ease;
+        }
+        .pagination .page-link:hover {
+            background-color: rgba(231, 76, 60, 0.1) !important;
+            border-color: var(--primary-color);
+            color: var(--primary-color) !important;
+        }
+        .pagination .page-item.disabled .page-link {
+            color: var(--text-muted) !important;
+            background-color: transparent;
+            border-color: var(--border-color);
+        }
+        [data-theme="dark"] .pagination .page-link {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+        }
+        [data-theme="dark"] .pagination .page-item.active .page-link {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: #ffffff !important;
+        }
+
         /* Main Content Style */
         .main-wrapper {
             margin-left: var(--sidebar-width);
@@ -398,8 +429,8 @@
                 </a>
             </li>
             <li class="nav-menu-item">
-                <a href="{{ route('download.view') }}" target="_blank" class="nav-menu-link">
-                    <i class="fa-solid fa-up-right-from-square"></i><span>Portal Cari & Preview</span>
+                <a href="{{ route('admin.certificates.preview') }}" class="nav-menu-link {{ Request::routeIs('admin.certificates.preview') ? 'active' : '' }}">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i><span>Portal Cari & Preview</span>
                 </a>
             </li>
             <li class="nav-menu-item">

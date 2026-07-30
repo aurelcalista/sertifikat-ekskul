@@ -33,6 +33,8 @@ Route::middleware(AuthenticateAdmin::class)->prefix('admin')->name('admin.')->gr
     // Certificates CRUD
     Route::get('/certificates/export/excel', [CertificateController::class, 'exportExcel'])->name('certificates.export.excel');
     Route::get('/certificates/export/pdf', [CertificateController::class, 'exportPdf'])->name('certificates.export.pdf');
+    Route::get('/certificates/preview', [CertificateController::class, 'preview'])->name('certificates.preview');
+    Route::post('/certificates/preview/search', [CertificateController::class, 'search'])->name('certificates.preview.search');
     Route::resource('/certificates', CertificateController::class);
 
     // Templates CRUD

@@ -276,7 +276,7 @@
             display: table-cell;
             width: 32%;
             vertical-align: bottom;
-            text-align: right;
+            text-align: center;
             font-size: 9.5pt;
         }
 
@@ -290,15 +290,15 @@
 
         .signature-container {
             position: relative;
-            height: 15mm;
+            height: 24mm;
             margin-bottom: 1.5mm;
         }
 
         .signature-img {
-            max-height: 15mm;
+            max-height: 24mm;
             width: auto;
             display: block;
-            margin-left: auto;
+            margin: 0 auto;
         }
 
         .pembina-title {
@@ -357,6 +357,8 @@
         $get_local_path = function($path) {
             if ($path && file_exists(storage_path('app/public/' . $path))) {
                 return storage_path('app/public/' . $path);
+            } elseif ($path && file_exists(public_path($path))) {
+                return public_path($path);
             }
             return null;
         };
@@ -369,9 +371,12 @@
             $bg_image = $get_local_path($certificate->template->background_path);
         }
 
-        // Determine logo and signature
-        $logo_data = $get_local_path($certificate->logo_sekolah);
-        $sig_data = $get_local_path($certificate->tanda_tangan);
+        // Determine logo and signature with white background removed
+        $logo_file = $get_local_path($certificate->logo_sekolah);
+        $logo_data = $logo_file ? \App\Models\Certificate::removeWhiteBackground($logo_file) : null;
+
+        $sig_file = $get_local_path($certificate->tanda_tangan);
+        $sig_data = $sig_file ? \App\Models\Certificate::removeWhiteBackground($sig_file) : null;
 
         // Generate dynamic QR Code URL accessible by other devices
         $verify_url = route('verify', $certificate->code);

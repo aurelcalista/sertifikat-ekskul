@@ -53,7 +53,7 @@ class DashboardController extends Controller
     {
         $histories = DownloadHistory::with('certificate')
             ->latest()
-            ->paginate(15);
+            ->paginate(10); // Standard pagination with 10 items per page
 
         return view('admin.download-histories', compact('histories'));
     }

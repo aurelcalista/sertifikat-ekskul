@@ -173,8 +173,18 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
                 @if($certificate->logo_sekolah)
+                    @php
+                        $logoBase64 = null;
+                        $path = storage_path('app/public/' . $certificate->logo_sekolah);
+                        if (file_exists($path)) {
+                            $logoBase64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents($path));
+                        } elseif (file_exists(public_path($certificate->logo_sekolah))) {
+                            $path = public_path($certificate->logo_sekolah);
+                            $logoBase64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents($path));
+                        }
+                    @endphp
                     <div class="mt-2">
-                        <img src="{{ asset('storage/' . $certificate->logo_sekolah) }}" alt="Logo" class="img-thumbnail" style="max-height: 50px;">
+                        <img src="{{ $logoBase64 ?? asset('storage/' . $certificate->logo_sekolah) }}" alt="Logo" class="img-thumbnail" style="max-height: 50px;">
                     </div>
                 @endif
             </div>
@@ -187,8 +197,15 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
                 @if($certificate->tanda_tangan)
+                    @php
+                        $sigBase64 = null;
+                        $path = storage_path('app/public/' . $certificate->tanda_tangan);
+                        if (file_exists($path)) {
+                            $sigBase64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents($path));
+                        }
+                    @endphp
                     <div class="mt-2">
-                        <img src="{{ asset('storage/' . $certificate->tanda_tangan) }}" alt="Ttd" class="img-thumbnail" style="max-height: 50px; background-color: #eee;">
+                        <img src="{{ $sigBase64 ?? asset('storage/' . $certificate->tanda_tangan) }}" alt="Ttd" class="img-thumbnail" style="max-height: 50px; background-color: #eee;">
                     </div>
                 @endif
             </div>

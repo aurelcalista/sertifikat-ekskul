@@ -55,7 +55,14 @@
                             <!-- Background Image Preview -->
                             <div class="bg-light d-flex align-items-center justify-content-center border-bottom text-muted" style="height: 180px; overflow: hidden; position: relative;">
                                 @if($tpl->background_path)
-                                    <img src="{{ asset('storage/' . $tpl->background_path) }}" alt="{{ $tpl->name }}" class="w-100 h-100 object-fit-cover">
+                                    @php
+                                        $bgBase64 = null;
+                                        $path = storage_path('app/public/' . $tpl->background_path);
+                                        if (file_exists($path)) {
+                                            $bgBase64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents($path));
+                                        }
+                                    @endphp
+                                    <img src="{{ $bgBase64 ?? asset('storage/' . $tpl->background_path) }}" alt="{{ $tpl->name }}" class="w-100 h-100 object-fit-cover">
                                 @else
                                     <!-- Default CSS layout preview -->
                                     <div class="p-3 text-center w-100 h-100 d-flex flex-column justify-content-center align-items-center" style="border: 6px double #E74C3C; background: #FFF;">

@@ -73,4 +73,74 @@ class Certificate extends Model
     {
         return $this->hasMany(DownloadHistory::class);
     }
+
+    /**
+     * Menghapus background putih/hampir putih dari gambar dan mengembalikannya sebagai Base64 PNG transparan.
+     */
+    public static function removeWhiteBackground($path)
+    {
+        if (!$path || !file_exists($path)) {
+            return null;
+        }
+
+        $info = getimagesize($path);
+        if (!$info) {
+            return null;
+        }
+
+        $mime = $info['mime'];
+        if ($mime == 'image/jpeg' || $mime == 'image/jpg') {
+            $im = @imagecreatefromjpeg($path);
+        } elseif ($mime == 'image/png') {
+            $im = @imagecreatefrompng($path);
+        } elseif ($mime == 'image/gif') {
+            $im = @imagecreatefromgif($path);
+        } else {
+            return null;
+        }
+
+        if (!$im) {
+            return null;
+        }
+
+        $width = imagesx($im);
+        $height = imagesy($im);
+
+        // Buat image baru dengan transparansi penuh
+        $new_img = imagecreatetruecolor($width, $height);
+        imagealphablending($new_img, false);
+        imagesavealpha($new_img, true);
+
+        $transparent = imagecolorallocatealpha($new_img, 0, 0, 0, 127);
+        imagefill($new_img, 0, 0, $transparent);
+
+        for ($x = 0; $x < $width; $x++) {
+            for ($y = 0; $y < $height; $y++) {
+                $rgb = imagecolorat($im, $x, $y);
+                $colors = imagecolorsforindex($im, $rgb);
+
+                $r = $colors['red'];
+                $g = $colors['green'];
+                $b = $colors['blue'];
+                $a = $colors['alpha'];
+
+                // Jika pixel berwarna putih atau mendekati putih (threshold RGB > 240)
+                if ($r > 240 && $g > 240 && $b > 240) {
+                    imagesetpixel($new_img, $x, $y, $transparent);
+                } else {
+                    $color = imagecolorallocatealpha($new_img, $r, $g, $b, $a);
+                    imagesetpixel($new_img, $x, $y, $color);
+                }
+            }
+        }
+
+        ob_start();
+        imagepng($new_img);
+        $data = ob_get_clean();
+
+        imagedestroy($im);
+        imagedestroy($new_img);
+
+        return 'data:image/png;base64,' . base64_encode($data);
+    }
 }

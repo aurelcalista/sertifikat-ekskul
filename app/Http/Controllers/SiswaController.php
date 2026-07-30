@@ -46,6 +46,27 @@ class SiswaController extends Controller
             ], 404);
         }
 
+        // Convert logo to Base64 with white background removed to bypass symlink and background issues
+        $logo_base64 = null;
+        if ($certificate->logo_sekolah) {
+            $logo_path = storage_path('app/public/' . $certificate->logo_sekolah);
+            if (file_exists($logo_path)) {
+                $logo_base64 = Certificate::removeWhiteBackground($logo_path);
+            } elseif (file_exists(public_path($certificate->logo_sekolah))) {
+                $logo_path = public_path($certificate->logo_sekolah);
+                $logo_base64 = Certificate::removeWhiteBackground($logo_path);
+            }
+        }
+
+        // Convert signature to Base64 with white background removed to bypass symlink and background issues
+        $signature_base64 = null;
+        if ($certificate->tanda_tangan) {
+            $sig_path = storage_path('app/public/' . $certificate->tanda_tangan);
+            if (file_exists($sig_path)) {
+                $signature_base64 = Certificate::removeWhiteBackground($sig_path);
+            }
+        }
+
         return response()->json([
             'success' => true,
             'data' => [
@@ -61,6 +82,8 @@ class SiswaController extends Controller
                 'tanggal' => $certificate->tanggal->translatedFormat('d F Y'),
                 'nama_pembina' => $certificate->nama_pembina,
                 'jabatan_pembina' => $certificate->jabatan_pembina,
+                'logo_base64' => $logo_base64,
+                'signature_base64' => $signature_base64,
                 'verify_url' => route('verify', $certificate->code),
                 'pdf_url' => route('download.pdf', $certificate->code),
             ]
