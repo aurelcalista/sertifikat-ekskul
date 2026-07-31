@@ -283,11 +283,12 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
     // Fetch CSRF token
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch("{{ route('admin.certificates.preview.search') }}", {
+    fetch("{{ route('admin.certificates.preview.search', [], false) }}", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "X-CSRF-TOKEN": token
+            "X-CSRF-TOKEN": token,
+            "Bypass-Tunnel-Reminder": "true"
         },
         body: JSON.stringify({ code: code })
     })
