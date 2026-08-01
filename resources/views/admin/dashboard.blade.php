@@ -62,18 +62,6 @@
         </div>
     </div>
 
-    <!-- Stat Card 3 -->
-    <div class="col-xl-3 col-sm-6">
-        <div class="card-stat d-flex align-items-center justify-content-between shadow-sm h-100">
-            <div>
-                <span class="text-muted small fw-medium d-block mb-1">Total Template</span>
-                <h3 class="fw-bold mb-0 text-dark">{{ $jumlah_template }}</h3>
-            </div>
-            <div class="stat-icon bg-warning-subtle text-warning">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-            </div>
-        </div>
-    </div>
 
     <!-- Stat Card 4 -->
     <div class="col-xl-3 col-sm-6">

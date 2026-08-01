@@ -39,14 +39,6 @@
                                     <td>{{ $certificate->nis }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="bg-light">Sekolah</th>
-                                    <td>{{ $certificate->sekolah }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="bg-light">Kelas</th>
-                                    <td>{{ $certificate->kelas }}</td>
-                                </tr>
-                                <tr>
                                     <th class="bg-light">Ekstrakurikuler</th>
                                     <td><span class="badge bg-secondary">{{ $certificate->ekskul }}</span></td>
                                 </tr>

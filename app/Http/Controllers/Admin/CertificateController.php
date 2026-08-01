@@ -40,7 +40,7 @@ class CertificateController extends Controller
             $query->where('status', $request->input('status'));
         }
 
-        $certificates = $query->latest()->paginate(10)->withQueryString();
+        $certificates = $query->latest()->paginate(15)->withQueryString();
         
         // Ambil opsi ekskul unik untuk dropdown filter
         $ekskul_list = Certificate::distinct()->pluck('ekskul')->filter()->toArray();
@@ -59,8 +59,14 @@ class CertificateController extends Controller
         $default_sekolah = Setting::get('sekolah_default', '');
         $default_pembina = Setting::get('pembina_default', '');
         $default_jabatan = Setting::get('jabatan_pembina_default', '');
+        
+        $logo_default_val = Setting::get('logo_default', '');
+        $default_logo = $logo_default_val ? asset('storage/' . $logo_default_val) : null;
+        
+        $signature_default_val = Setting::get('tanda_tangan_default', '');
+        $default_signature = $signature_default_val ? asset('storage/' . $signature_default_val) : null;
 
-        return view('admin.certificates.create', compact('templates', 'default_sekolah', 'default_pembina', 'default_jabatan'));
+        return view('admin.certificates.create', compact('templates', 'default_sekolah', 'default_pembina', 'default_jabatan', 'default_logo', 'default_signature'));
     }
 
     /**
@@ -71,8 +77,6 @@ class CertificateController extends Controller
         $validated = $request->validate([
             'nama_siswa' => 'required|string|max:255',
             'nis' => 'required|string|max:50',
-            'sekolah' => 'required|string|max:255',
-            'kelas' => 'required|string|max:50',
             'ekskul' => 'required|string|max:100',
             'jenis_sertifikat' => 'required|string|max:100',
             'nomor_sertifikat' => 'required|string|max:100',
@@ -133,8 +137,6 @@ class CertificateController extends Controller
         $validated = $request->validate([
             'nama_siswa' => 'required|string|max:255',
             'nis' => 'required|string|max:50',
-            'sekolah' => 'required|string|max:255',
-            'kelas' => 'required|string|max:50',
             'ekskul' => 'required|string|max:100',
             'jenis_sertifikat' => 'required|string|max:100',
             'nomor_sertifikat' => 'required|string|max:100',
@@ -227,8 +229,8 @@ class CertificateController extends Controller
 
             // Header kolom
             fputcsv($file, [
-                'Kode Sertifikat', 'Nomor Sertifikat', 'Nama Siswa', 'NIS', 'Sekolah',
-                'Kelas', 'Ekskul', 'Jenis Sertifikat', 'Prestasi', 'Tanggal',
+                'Kode Sertifikat', 'Nomor Sertifikat', 'Nama Siswa', 'NIS',
+                'Ekskul', 'Jenis Sertifikat', 'Prestasi', 'Tanggal',
                 'Nama Pembina', 'Jabatan Pembina', 'Status'
             ], ';');
 
@@ -238,8 +240,6 @@ class CertificateController extends Controller
                     $cert->nomor_sertifikat,
                     $cert->nama_siswa,
                     $cert->nis,
-                    $cert->sekolah,
-                    $cert->kelas,
                     $cert->ekskul,
                     $cert->jenis_sertifikat,
                     $cert->prestasi ?? '-',
@@ -323,8 +323,6 @@ class CertificateController extends Controller
                 'nomor_sertifikat' => $certificate->nomor_sertifikat,
                 'nama_siswa' => $certificate->nama_siswa,
                 'nis' => $certificate->nis,
-                'sekolah' => $certificate->sekolah,
-                'kelas' => $certificate->kelas,
                 'ekskul' => $certificate->ekskul,
                 'jenis_sertifikat' => $certificate->jenis_sertifikat,
                 'prestasi' => $certificate->prestasi ?? '-',

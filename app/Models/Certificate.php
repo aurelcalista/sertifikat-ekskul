@@ -14,8 +14,6 @@ use Illuminate\Support\Str;
     'nomor_sertifikat',
     'nama_siswa',
     'nis',
-    'sekolah',
-    'kelas',
     'ekskul',
     'jenis_sertifikat',
     'prestasi',

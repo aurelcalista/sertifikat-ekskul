@@ -74,8 +74,6 @@ class SiswaController extends Controller
                 'nomor_sertifikat' => $certificate->nomor_sertifikat,
                 'nama_siswa' => $certificate->nama_siswa,
                 'nis' => $certificate->nis,
-                'sekolah' => $certificate->sekolah,
-                'kelas' => $certificate->kelas,
                 'ekskul' => $certificate->ekskul,
                 'jenis_sertifikat' => $certificate->jenis_sertifikat,
                 'prestasi' => $certificate->prestasi ?? '-',

@@ -2,6 +2,46 @@
 
 @section('title', 'Data Sertifikat')
 
+@section('styles')
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
+<style>
+    /* Tom Select dark/light integration overrides */
+    .ts-wrapper.form-select {
+        padding: 0 !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        background-color: var(--card-bg) !important;
+        color: var(--text-color) !important;
+        height: auto !important;
+    }
+    .ts-wrapper .ts-control {
+        border: none !important;
+        background: transparent !important;
+        color: var(--text-color) !important;
+        padding: 0.375rem 2.25rem 0.375rem 0.75rem !important;
+        border-radius: 8px !important;
+    }
+    .ts-wrapper.single .ts-control::after {
+        border-color: var(--text-muted) transparent transparent transparent !important;
+    }
+    .ts-dropdown {
+        background-color: var(--card-bg) !important;
+        color: var(--text-color) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1) !important;
+    }
+    .ts-dropdown .active {
+        background-color: var(--primary-color) !important;
+        color: #FFFFFF !important;
+    }
+    .ts-dropdown .option:hover {
+        background-color: rgba(231, 76, 60, 0.1) !important;
+        color: var(--primary-color) !important;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="card-custom-admin shadow-sm">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
@@ -23,7 +63,7 @@
     </div>
 
     <!-- Filter Form -->
-    <form action="{{ route('admin.certificates.index') }}" method="GET" class="row g-3 mb-4 bg-light p-3 rounded-4">
+    <form action="{{ route('admin.certificates.index') }}" method="GET" class="row g-3 mb-4 bg-light p-3 rounded-4" id="filterForm">
         <div class="col-md-5">
             <div class="input-group">
                 <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -32,7 +72,7 @@
         </div>
         
         <div class="col-md-3">
-            <select name="ekskul" class="form-select">
+            <select name="ekskul" id="ekskulSelect" class="form-select">
                 <option value="">-- Semua Ekskul --</option>
                 @foreach($ekskul_list as $ekskul)
                     <option value="{{ $ekskul }}" {{ request('ekskul') == $ekskul ? 'selected' : '' }}>{{ $ekskul }}</option>
@@ -41,7 +81,7 @@
         </div>
 
         <div class="col-md-2">
-            <select name="status" class="form-select">
+            <select name="status" id="statusSelect" class="form-select">
                 <option value="">-- Semua Status --</option>
                 <option value="Aktif" {{ request('status') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
                 <option value="Draft" {{ request('status') == 'Draft' ? 'selected' : '' }}>Draft</option>
@@ -142,6 +182,21 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         padding: 1.5rem 2rem !important;
         border: 1px solid rgba(0,0,0,0.08);
+    }
+    @media (max-width: 991.98px) {
+        .preview-certificate-container {
+            zoom: 0.85;
+        }
+    }
+    @media (max-width: 767.98px) {
+        .preview-certificate-container {
+            zoom: 0.65;
+        }
+    }
+    @media (max-width: 575.98px) {
+        .preview-certificate-container {
+            zoom: 0.45;
+        }
     }
     
     .preview-border-outer {
@@ -308,14 +363,6 @@
                                         <td id="tblNis"></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-secondary bg-light">Sekolah</td>
-                                        <td id="tblSchool"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold text-secondary bg-light">Kelas</td>
-                                        <td id="tblKelas"></td>
-                                    </tr>
-                                    <tr>
                                         <td class="fw-bold text-secondary bg-light">Ekstrakurikuler</td>
                                         <td><span class="badge bg-secondary-subtle text-secondary" id="tblEkskul"></span></td>
                                     </tr>
@@ -343,77 +390,112 @@
                     <!-- Tab 2: Pratinjau Sertifikat Mockup -->
                     <div class="tab-pane fade" id="preview-pane" role="tabpanel" aria-labelledby="preview-tab" tabindex="0">
                         <!-- Mockup Container -->
-                        <div class="preview-certificate-container p-3 p-md-4 mb-0 position-relative overflow-hidden" id="modalCertFrame">
+                        <div class="preview-certificate-container p-3 p-md-4 mb-0 position-relative overflow-hidden" id="modalCertFrame" style="aspect-ratio: 297/210; min-height: 380px;">
                             <!-- Elegant Double Border Frame -->
-                            <div class="preview-border-outer"></div>
-                            <div class="preview-border-inner"></div>
-
+                            <div class="preview-border-outer" id="previewBorderOuter"></div>
+                            <div class="preview-border-inner" id="previewBorderInner"></div>
+ 
                             <!-- Small Elegant Corner Brackets -->
                             <div class="preview-corner-accent-tl"></div>
                             <div class="preview-corner-accent-tr"></div>
                             <div class="preview-corner-accent-bl"></div>
                             <div class="preview-corner-accent-br"></div>
+ 
+                            <!-- Content -->
+                            <div class="position-relative h-100 d-flex flex-column" style="z-index: 5; gap: 0; text-align: left;">
 
-                            <!-- Header -->
-                            <div class="row align-items-center mb-3 position-relative" style="z-index: 5; text-align: left;">
-                                <div class="col-md-2 text-center text-md-start mb-2 mb-md-0">
-                                    <img id="modalLogo" src="" class="img-fluid" style="max-height: 50px; width: auto;" alt="Logo Sekolah">
-                                </div>
-                                <div class="col-md-8 text-center">
-                                    <h4 class="fw-bold mb-0 text-uppercase" id="modalSchool" style="font-family: 'Georgia', serif; color: #0F172A; letter-spacing: 1.5px; font-size: 1rem; line-height: 1.2;"></h4>
-                                    <p class="text-muted small mb-0 text-uppercase" style="font-size: 0.55rem; letter-spacing: 0.5px; font-weight: 600; margin-top: 2px;">Hasil Penilaian Kegiatan Ekstrakurikuler Mandiri</p>
-                                </div>
-                                <div class="col-md-2 text-center text-md-end d-none d-md-block">
-                                    <!-- Gold Seal Badge -->
-                                    <div class="preview-gold-seal-badge">
-                                        <div class="preview-gold-seal-inner">
-                                            <span style="font-size: 10px;">★</span>
+                                <!-- Header: Logo + Subtitle + Seal -->
+                                <div class="d-flex justify-content-between align-items-center pb-2" style="border-bottom: 1px solid #e8d5a3; width: 100%;">
+                                    <div style="width:48px;">
+                                        <img id="modalLogo" src="" class="img-fluid" style="max-height: 44px; width: auto; mix-blend-mode: multiply;" alt="Logo">
+                                    </div>
+                                    <div class="text-center flex-grow-1">
+                                        <p class="mb-0 text-uppercase fw-bold" style="font-size: 0.58rem; letter-spacing: 1px; color: #334155;">Lembaga Pendidikan Sertifikasi Ekstrakurikuler</p>
+                                        <p class="mb-0" style="font-size: 0.48rem; letter-spacing: 0.5px; color: #94A3B8; margin-top: 1px;">Sertifikat Resmi Kegiatan Peserta Didik</p>
+                                    </div>
+                                    <div style="width:44px;">
+                                        <div class="preview-gold-seal-badge" style="width: 44px; height: 44px; border-width: 1.5px;">
+                                            <div class="preview-gold-seal-inner" style="top: 2px; left: 2px; right: 2px; bottom: 2px;">
+                                                <span style="font-size: 14px;">★</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="text-center my-3 position-relative" style="z-index: 5;">
-                                <h3 class="fw-bold mb-0 text-uppercase" style="font-family: 'Georgia', serif; color: #0F172A; font-size: 1.6rem; letter-spacing: 2px; line-height: 1.1;">Sertifikat</h3>
-                                <p id="modalJenis" class="text-uppercase fw-bold mb-2 text-secondary" style="font-family: 'Georgia', serif; color: #D4AF37 !important; letter-spacing: 3px; font-size: 0.75rem; margin-top: 2px;"></p>
-                                
-                                <div class="recipient-label text-muted" style="font-family: 'Georgia', serif; font-style: italic; font-size: 0.75rem; margin-top: 4px;">Diberikan Kepada:</div>
-                                <div class="my-0">
-                                    <h2 class="fw-bold text-dark m-0" id="modalName" style="font-family: 'Georgia', serif; font-size: 1.6rem; letter-spacing: 1px;"></h2>
-                                </div>
-                                <div class="preview-gold-divider" style="width: 50%; max-width: 300px; height: 1px; background-color: #D4AF37; margin: 3px auto;"></div>
-                                <div class="fw-bold text-secondary small mt-1" id="modalNisAndKelas" style="letter-spacing: 0.5px; font-size: 0.75rem;"></div>
-                            </div>
-
-                            <div class="my-3 text-center position-relative" style="z-index: 5;">
-                                <p class="text-secondary mb-0" id="modalDescription" style="line-height: 1.5; max-width: 85%; margin: 0 auto; font-size: 0.82rem;">
-                                </p>
-                            </div>
-
-                            <div class="row align-items-end mt-3 position-relative" style="z-index: 5; text-align: left;">
-                                <!-- QR Code -->
-                                <div class="col-md-4 text-center text-md-start mb-2 mb-md-0">
-                                    <img id="modalQrCode" src="" class="img-fluid border bg-white p-1 rounded shadow-sm" style="width: 65px; height: 65px; border-color: #D4AF37 !important;" alt="QR Code Verifikasi">
-                                    <span class="d-block text-muted small mt-1" style="font-size: 0.55rem; letter-spacing: 0.2px; font-weight: 500;">Pindai untuk validasi</span>
-                                </div>
-                                
-                                <!-- Certificate Details -->
-                                <div class="col-md-4 text-center mb-2 mb-md-0 small" style="font-size: 0.7rem;">
-                                    <div class="fw-bold text-dark">No: <span id="modalNomor"></span></div>
-                                    <div class="mt-1">Kode: <strong id="modalCode" style="color: #E74C3C;"></strong></div>
-                                    <div class="fw-bold text-dark mt-2" id="modalTanggal"></div>
+                                <!-- Decorative top ornament -->
+                                <div class="text-center w-100" style="margin: 6px 0 2px;">
+                                    <span style="color: #D4AF37; font-size: 0.65rem; letter-spacing: 6px;">✦ ✦ ✦</span>
                                 </div>
 
-                                <!-- Signature -->
-                                <div class="col-md-4 text-center">
-                                    <span class="text-muted d-block small mb-1" id="modalJabatan" style="font-size: 0.65rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 2px;"></span>
-                                    <div class="my-1" style="height: 70px;">
-                                        <img id="modalSignature" src="" class="img-fluid" alt="Tanda Tangan" style="height: 70px !important; width: 140px !important; object-fit: contain; display: block; margin: 0 auto; mix-blend-mode: multiply; transform: scale(1.2); transform-origin: center;">
+                                <!-- Title + Recipient -->
+                                <div class="text-center w-100" style="margin-bottom: 4px;">
+                                    <h4 class="fw-bold mb-0 text-uppercase" style="font-family: 'Cormorant Garamond', 'Georgia', serif; color: #0F172A; font-size: 2rem; letter-spacing: 5px; line-height: 1;">Sertifikat</h4>
+                                    <p id="modalJenis" class="text-uppercase fw-bold mb-0" style="font-family: 'Poppins', sans-serif; color: #D4AF37; letter-spacing: 4px; font-size: 0.6rem; margin-top: 2px;">SERTIFIKAT KEIKUTSERTAAN</p>
+
+                                    <!-- Thin gold rule -->
+                                    <div style="display:flex; align-items:center; margin: 6px auto; width: 70%;">
+                                        <div style="flex:1; height:1px; background: linear-gradient(to right, transparent, #D4AF37);"></div>
+                                        <span style="color:#D4AF37; font-size:0.6rem; margin: 0 6px;">◆</span>
+                                        <div style="flex:1; height:1px; background: linear-gradient(to left, transparent, #D4AF37);"></div>
                                     </div>
-                                    <strong class="d-block text-dark" id="modalPembina" style="font-family: 'Georgia', serif; font-size: 0.8rem;"></strong>
+
+                                    <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
+                                    <h5 class="mb-0" id="modalName" style="font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 4px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
+                                    <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 6px auto 3px;"></div>
+                                    <div class="fw-semibold" id="modalNis" style="font-size: 0.68rem; letter-spacing: 0.8px; font-family: 'Poppins', sans-serif; color: #475569;">NIS. -</div>
                                 </div>
-                            </div>
-                        </div>
+
+                                <!-- Info Badges row -->
+                                <div class="d-flex justify-content-center gap-2 w-100" style="margin: 4px 0;">
+                                    <div style="background: rgba(212,175,55,0.10); border: 1px solid #D4AF37; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #92600a; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
+                                        🎓 Ekskul: <span id="modalEkskul2" style="color:#0F172A;">-</span>
+                                    </div>
+                                    <div style="background: rgba(15,23,42,0.06); border: 1px solid #CBD5E1; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #475569; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
+                                        📅 Periode: <span id="modalPeriode" style="color:#0F172A;">-</span>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="text-center px-4 w-100" style="margin: 2px 0 6px;">
+                                    <p class="mb-0" id="modalDescription" style="line-height: 1.65; font-size: 0.78rem; color: #334155; font-family: 'Poppins', sans-serif;">
+                                    </p>
+                                </div>
+
+                                <!-- Decorative bottom ornament -->
+                                <div class="text-center w-100" style="margin: 2px 0;">
+                                    <span style="color: #D4AF37; font-size: 0.5rem; letter-spacing: 8px;">— ✦ —</span>
+                                </div>
+
+                                <!-- Footer: QR | Nomor+Tanggal | Tanda Tangan -->
+                                <div class="d-flex justify-content-between align-items-end w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
+
+                                    <!-- QR Code -->
+                                    <div class="text-start" style="width:68px;">
+                                        <div class="border bg-white p-1 d-inline-block" style="border-color: #D4AF37 !important; border-radius:4px;">
+                                            <img id="modalQrCode" src="" style="width:50px; height:50px; display:block;" alt="QR Code">
+                                        </div>
+                                        <div class="text-muted" style="font-size:0.42rem; margin-top:2px; font-family:'Poppins',sans-serif;">Pindai untuk verifikasi</div>
+                                    </div>
+
+                                    <!-- Nomor & Tanggal center -->
+                                    <div class="text-center" style="font-family:'Poppins',sans-serif;">
+                                        <div style="font-size:0.55rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
+                                        <div class="fw-bold" style="font-size:0.72rem; color:#0F172A;" id="modalNomor">-</div>
+                                        <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:4px;">Diterbitkan pada</div>
+                                        <div class="fw-bold" style="font-size:0.7rem; color:#0F172A;" id="modalTanggal">-</div>
+                                    </div>
+
+                                    <!-- Tanda Tangan Resmi -->
+                                    <div class="text-center" style="width:120px; font-family:'Poppins',sans-serif;">
+                                        <div style="font-size:0.5rem; color:#64748B; text-transform:uppercase; font-weight:600; letter-spacing:0.5px; margin-bottom:2px;" id="modalJabatan">Pembina OSIS</div>
+                                        <div style="height: 38px; position: relative;">
+                                            <img id="modalSignature" src="" class="img-fluid" style="max-height:36px; width:auto; mix-blend-mode:multiply; display:block; margin:0 auto;" alt="">
+                                        </div>
+                                        <div style="border-top: 1.5px solid #0F172A; margin: 0 6px 3px 6px;"></div>
+                                        <strong class="d-block" id="modalPembina" style="font-family:'Georgia',serif; font-size:0.62rem; color:#0F172A; line-height:1.3;">Nama Pembina</strong>
+                                        <div style="font-size:0.42rem; color:#94A3B8; margin-top:1px;">NIP / NIK</div>
+                                    </div>
+
                     </div>
                 </div>
             </div>
@@ -434,8 +516,31 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // Initialize Tom Select search dropdowns
+        const tsEkskul = new TomSelect('#ekskulSelect', {
+            create: false,
+            sortField: {
+                field: "text",
+                direction: "asc"
+            }
+        });
+
+        const tsStatus = new TomSelect('#statusSelect', {
+            create: false
+        });
+
+        // Auto filter on change
+        tsEkskul.on('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+
+        tsStatus.on('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+
         // Konfirmasi Hapus Data
         const deleteButtons = document.querySelectorAll('.delete-btn');
         deleteButtons.forEach(button => {
@@ -495,20 +600,35 @@
                     if (data.success) {
                         const cert = data.data;
 
+                        // Titlecase helper
+                        function toTitleCase(str) {
+                            return str.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
+                        }
+
                         // Populate modal preview fields
-                        document.getElementById('modalName').innerText = cert.nama_siswa.toUpperCase();
-                        document.getElementById('modalNisAndKelas').innerHTML = "NIS. " + cert.nis + " &nbsp;|&nbsp; KELAS: " + cert.kelas.toUpperCase();
-                        document.getElementById('modalSchool').innerText = cert.sekolah.toUpperCase();
+                        document.getElementById('modalName').innerText = toTitleCase(cert.nama_siswa);
+                        document.getElementById('modalNis').innerText = "NIS. " + cert.nis;
+                        document.getElementById('modalEkskul2').innerText = cert.ekskul;
+                        
+                        const prestasiText = cert.prestasi && cert.prestasi !== '-' ? cert.prestasi : 'Anggota/Peserta Aktif';
                         document.getElementById('modalJenis').innerText = cert.jenis_sertifikat.toUpperCase();
                         
+                        const dateParts = cert.tanggal.split(' ');
+                        const yrVal = dateParts[dateParts.length - 1];
+                        const yrNum = parseInt(yrVal);
+                        if (!isNaN(yrNum)) {
+                            document.getElementById('modalPeriode').innerText = `${yrNum}/${yrNum+1}`;
+                        } else {
+                            const currentYr = new Date().getFullYear();
+                            document.getElementById('modalPeriode').innerText = `${currentYr}/${currentYr+1}`;
+                        }
+                        
                         // Description text formatting
-                        const prestasiText = cert.prestasi && cert.prestasi !== '-' ? cert.prestasi : 'Anggota/Peserta Aktif';
-                        document.getElementById('modalDescription').innerHTML = `Telah menyelesaikan dan berpartisipasi aktif dalam kegiatan ekstrakurikuler <strong style="color: #0f172a;">${cert.ekskul}</strong> dengan pencapaian prestasi luar biasa sebagai "<strong style="color: #D4AF37;">${prestasiText}</strong>" pada tahun pelajaran {{ date('Y') }}.`;
+                        document.getElementById('modalDescription').innerHTML = `Dinyatakan telah mengikuti dan aktif berprestasi dalam kegiatan Ekstrakurikuler <strong style="color: #0F172A;">${cert.ekskul}</strong> dengan predikat <span style="background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px;"><strong style="color: #b5860d;">"${prestasiText}"</strong></span> pada tahun pelajaran <strong style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</strong>.`;
 
                         document.getElementById('modalTanggal').innerText = cert.tanggal;
                         document.getElementById('modalPembina').innerText = cert.nama_pembina;
-                        document.getElementById('modalJabatan').innerText = cert.jabatan_pembina;
-                        document.getElementById('modalCode').innerText = cert.code;
+                        document.getElementById('modalJabatan').innerText = cert.jabatan_pembina.toUpperCase();
                         document.getElementById('modalNomor').innerText = cert.nomor_sertifikat;
 
                         // Populate modal details table fields
@@ -517,8 +637,6 @@
                         document.getElementById('tblNomor').innerText = cert.nomor_sertifikat;
                         document.getElementById('tblName').innerText = cert.nama_siswa.toUpperCase();
                         document.getElementById('tblNis').innerText = cert.nis;
-                        document.getElementById('tblSchool').innerText = cert.sekolah;
-                        document.getElementById('tblKelas').innerText = cert.kelas;
                         document.getElementById('tblEkskul').innerText = cert.ekskul;
                         document.getElementById('tblJenis').innerText = cert.jenis_sertifikat;
                         document.getElementById('tblPrestasi').innerText = prestasiText;

@@ -8,10 +8,10 @@
 
     <title>@yield('title', 'Admin Dashboard') | Sertifikat Ekskul</title>
     
-    <!-- Google Fonts Poppins -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -124,6 +124,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
+            font-size: 13px;
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
@@ -431,11 +432,6 @@
             <li class="nav-menu-item">
                 <a href="{{ route('admin.certificates.preview') }}" class="nav-menu-link {{ Request::routeIs('admin.certificates.preview') ? 'active' : '' }}">
                     <i class="fa-solid fa-magnifying-glass-chart"></i><span>Portal Cari & Preview</span>
-                </a>
-            </li>
-            <li class="nav-menu-item">
-                <a href="{{ route('admin.templates.index') }}" class="nav-menu-link {{ Request::routeIs('admin.templates.index') ? 'active' : '' }}">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i><span>Template Sertifikat</span>
                 </a>
             </li>
 

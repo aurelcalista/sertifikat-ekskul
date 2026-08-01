@@ -4,120 +4,112 @@
 
 @section('styles')
 <style>
-    /* Styling to match the PDF certificate view */
     .preview-certificate-container {
         background-color: #FCFBF7;
         position: relative;
         overflow: hidden;
         border-radius: 8px;
         box-shadow: 0 8px 30px rgba(0,0,0,0.05);
-        padding: 2.2rem 2.8rem !important; /* Compact padding to reduce scrolling */
+        padding: 1.25rem 1.5rem !important;
+        border: 1px solid rgba(0,0,0,0.08);
     }
-    
-    #prevSignature {
-        height: 90px !important;
-        width: 180px !important;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
-        mix-blend-mode: multiply; /* Removes white background */
-        transform: scale(1.3); /* Scale up to compensate for margins */
-        transform-origin: center;
+    @media (max-width: 991.98px) {
+        .preview-certificate-container {
+            zoom: 0.85;
+        }
     }
-    
+    @media (max-width: 767.98px) {
+        .preview-certificate-container {
+            zoom: 0.65;
+        }
+    }
+    @media (max-width: 575.98px) {
+        .preview-certificate-container {
+            zoom: 0.45;
+        }
+    }
     .preview-border-outer {
         position: absolute;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        border: 2px solid #D4AF37;
-        z-index: 5;
+        top: 6px;
+        left: 6px;
+        right: 6px;
+        bottom: 6px;
+        border: 1.5px solid #D4AF37;
+        z-index: 2;
         pointer-events: none;
     }
-    
     .preview-border-inner {
         position: absolute;
-        top: 14px;
-        left: 14px;
-        right: 14px;
-        bottom: 14px;
-        border: 1px solid #0F172A;
-        z-index: 5;
+        top: 9px;
+        left: 9px;
+        right: 9px;
+        bottom: 9px;
+        border: 0.5px solid #0F172A;
+        z-index: 2;
         pointer-events: none;
     }
-    
     .preview-corner-accent-tl {
         position: absolute;
-        top: 18px;
-        left: 18px;
-        width: 16px;
-        height: 16px;
-        border-top: 2.5px solid #D4AF37;
-        border-left: 2.5px solid #D4AF37;
-        z-index: 6;
+        top: 11px;
+        left: 11px;
+        width: 10px;
+        height: 10px;
+        border-top: 1.8px solid #D4AF37;
+        border-left: 1.8px solid #D4AF37;
+        z-index: 3;
     }
-    
     .preview-corner-accent-tr {
         position: absolute;
-        top: 18px;
-        right: 18px;
-        width: 16px;
-        height: 16px;
-        border-top: 2.5px solid #D4AF37;
-        border-right: 2.5px solid #D4AF37;
-        z-index: 6;
+        top: 11px;
+        right: 11px;
+        width: 10px;
+        height: 10px;
+        border-top: 1.8px solid #D4AF37;
+        border-right: 1.8px solid #D4AF37;
+        z-index: 3;
     }
-    
     .preview-corner-accent-bl {
         position: absolute;
-        bottom: 18px;
-        left: 18px;
-        width: 16px;
-        height: 16px;
-        border-bottom: 2.5px solid #D4AF37;
-        border-left: 2.5px solid #D4AF37;
-        z-index: 6;
+        bottom: 11px;
+        left: 11px;
+        width: 10px;
+        height: 10px;
+        border-bottom: 1.8px solid #D4AF37;
+        border-left: 1.8px solid #D4AF37;
+        z-index: 3;
     }
-    
     .preview-corner-accent-br {
         position: absolute;
-        bottom: 18px;
-        right: 18px;
-        width: 16px;
-        height: 16px;
-        border-bottom: 2.5px solid #D4AF37;
-        border-right: 2.5px solid #D4AF37;
-        z-index: 6;
+        bottom: 11px;
+        right: 11px;
+        width: 10px;
+        height: 10px;
+        border-bottom: 1.8px solid #D4AF37;
+        border-right: 1.8px solid #D4AF37;
+        z-index: 3;
     }
-
     .preview-gold-seal-badge {
-        width: 50px;
-        height: 50px;
         background: radial-gradient(circle, #f39c12, #D4AF37);
         border-radius: 50%;
         position: relative;
         display: inline-block;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-        border: 1.5px dashed #FFFFFF;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border: 1px dashed #FFFFFF;
     }
-
     .preview-gold-seal-inner {
         position: absolute;
-        top: 3px;
-        left: 3px;
-        right: 3px;
-        bottom: 3px;
-        border: 0.8px solid rgba(255,255,255,0.7);
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        border: 0.5px solid rgba(255,255,255,0.7);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
     .preview-gold-seal-inner span {
         color: #FFFFFF;
-        font-size: 14px;
         font-weight: bold;
     }
 </style>
@@ -148,109 +140,148 @@
             </form>
         </div>
 
-        <!-- Preview Card (Hidden by default) -->
-        <div id="previewCard" class="card card-custom-admin p-4 shadow-sm d-none" style="position: relative; overflow: hidden;">
-            <div class="text-center mb-4 mt-2">
-                <span id="prevStatus" class="badge px-3 py-2 rounded-pill fw-semibold mb-2">
-                    <!-- Populated dynamically -->
-                </span>
-                <h3 class="fw-bold text-dark mb-1">Pratinjau Dokumen</h3>
-                <p class="text-muted small mb-0">Berikut pratinjau sertifikat yang tersimpan di dalam sistem database.</p>
-            </div>
-
-            <!-- Certificate Mockup Frame (Canva style) -->
-            <div class="preview-certificate-container p-3 p-md-4 mb-3 position-relative overflow-hidden">
-                <!-- Elegant Double Border Frame -->
-                <div class="preview-border-outer"></div>
-                <div class="preview-border-inner"></div>
-
-                <!-- Small Elegant Corner Brackets -->
-                <div class="preview-corner-accent-tl"></div>
-                <div class="preview-corner-accent-tr"></div>
-                <div class="preview-corner-accent-bl"></div>
-                <div class="preview-corner-accent-br"></div>
-
-                <!-- Header -->
-                <div class="row align-items-center mb-3 position-relative" style="z-index: 5; text-align: left;">
-                    <div class="col-md-2 text-center text-md-start mb-2 mb-md-0">
-                        <!-- School Logo (Placeholder or dynamic) -->
-                        <img id="prevLogo" src="https://via.placeholder.com/100" class="img-fluid" style="max-height: 60px; width: auto;" alt="Logo Sekolah">
+        <!-- Preview Modal -->
+        <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4">
+                    <div class="modal-header bg-light border-bottom px-4">
+                        <h5 class="modal-title fw-bold text-dark" id="previewModalLabel">
+                            <i class="fa-solid fa-certificate text-danger me-2"></i>Pratinjau Sertifikat
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="col-md-8 text-center">
-                        <h4 class="fw-bold mb-0 text-uppercase" id="prevSchool" style="font-family: 'Georgia', serif; color: #0F172A; letter-spacing: 2px; font-size: 1.15rem; line-height: 1.2;">SMK NEGERI 1 CIREBON</h4>
-                        <p class="text-muted small mb-0 text-uppercase" style="font-size: 0.65rem; letter-spacing: 1px; font-weight: 600; margin-top: 3px;">Hasil Penilaian Kegiatan Ekstrakurikuler Mandiri</p>
-                    </div>
-                    <div class="col-md-2 text-center text-md-end d-none d-md-block">
-                        <!-- Gold Seal Badge -->
-                        <div class="preview-gold-seal-badge">
-                            <div class="preview-gold-seal-inner">
-                                <span style="font-size: 14px;">★</span>
+                    <div class="modal-body p-4 bg-light">
+                        <div class="text-center mb-3">
+                            <span id="prevStatus" class="badge px-3 py-2 rounded-pill fw-semibold mb-2"></span>
+                        </div>
+                        
+                        <!-- Certificate Mockup Frame (Canva style) -->
+                        <div class="preview-certificate-container p-3 p-md-4 mb-3 position-relative overflow-hidden" style="aspect-ratio: 297/210; min-height: 380px;">
+                            <!-- Elegant Double Border Frame -->
+                            <div class="preview-border-outer"></div>
+                            <div class="preview-border-inner"></div>
+
+                            <!-- Small Elegant Corner Brackets -->
+                            <div class="preview-corner-accent-tl"></div>
+                            <div class="preview-corner-accent-tr"></div>
+                            <div class="preview-corner-accent-bl"></div>
+                            <div class="preview-corner-accent-br"></div>
+
+                            <!-- Content -->
+                            <div class="position-relative h-100 d-flex flex-column" style="z-index: 5; gap: 0; text-align: left;">
+
+                                <!-- Header: Logo + Subtitle + Seal -->
+                                <div class="d-flex justify-content-between align-items-center pb-2" style="border-bottom: 1px solid #e8d5a3; width: 100%;">
+                                    <div style="width:48px;">
+                                        <img id="prevLogo" src="" class="img-fluid" style="max-height: 44px; width: auto; mix-blend-mode: multiply;" alt="Logo">
+                                    </div>
+                                    <div class="text-center flex-grow-1">
+                                        <p class="mb-0 text-uppercase fw-bold" style="font-size: 0.58rem; letter-spacing: 1px; color: #334155;">Lembaga Pendidikan Sertifikasi Ekstrakurikuler</p>
+                                        <p class="mb-0" style="font-size: 0.48rem; letter-spacing: 0.5px; color: #94A3B8; margin-top: 1px;">Sertifikat Resmi Kegiatan Peserta Didik</p>
+                                    </div>
+                                    <div style="width:44px;">
+                                        <div class="preview-gold-seal-badge" style="width: 44px; height: 44px; border-width: 1.5px;">
+                                            <div class="preview-gold-seal-inner" style="top: 2px; left: 2px; right: 2px; bottom: 2px;">
+                                                <span style="font-size: 14px;">★</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Decorative top ornament -->
+                                <div class="text-center w-100" style="margin: 6px 0 2px;">
+                                    <span style="color: #D4AF37; font-size: 0.65rem; letter-spacing: 6px;">✦ ✦ ✦</span>
+                                </div>
+
+                                <!-- Title + Recipient -->
+                                <div class="text-center w-100" style="margin-bottom: 4px;">
+                                    <h4 class="fw-bold mb-0 text-uppercase" style="font-family: 'Cormorant Garamond', 'Georgia', serif; color: #0F172A; font-size: 2rem; letter-spacing: 5px; line-height: 1;">Sertifikat</h4>
+                                    <p id="prevJenis" class="text-uppercase fw-bold mb-0" style="font-family: 'Poppins', sans-serif; color: #D4AF37; letter-spacing: 4px; font-size: 0.6rem; margin-top: 2px;">SERTIFIKAT KEIKUTSERTAAN</p>
+
+                                    <!-- Thin gold rule -->
+                                    <div style="display:flex; align-items:center; margin: 6px auto; width: 70%;">
+                                        <div style="flex:1; height:1px; background: linear-gradient(to right, transparent, #D4AF37);"></div>
+                                        <span style="color:#D4AF37; font-size:0.6rem; margin: 0 6px;">◆</span>
+                                        <div style="flex:1; height:1px; background: linear-gradient(to left, transparent, #D4AF37);"></div>
+                                    </div>
+
+                                    <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
+                                    <h5 class="mb-0" id="prevName" style="font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 4px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
+                                    <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 6px auto 3px;"></div>
+                                    <div class="fw-semibold" id="prevNis" style="font-size: 0.68rem; letter-spacing: 0.8px; font-family: 'Poppins', sans-serif; color: #475569;">NIS. -</div>
+                                </div>
+
+                                <!-- Info Badges row -->
+                                <div class="d-flex justify-content-center gap-2 w-100" style="margin: 4px 0;">
+                                    <div style="background: rgba(212,175,55,0.10); border: 1px solid #D4AF37; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #92600a; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
+                                        🎓 Ekskul: <span id="prevEkskul2" style="color:#0F172A;">-</span>
+                                    </div>
+                                    <div style="background: rgba(15,23,42,0.06); border: 1px solid #CBD5E1; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #475569; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
+                                        📅 Periode: <span id="prevPeriode" style="color:#0F172A;">-</span>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="text-center px-4 w-100" style="margin: 2px 0 6px;">
+                                    <p class="mb-0" id="prevDescription" style="line-height: 1.65; font-size: 0.78rem; color: #334155; font-family: 'Poppins', sans-serif;">
+                                    </p>
+                                </div>
+
+                                <!-- Decorative bottom ornament -->
+                                <div class="text-center w-100" style="margin: 2px 0;">
+                                    <span style="color: #D4AF37; font-size: 0.5rem; letter-spacing: 8px;">— ✦ —</span>
+                                </div>
+
+                                <!-- Footer: QR | Nomor+Tanggal | Tanda Tangan -->
+                                <div class="d-flex justify-content-between align-items-end w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
+
+                                    <!-- QR Code -->
+                                    <div class="text-start" style="width:68px;">
+                                        <div class="border bg-white p-1 d-inline-block" style="border-color: #D4AF37 !important; border-radius:4px;">
+                                            <img id="prevQrCode" src="" style="width:50px; height:50px; display:block;" alt="QR Code">
+                                        </div>
+                                        <div class="text-muted" style="font-size:0.42rem; margin-top:2px; font-family:'Poppins',sans-serif;">Pindai untuk verifikasi</div>
+                                    </div>
+
+                                    <!-- Nomor & Tanggal center -->
+                                    <div class="text-center" style="font-family:'Poppins',sans-serif;">
+                                        <div style="font-size:0.55rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
+                                        <div class="fw-bold" style="font-size:0.72rem; color:#0F172A;" id="prevNomor">-</div>
+                                        <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:4px;">Diterbitkan pada</div>
+                                        <div class="fw-bold" style="font-size:0.7rem; color:#0F172A;" id="prevTanggal">-</div>
+                                    </div>
+
+                                    <!-- Tanda Tangan Resmi -->
+                                    <div class="text-center" style="width:120px; font-family:'Poppins',sans-serif;">
+                                        <div style="font-size:0.5rem; color:#64748B; text-transform:uppercase; font-weight:600; letter-spacing:0.5px; margin-bottom:2px;" id="prevJabatan">Pembina OSIS</div>
+                                        <div style="height: 38px; position: relative;">
+                                            <img id="prevSignature" src="" class="img-fluid" style="max-height:36px; width:auto; mix-blend-mode:multiply; display:block; margin:0 auto;" alt="">
+                                        </div>
+                                        <div style="border-top: 1.5px solid #0F172A; margin: 0 6px 3px 6px;"></div>
+                                        <strong class="d-block" id="prevPembina" style="font-family:'Georgia',serif; font-size:0.62rem; color:#0F172A; line-height:1.3;">Nama Pembina</strong>
+                                        <div style="font-size:0.42rem; color:#94A3B8; margin-top:1px;">NIP / NIK</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="text-center my-3 position-relative" style="z-index: 5;">
-                    <!-- Georgia Serif Fonts -->
-                    <h3 class="fw-bold mb-0 text-uppercase" style="font-family: 'Georgia', serif; color: #0F172A; font-size: 2rem; letter-spacing: 3px; line-height: 1.1;">Sertifikat</h3>
-                    <p id="prevJenis" class="text-uppercase fw-bold mb-2 text-secondary" style="font-family: 'Georgia', serif; color: #D4AF37 !important; letter-spacing: 4px; font-size: 0.8rem; margin-top: 2px;">KEJUARAAN</p>
-                    
-                    <div class="recipient-label text-muted" style="font-family: 'Georgia', serif; font-style: italic; font-size: 0.85rem; margin-top: 6px;">Diberikan Kepada:</div>
-                    <div class="my-0">
-                        <h2 class="fw-bold text-dark m-0" id="prevName" style="font-family: 'Georgia', serif; font-size: 2rem; letter-spacing: 1px;">AUREL CALISTA</h2>
-                    </div>
-                    <div class="preview-gold-divider" style="width: 55%; max-width: 400px; height: 1.5px; background-color: #D4AF37; margin: 4px auto;"></div>
-                    <div class="fw-bold text-secondary small mt-1" id="prevNisAndKelas" style="letter-spacing: 0.5px; font-size: 0.8rem;">NIS. 2026102391 &nbsp;|&nbsp; KELAS: XII RPL 1</div>
-                </div>
-
-                <div class="my-3 text-center position-relative" style="z-index: 5;">
-                    <p class="text-secondary mb-0" style="line-height: 1.6; max-width: 85%; margin: 0 auto; font-size: 0.9rem;">
-                        Telah menyelesaikan dan berpartisipasi aktif dalam kegiatan ekstrakurikuler 
-                        <strong id="prevEkskul" style="color: #0F172A;">Pramuka</strong> dengan pencapaian prestasi luar biasa sebagai 
-                        "<strong id="prevPrestasi" style="color: #D4AF37;">Juara 1 Lomba Tingkat Kota</strong>" pada tahun pelajaran {{ date('Y') }}.
-                    </p>
-                </div>
-
-                <div class="row align-items-end mt-4 position-relative" style="z-index: 5; text-align: left;">
-                    <!-- QR Code -->
-                    <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                        <img id="prevQrCode" src="" class="img-fluid border bg-white p-1 rounded shadow-sm" style="width: 75px; height: 75px; border-color: #D4AF37 !important;" alt="QR Code Verifikasi">
-                        <span class="d-block text-muted small mt-1" style="font-size: 0.6rem; letter-spacing: 0.3px; font-weight: 500;">Pindai untuk validasi sertifikat</span>
-                    </div>
-                    
-                    <!-- Certificate Details -->
-                    <div class="col-md-4 text-center mb-3 mb-md-0 small">
-                        <div class="fw-bold text-dark small" style="font-size: 0.8rem;">No: <span id="prevNomor">001/EKS/2026</span></div>
-                        <div class="mt-1 small" style="font-size: 0.8rem;">Kode Verifikasi: <strong id="prevCode" style="color: #E74C3C; font-size: 0.85rem;">SK-2026-XXXX</strong></div>
-                        <div class="mt-2 text-muted text-uppercase" style="font-size: 0.6rem; letter-spacing: 0.5px;">Diterbitkan pada tanggal:</div>
-                        <div class="fw-bold text-dark mt-0" id="prevTanggal" style="font-size: 0.78rem;">30 Juli 2026</div>
-                    </div>
-
-                    <!-- Signature -->
-                    <div class="col-md-4 text-center">
-                        <span class="text-muted d-block small mb-1" id="prevJabatan" style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px;">Pembina Pramuka</span>
-                        <div class="my-1" style="height: 90px;">
-                            <img id="prevSignature" src="https://via.placeholder.com/150x50" class="img-fluid" alt="Tanda Tangan">
+                    <div class="modal-footer bg-light border-top px-4 py-3 justify-content-between">
+                        <div>
+                            <a id="btnEditCert" href="" class="btn btn-warning rounded-3 text-dark btn-sm fw-semibold me-1">
+                                <i class="fa-solid fa-pen-to-square me-1"></i>Ubah Data
+                            </a>
+                            <a id="btnDownloadPdf" href="" class="btn btn-success rounded-3 btn-sm fw-semibold">
+                                <i class="fa-solid fa-file-pdf me-1"></i>Unduh PDF
+                            </a>
                         </div>
-                        <strong class="d-block text-dark" id="prevPembina" style="font-family: 'Georgia', serif; font-size: 0.88rem;">Budi Santoso, S.Pd.</strong>
+                        <button type="button" class="btn btn-secondary rounded-3 btn-sm" data-bs-dismiss="modal">Tutup</button>
                     </div>
                 </div>
-            </div>
-
-            <!-- Download / Action Buttons -->
-            <div class="text-center mt-3 d-flex justify-content-center gap-2">
-                <a id="btnDownloadPdf" href="" class="btn btn-success rounded-3 px-4 py-2">
-                    <i class="fa-solid fa-file-pdf me-2"></i>Unduh PDF
-                </a>
-                <a id="btnEditCert" href="" class="btn btn-warning rounded-3 px-4 py-2 text-dark">
-                    <i class="fa-solid fa-pen-to-square me-2"></i>Ubah Data
-                </a>
             </div>
         </div>
     </div>
 </div>
 @endsection
-
 @section('scripts')
 <script>
 // Define loaders for admin panel (since they are not defined in admin layout)
@@ -276,9 +307,6 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
     if (!code) return;
 
     showLoader();
-    
-    // Reset preview
-    document.getElementById('previewCard').classList.add('d-none');
 
     // Fetch CSRF token
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -302,17 +330,34 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
         if (data.success) {
             const cert = data.data;
 
+            // Titlecase helper
+            function toTitleCase(str) {
+                return str.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
+            }
+
             // Populate preview fields
-            document.getElementById('prevName').innerText = cert.nama_siswa.toUpperCase();
-            document.getElementById('prevNisAndKelas').innerHTML = "NIS. " + cert.nis + " &nbsp;|&nbsp; KELAS: " + cert.kelas.toUpperCase();
-            document.getElementById('prevSchool').innerText = cert.sekolah.toUpperCase();
-            document.getElementById('prevEkskul').innerText = cert.ekskul;
+            document.getElementById('prevName').innerText = toTitleCase(cert.nama_siswa);
+            document.getElementById('prevNis').innerText = "NIS. " + cert.nis;
+            document.getElementById('prevEkskul2').innerText = cert.ekskul;
+            
+            const prestasiText = cert.prestasi && cert.prestasi !== '-' ? cert.prestasi : 'Anggota/Peserta Aktif';
             document.getElementById('prevJenis').innerText = cert.jenis_sertifikat.toUpperCase();
-            document.getElementById('prevPrestasi').innerText = cert.prestasi && cert.prestasi !== '-' ? cert.prestasi : 'Anggota/Peserta Aktif';
+            
+            const dateParts = cert.tanggal.split(' ');
+            const yrVal = dateParts[dateParts.length - 1];
+            const yrNum = parseInt(yrVal);
+            if (!isNaN(yrNum)) {
+                document.getElementById('prevPeriode').innerText = `${yrNum}/${yrNum+1}`;
+            } else {
+                const currentYr = new Date().getFullYear();
+                document.getElementById('prevPeriode').innerText = `${currentYr}/${currentYr+1}`;
+            }
+            
+            document.getElementById('prevDescription').innerHTML = `Dinyatakan telah mengikuti dan aktif berprestasi dalam kegiatan Ekstrakurikuler <strong style="color: #0F172A;">${cert.ekskul}</strong> dengan predikat <span style="background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px;"><strong style="color: #b5860d;">"${prestasiText}"</strong></span> pada tahun pelajaran <strong style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</strong>.`;
+
             document.getElementById('prevTanggal').innerText = cert.tanggal;
             document.getElementById('prevPembina').innerText = cert.nama_pembina;
-            document.getElementById('prevJabatan').innerText = cert.jabatan_pembina;
-            document.getElementById('prevCode').innerText = cert.code;
+            document.getElementById('prevJabatan').innerText = cert.jabatan_pembina.toUpperCase();
             document.getElementById('prevNomor').innerText = cert.nomor_sertifikat;
 
             // Populate status badge
@@ -346,18 +391,6 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
             // Set download PDF action url
             document.getElementById('btnDownloadPdf').href = cert.pdf_url;
             
-            // Set edit certificate link (assuming standard resource route structure)
-            // Wait, we need the certificate ID to build the edit URL!
-            // Let's pass the ID in the search response or get the edit URL from server.
-            // But we can check what cert.pdf_url ends with or add an 'edit_url' field in Controller search response!
-            // Actually, we don't have cert.id in the response yet, so let's make sure the controller returns it!
-            // Let's see: we can construct the edit URL dynamically if we know the ID or we can just fetch it from the database!
-            // Let's add 'edit_url' field in SiswaController/CertificateController. In the CertificateController preview search, we can return the edit_url!
-            // Yes! In CertificateController, I returned the edit url:
-            // Let's check my CertificateController search output:
-            // It did not have edit_url yet. Let's add it! Or we can use route builder or edit_url directly.
-            // Let's add 'edit_url' => route('admin.certificates.edit', $certificate->id) in CertificateController@search.
-            // For now, in JS:
             if (cert.edit_url) {
                 document.getElementById('btnEditCert').href = cert.edit_url;
                 document.getElementById('btnEditCert').style.display = 'inline-block';
@@ -365,11 +398,9 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
                 document.getElementById('btnEditCert').style.display = 'none';
             }
 
-            // Show preview
-            document.getElementById('previewCard').classList.remove('d-none');
-            
-            // Smooth scroll to preview
-            document.getElementById('previewCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Show preview modal
+            const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+            previewModal.show();
         }
     })
     .catch(err => {
