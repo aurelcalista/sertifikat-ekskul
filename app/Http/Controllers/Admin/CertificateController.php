@@ -45,7 +45,20 @@ class CertificateController extends Controller
         // Ambil opsi ekskul unik untuk dropdown filter
         $ekskul_list = Certificate::distinct()->pluck('ekskul')->filter()->toArray();
 
-        return view('admin.certificates.index', compact('certificates', 'ekskul_list'));
+        $templates = Template::all();
+        
+        // Nilai default dari settings untuk mempercepat pengisian
+        $default_sekolah = Setting::get('sekolah_default', '');
+        $default_pembina = Setting::get('pembina_default', '');
+        $default_jabatan = Setting::get('jabatan_pembina_default', '');
+        
+        $logo_default_val = Setting::get('logo_default', '');
+        $default_logo = $logo_default_val ? asset('storage/' . $logo_default_val) : null;
+        
+        $signature_default_val = Setting::get('tanda_tangan_default', '');
+        $default_signature = $signature_default_val ? asset('storage/' . $signature_default_val) : null;
+
+        return view('admin.certificates.index', compact('certificates', 'ekskul_list', 'templates', 'default_sekolah', 'default_pembina', 'default_jabatan', 'default_logo', 'default_signature'));
     }
 
     /**

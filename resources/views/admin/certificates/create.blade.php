@@ -142,50 +142,43 @@
                 @endif
 
                 <div class="row g-3">
+                    <!-- Hidden validation requirements -->
+                    <input type="hidden" name="nis" value="-">
+                    <input type="hidden" name="ekskul" value="-">
+                    <input type="hidden" name="nama_pembina" value="-">
+                    <input type="hidden" name="jabatan_pembina" value="-">
 
-                    <!-- 1. Identitas Siswa -->
+                    <!-- Identitas Penerima -->
                     <div class="col-12">
-                        <h5 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-user-graduate me-2"></i>1. Identitas Siswa</h5>
+                        <h5 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-user-graduate me-2"></i>Identitas Penerima</h5>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-12">
                         <label for="nama_siswa" class="form-label small fw-medium text-secondary">Nama Lengkap Siswa</label>
                         <input type="text" name="nama_siswa" id="nama_siswa" class="form-control @error('nama_siswa') is-invalid @enderror" value="{{ old('nama_siswa') }}" required placeholder="Masukkan nama siswa...">
                         @error('nama_siswa') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="col-md-4">
-                        <label for="nis" class="form-label small fw-medium text-secondary">NIS (Nomor Induk Siswa)</label>
-                        <input type="text" name="nis" id="nis" class="form-control @error('nis') is-invalid @enderror" value="{{ old('nis') }}" required placeholder="2026xxxxxx">
-                        @error('nis') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-
-                    <!-- 2. Detail Sertifikat & Kegiatan -->
+                    <!-- Detail Sertifikat & Kegiatan -->
                     <div class="col-12 mt-4">
-                        <h5 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-award me-2"></i>2. Detail Sertifikat & Kegiatan</h5>
+                        <h5 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-award me-2"></i>Detail Sertifikat</h5>
                     </div>
 
-                    <div class="col-md-3">
-                        <label for="ekskul" class="form-label small fw-medium text-secondary">Nama Ekskul</label>
-                        <input type="text" name="ekskul" id="ekskul" class="form-control @error('ekskul') is-invalid @enderror" value="{{ old('ekskul') }}" required placeholder="Pramuka, Futsal, Paskibra...">
-                        @error('ekskul') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="nomor_sertifikat" class="form-label small fw-medium text-secondary">
                             Nomor Sertifikat <span class="badge bg-danger" style="font-size:0.6rem;">Unik</span>
                         </label>
-                        <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control @error('nomor_sertifikat') is-invalid @enderror" value="{{ old('nomor_sertifikat') }}" required placeholder="124/SMK1/EKS/2026">
+                        <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control @error('nomor_sertifikat') is-invalid @enderror" value="{{ old('nomor_sertifikat') }}" required placeholder="124/SMK1/2026">
                         @error('nomor_sertifikat') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <label for="tanggal" class="form-label small fw-medium text-secondary">Tanggal Terbit</label>
                         <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal', date('Y-m-d')) }}" required>
                         @error('tanggal') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <label for="status" class="form-label small fw-medium text-secondary">Status Sertifikat</label>
                         <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" required>
                             <option value="Aktif" selected>Aktif</option>
@@ -194,40 +187,16 @@
                         @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <label for="jenis_sertifikat" class="form-label small fw-medium text-secondary">Jenis Sertifikat</label>
                         <input type="text" name="jenis_sertifikat" id="jenis_sertifikat" class="form-control @error('jenis_sertifikat') is-invalid @enderror" value="{{ old('jenis_sertifikat', 'Sertifikat Keikutsertaan') }}" required placeholder="Keikutsertaan, Kejuaraan...">
                         @error('jenis_sertifikat') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="col-md-12">
-                        <label for="prestasi" class="form-label small fw-medium text-secondary">Pencapaian / Prestasi <span class="text-muted">(Opsional)</span></label>
-                        <input type="text" name="prestasi" id="prestasi" class="form-control @error('prestasi') is-invalid @enderror" value="{{ old('prestasi') }}" placeholder="Juara 1 Lomba Tingkat Kota, Anggota Aktif, dll">
+                    <div class="col-12">
+                        <label for="prestasi" class="form-label small fw-medium text-secondary">Deskripsi / Teks Sertifikat</label>
+                        <textarea name="prestasi" id="prestasi" class="form-control @error('prestasi') is-invalid @enderror" rows="3" required placeholder="Masukkan deskripsi sertifikat...">{{ old('prestasi', 'Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri sekolah dengan predikat "Anggota/Peserta Aktif"') }}</textarea>
                         @error('prestasi') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-
-                    <!-- 3. Pembina / Penanggung Jawab -->
-                    <div class="col-12 mt-4">
-                        <h5 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-signature me-2"></i>3. Pembina / Penanggung Jawab</h5>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="nama_pembina" class="form-label small fw-medium text-secondary">Nama Pembina</label>
-                        <input type="text" name="nama_pembina" id="nama_pembina" class="form-control @error('nama_pembina') is-invalid @enderror" value="{{ old('nama_pembina', $default_pembina) }}" required placeholder="Masukkan nama pembina...">
-                        @error('nama_pembina') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="jabatan_pembina" class="form-label small fw-medium text-secondary">Jabatan Pembina</label>
-                        <input type="text" name="jabatan_pembina" id="jabatan_pembina" class="form-control @error('jabatan_pembina') is-invalid @enderror" value="{{ old('jabatan_pembina', $default_jabatan) }}" required placeholder="Pembina Futsal, Koordinator Ekskul, dll">
-                        @error('jabatan_pembina') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="tanda_tangan_file" class="form-label small fw-medium text-secondary">Tanda Tangan Pembina <span class="text-muted">(Kosongkan jika default)</span></label>
-                        <input type="file" name="tanda_tangan_file" id="tanda_tangan_file" class="form-control @error('tanda_tangan_file') is-invalid @enderror">
-                        <small class="text-muted" style="font-size: 0.75rem;">Format: PNG transparan, Maks: 1MB</small>
-                        @error('tanda_tangan_file') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
                     <!-- 4. Pengaturan Template & Berkas -->
@@ -331,27 +300,12 @@
                             <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
                             <h5 class="mb-0" id="prevName" style="font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 4px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
                             <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 6px auto 3px;"></div>
-                            <div class="fw-semibold" id="prevNis" style="font-size: 0.68rem; letter-spacing: 0.8px; font-family: 'Poppins', sans-serif; color: #475569;">NIS. -</div>
-                        </div>
-
-                        <!-- Info Badges row -->
-                        <div class="d-flex justify-content-center gap-2" style="margin: 4px 0;">
-                            <div style="background: rgba(212,175,55,0.10); border: 1px solid #D4AF37; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #92600a; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                🎓 Ekskul: <span id="prevEkskul2" style="color:#0F172A;">-</span>
-                            </div>
-                            <div style="background: rgba(15,23,42,0.06); border: 1px solid #CBD5E1; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #475569; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                📅 Periode: <span id="prevPeriode" style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</span>
-                            </div>
                         </div>
 
                         <!-- Description -->
                         <div class="text-center px-4" style="margin: 2px 0 6px;">
                             <p class="mb-0" style="line-height: 1.65; font-size: 0.78rem; color: #334155; font-family: 'Poppins', sans-serif;">
-                                Dinyatakan telah mengikuti dan aktif berprestasi dalam kegiatan Ekstrakurikuler
-                                <strong id="prevEkskul" style="color: #0F172A;"> - </strong>
-                                dengan predikat
-                                <span style="background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px;"><strong id="prevPrestasi" style="color: #b5860d;">"Anggota/Peserta Aktif"</strong></span>
-                                pada tahun pelajaran <strong style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</strong>.
+                                Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri sekolah dengan predikat <span style="background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px;"><strong id="prevPrestasi" style="color: #b5860d;">"Anggota/Peserta Aktif"</strong></span>.
                             </p>
                         </div>
 
@@ -360,7 +314,7 @@
                             <span style="color: #D4AF37; font-size: 0.5rem; letter-spacing: 8px;">— ✦ —</span>
                         </div>
 
-                        <!-- Footer: QR | Nomor+Tanggal | Tanda Tangan -->
+                        <!-- Footer: QR | Nomor+Tanggal -->
                         <div class="d-flex justify-content-between align-items-end" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
 
                             <!-- QR Code (auto-generated) -->
@@ -371,23 +325,12 @@
                                 <div class="text-muted" style="font-size:0.42rem; margin-top:2px; font-family:'Poppins',sans-serif;">Pindai untuk verifikasi</div>
                             </div>
 
-                            <!-- Nomor & Tanggal center -->
-                            <div class="text-center" style="font-family:'Poppins',sans-serif;">
+                            <!-- Nomor & Tanggal -->
+                            <div class="text-end" style="font-family:'Poppins',sans-serif; line-height: 1.1;">
                                 <div style="font-size:0.55rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
                                 <div class="fw-bold" style="font-size:0.72rem; color:#0F172A;" id="prevNomor">-</div>
                                 <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:4px;">Diterbitkan pada</div>
                                 <div class="fw-bold" style="font-size:0.7rem; color:#0F172A;" id="prevTanggal">-</div>
-                            </div>
-
-                            <!-- Tanda Tangan Resmi -->
-                            <div class="text-center" style="width:120px; font-family:'Poppins',sans-serif;">
-                                <div style="font-size:0.5rem; color:#64748B; text-transform:uppercase; font-weight:600; letter-spacing:0.5px; margin-bottom:2px;" id="prevJabatan">{{ $default_jabatan ?: 'Pembina OSIS' }}</div>
-                                <div style="height: 38px; position: relative;">
-                                    <img id="prevSignature" src="{{ $default_signature ?: '' }}" class="img-fluid" style="max-height:36px; width:auto; mix-blend-mode:multiply; display:block; margin:0 auto;" alt="">
-                                </div>
-                                <div style="border-top: 1.5px solid #0F172A; margin: 0 6px 3px 6px;"></div>
-                                <strong class="d-block" id="prevPembina" style="font-family:'Georgia',serif; font-size:0.62rem; color:#0F172A; line-height:1.3;">{{ $default_pembina ?: 'Nama Pembina' }}</strong>
-                                <div style="font-size:0.42rem; color:#94A3B8; margin-top:1px;">NIP / NIK</div>
                             </div>
 
                         </div>

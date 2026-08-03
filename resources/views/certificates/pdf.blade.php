@@ -353,7 +353,108 @@
             text-align: center;
             color: #D4AF37;
             font-size: 7pt;
-            margin: 2px 0;
+            margin: 4px 0;
+        }
+
+        /* Decorative Side Lines */
+        .side-deco-left {
+            position: absolute;
+            left: 14mm;
+            top: 20mm;
+            bottom: 20mm;
+            width: 3px;
+            z-index: 3;
+        }
+        .side-deco-right {
+            position: absolute;
+            right: 14mm;
+            top: 20mm;
+            bottom: 20mm;
+            width: 3px;
+            z-index: 3;
+        }
+        .side-line-outer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-left: 1px solid #D4AF37;
+        }
+        .side-dot {
+            position: absolute;
+            left: -3px;
+            width: 6px;
+            height: 6px;
+            background: #D4AF37;
+            border-radius: 50%;
+        }
+        .side-dot-top    { top: 0; }
+        .side-dot-mid    { top: 50%; margin-top: -3px; }
+        .side-dot-bottom { bottom: 0; }
+
+        /* Gold Ribbon Banner */
+        .ribbon-banner {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 30mm;
+            height: 10mm;
+            z-index: 4;
+            overflow: hidden;
+        }
+        .ribbon-stripe-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #D4AF37;
+        }
+        .ribbon-stripe-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #D4AF37;
+        }
+        .ribbon-fill {
+            position: absolute;
+            top: 1px;
+            bottom: 1px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #FAF6E8 0%, #FDF9EF 40%, #FAF6E8 100%);
+        }
+        .ribbon-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: table;
+            width: 100%;
+        }
+        .ribbon-inner {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .ribbon-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 7pt;
+            color: #92600a;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .ribbon-diamond {
+            display: inline-block;
+            color: #D4AF37;
+            font-size: 8pt;
+            margin: 0 8px;
+            vertical-align: middle;
         }
 
         /* Footer Table absolute layout (Placed directly under container for DomPDF reliability) */
@@ -366,19 +467,14 @@
             z-index: 15;
         }
         .footer-qr-cell {
-            width: 25%;
-            vertical-align: bottom;
+            width: 50%;
+            vertical-align: middle;
             text-align: left;
         }
         .footer-meta-cell {
-            width: 45%;
-            vertical-align: bottom;
-            text-align: center;
-        }
-        .footer-signature-cell {
-            width: 30%;
-            vertical-align: bottom;
-            text-align: center;
+            width: 50%;
+            vertical-align: middle;
+            text-align: right;
         }
 
         .qr-code-border {
@@ -517,7 +613,41 @@
     @endphp
 
     <div class="certificate-container">
-        
+
+        <!-- Decorative Left Side Line -->
+        <div class="side-deco-left">
+            <div class="side-line-outer"></div>
+            <div class="side-dot side-dot-top"></div>
+            <div class="side-dot side-dot-mid"></div>
+            <div class="side-dot side-dot-bottom"></div>
+        </div>
+
+        <!-- Decorative Right Side Line -->
+        <div class="side-deco-right">
+            <div class="side-line-outer"></div>
+            <div class="side-dot side-dot-top"></div>
+            <div class="side-dot side-dot-mid"></div>
+            <div class="side-dot side-dot-bottom"></div>
+        </div>
+
+        <!-- Gold Ribbon Banner (Decorative) -->
+        <div class="ribbon-banner">
+            <div class="ribbon-stripe-top"></div>
+            <div class="ribbon-fill"></div>
+            <div class="ribbon-stripe-bottom"></div>
+            <div class="ribbon-content">
+                <div class="ribbon-inner">
+                    <span class="ribbon-text">
+                        <span class="ribbon-diamond">◆</span>
+                        <span style="letter-spacing: 6px;">―――――</span>
+                        <span class="ribbon-diamond" style="font-size: 10pt;">★</span>
+                        <span style="letter-spacing: 6px;">―――――</span>
+                        <span class="ribbon-diamond">◆</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
         <!-- Render Background Template or Elegant Custom Frame -->
         @if($bg_image)
             <img class="bg-template" src="{{ $bg_image }}" alt="Background Template">
@@ -579,32 +709,12 @@
                 <p class="given-to">Dengan bangga diberikan kepada:</p>
                 <h3 class="recipient-name" style="font-size: {{ $fs }};">{{ $title_cased_name }}</h3>
                 <div class="recipient-line"></div>
-                <p class="recipient-nis">NIS. {{ $certificate->nis }}</p>
             </div>
-
-            <!-- Badges Row (Ekskul and Number) using inline elements inside a table to prevent CSS wraps -->
-            <table class="badges-table">
-                <tr>
-                    <td class="badge-cell">
-                        <span class="badge-ekskul">Ekskul: <span style="color: #0F172A;">{{ $certificate->ekskul }}</span></span>
-                    </td>
-                    <td class="badge-cell">
-                        @php
-                            $yr = $certificate->tanggal->format('Y');
-                        @endphp
-                        <span class="badge-nomor">Periode: <span style="color: #0F172A;">{{ $yr }}/{{ $yr+1 }}</span></span>
-                    </td>
-                </tr>
-            </table>
 
             <!-- Description Text -->
             <div class="description-box">
                 <p class="description-text">
-                    Dinyatakan telah mengikuti dan aktif berprestasi dalam kegiatan Ekstrakurikuler 
-                    <span class="highlight-text">{{ $certificate->ekskul }}</span> 
-                    dengan predikat 
-                    <span class="predikat-badge">"{{ $certificate->prestasi ?? 'Anggota/Peserta Aktif' }}"</span> 
-                    pada tahun pelajaran <span class="highlight-text">{{ date('Y') }}/{{ date('Y')+1 }}</span>.
+                    {!! nl2br(e($certificate->prestasi)) !!}
                 </p>
             </div>
 
@@ -612,7 +722,6 @@
             <div class="bottom-ornament">--- * ---</div>
         </div>
 
-        <!-- Footer Details (QR, Signatures, Meta) placed as direct child for exact rendering coordinate -->
         <table class="footer-table">
             <tr>
                 <!-- QR Code -->
@@ -629,19 +738,6 @@
                     <div class="meta-val-nomor">{{ $certificate->nomor_sertifikat }}</div>
                     <div class="meta-title" style="margin-top: 4px;">Diterbitkan pada</div>
                     <div class="meta-val-tanggal">{{ $certificate->tanggal->translatedFormat('d F Y') }}</div>
-                </td>
-
-                <!-- Signature -->
-                <td class="footer-signature-cell">
-                    <div class="sig-jabatan">{{ $certificate->jabatan_pembina ?? 'Pembina OSIS' }}</div>
-                    <div class="sig-image-container">
-                        @if($sig_data)
-                            <img class="sig-image" src="{{ $sig_data }}" alt="Signature">
-                        @endif
-                    </div>
-                    <div class="sig-divider"></div>
-                    <div class="sig-pembina">{{ $certificate->nama_pembina }}</div>
-                    <div class="sig-nip">NIP / NIK</div>
                 </td>
             </tr>
         </table>

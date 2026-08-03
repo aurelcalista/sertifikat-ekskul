@@ -50,15 +50,117 @@
             <p class="text-muted small mb-0">Kelola data sertifikat ekstrakurikuler siswa secara efisien.</p>
         </div>
         <div class="d-flex flex-wrap gap-2">
-            <a href="{{ route('admin.certificates.export.excel') }}" class="btn btn-outline-success rounded-3 px-3">
-                <i class="fa-solid fa-file-excel me-2"></i>Ekspor Excel (CSV)
-            </a>
             <a href="{{ route('admin.certificates.export.pdf') }}" class="btn btn-outline-danger rounded-3 px-3">
                 <i class="fa-solid fa-file-pdf me-2"></i>Ekspor PDF List
             </a>
-            <a href="{{ route('admin.certificates.create') }}" class="btn btn-danger rounded-3 px-3">
+            <button type="button" class="btn btn-danger rounded-3 px-3" data-bs-toggle="collapse" data-bs-target="#createFormCollapse" aria-expanded="false" aria-controls="createFormCollapse">
                 <i class="fa-solid fa-circle-plus me-2"></i>Tambah Baru
-            </a>
+            </button>
+        </div>
+    </div>
+
+    <!-- Collapse Create Form Inline -->
+    <div class="collapse {{ $errors->any() ? 'show' : '' }} mb-4" id="createFormCollapse">
+        <div class="card border-0 shadow-sm rounded-4 p-4" style="background-color: var(--card-bg); border: 1px solid var(--border-color) !important;">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                <h5 class="fw-bold text-dark mb-0">
+                    <i class="fa-solid fa-circle-plus text-danger me-2"></i>Tambah Sertifikat Baru
+                </h5>
+                <button type="button" class="btn-close" data-bs-toggle="collapse" data-bs-target="#createFormCollapse" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.certificates.store') }}" method="POST" enctype="multipart/form-data" id="createCertForm">
+                @csrf
+                <div class="p-0">
+                    @if ($errors->any())
+                        <div class="alert alert-danger rounded-3 mb-4">
+                            <ul class="mb-0 small">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <div class="row g-3">
+                        <!-- Hidden validation requirements -->
+                        <input type="hidden" name="nis" value="-">
+                        <input type="hidden" name="ekskul" value="-">
+                        <input type="hidden" name="nama_pembina" value="-">
+                        <input type="hidden" name="jabatan_pembina" value="-">
+
+                        <!-- Identitas Penerima -->
+                        <div class="col-12">
+                            <h6 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-user-graduate me-2"></i>Identitas Penerima</h6>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="nama_siswa" class="form-label small fw-medium text-secondary">Nama Lengkap Siswa</label>
+                            <input type="text" name="nama_siswa" id="nama_siswa" class="form-control" value="{{ old('nama_siswa') }}" required placeholder="Masukkan nama lengkap penerima...">
+                        </div>
+
+                        <!-- Detail Sertifikat & Kegiatan -->
+                        <div class="col-12 mt-4">
+                            <h6 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-award me-2"></i>Detail Sertifikat</h6>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="nomor_sertifikat" class="form-label small fw-medium text-secondary">
+                                Nomor Sertifikat <span class="badge bg-danger" style="font-size:0.6rem;">Unik</span>
+                            </label>
+                            <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control" value="{{ old('nomor_sertifikat') }}" required placeholder="124/SMK1/2026">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="tanggal" class="form-label small fw-medium text-secondary">Tanggal Terbit</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ old('tanggal', date('Y-m-d')) }}" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="status" class="form-label small fw-medium text-secondary">Status Sertifikat</label>
+                            <select name="status" id="status" class="form-select" required>
+                                <option value="Aktif" selected>Aktif</option>
+                                <option value="Draft">Draft</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="jenis_sertifikat" class="form-label small fw-medium text-secondary">Jenis Sertifikat</label>
+                            <input type="text" name="jenis_sertifikat" id="jenis_sertifikat" class="form-control" value="{{ old('jenis_sertifikat', 'Sertifikat Keikutsertaan') }}" required placeholder="Keikutsertaan, Kejuaraan...">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="prestasi" class="form-label small fw-medium text-secondary">Deskripsi / Teks Sertifikat</label>
+                            <textarea name="prestasi" id="prestasi" class="form-control" rows="3" required placeholder="Masukkan deskripsi sertifikat...">{{ old('prestasi', 'Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri sekolah dengan predikat "Anggota/Peserta Aktif"') }}</textarea>
+                        </div>
+
+                        <!-- 4. Pengaturan Template & Berkas -->
+                        <div class="col-12 mt-4">
+                            <h6 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-image me-2"></i>4. Pengaturan Template & Berkas</h6>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="template_id" class="form-label small fw-medium text-secondary">Template Background Default</label>
+                            <select name="template_id" id="template_id" class="form-select" required>
+                                @foreach($templates as $tpl)
+                                    <option value="{{ $tpl->id }}" {{ old('template_id') == $tpl->id || $tpl->is_default ? 'selected' : '' }}>{{ $tpl->name }} {{ $tpl->is_default ? '(Default)' : '' }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="background_file" class="form-label small fw-medium text-secondary">Custom Background <span class="text-muted">(Opsional)</span></label>
+                            <input type="file" name="background_file" id="background_file" class="form-control">
+                            <small class="text-muted" style="font-size: 0.75rem;">Format: JPG/PNG, Maks: 2MB</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                    <button type="button" class="btn btn-secondary rounded-3 btn-sm" data-bs-toggle="collapse" data-bs-target="#createFormCollapse">Batal</button>
+                    <button type="submit" class="btn btn-danger rounded-3 btn-sm px-4">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>Simpan Sertifikat
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -171,7 +273,9 @@
         {{ $certificates->links() }}
     </div>
 </div>
+@endsection
 
+@push('modals')
 <!-- CSS Styling for Certificate Preview Frame inside Modal -->
 <style>
     .preview-certificate-container {
@@ -442,17 +546,6 @@
                                     <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
                                     <h5 class="mb-0" id="modalName" style="font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 4px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
                                     <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 6px auto 3px;"></div>
-                                    <div class="fw-semibold" id="modalNis" style="font-size: 0.68rem; letter-spacing: 0.8px; font-family: 'Poppins', sans-serif; color: #475569;">NIS. -</div>
-                                </div>
-
-                                <!-- Info Badges row -->
-                                <div class="d-flex justify-content-center gap-2 w-100" style="margin: 4px 0;">
-                                    <div style="background: rgba(212,175,55,0.10); border: 1px solid #D4AF37; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #92600a; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                        🎓 Ekskul: <span id="modalEkskul2" style="color:#0F172A;">-</span>
-                                    </div>
-                                    <div style="background: rgba(15,23,42,0.06); border: 1px solid #CBD5E1; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #475569; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                        📅 Periode: <span id="modalPeriode" style="color:#0F172A;">-</span>
-                                    </div>
                                 </div>
 
                                 <!-- Description -->
@@ -466,8 +559,13 @@
                                     <span style="color: #D4AF37; font-size: 0.5rem; letter-spacing: 8px;">— ✦ —</span>
                                 </div>
 
-                                <!-- Footer: QR | Nomor+Tanggal | Tanda Tangan -->
-                                <div class="d-flex justify-content-between align-items-end w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
+                                <!-- Gold Ribbon Banner -->
+                                <div class="w-100" style="margin: auto 0; border-top: 1px solid #D4AF37; border-bottom: 1px solid #D4AF37; background: linear-gradient(135deg, #FAF6E8 0%, #FDF9EF 50%, #FAF6E8 100%); padding: 5px 0; text-align: center; flex-shrink: 0;">
+                                    <span style="color: #D4AF37; font-size: 0.7rem; letter-spacing: 8px;">◆ ―――― ★ ―――― ◆</span>
+                                </div>
+
+                                <!-- Footer: QR | Nomor+Tanggal -->
+                                <div class="d-flex justify-content-between align-items-center w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
 
                                     <!-- QR Code -->
                                     <div class="text-start" style="width:68px;">
@@ -477,25 +575,15 @@
                                         <div class="text-muted" style="font-size:0.42rem; margin-top:2px; font-family:'Poppins',sans-serif;">Pindai untuk verifikasi</div>
                                     </div>
 
-                                    <!-- Nomor & Tanggal center -->
-                                    <div class="text-center" style="font-family:'Poppins',sans-serif;">
+                                    <!-- Nomor & Tanggal -->
+                                    <div class="text-end" style="font-family:'Poppins',sans-serif; line-height: 1.1;">
                                         <div style="font-size:0.55rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
                                         <div class="fw-bold" style="font-size:0.72rem; color:#0F172A;" id="modalNomor">-</div>
                                         <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:4px;">Diterbitkan pada</div>
                                         <div class="fw-bold" style="font-size:0.7rem; color:#0F172A;" id="modalTanggal">-</div>
                                     </div>
 
-                                    <!-- Tanda Tangan Resmi -->
-                                    <div class="text-center" style="width:120px; font-family:'Poppins',sans-serif;">
-                                        <div style="font-size:0.5rem; color:#64748B; text-transform:uppercase; font-weight:600; letter-spacing:0.5px; margin-bottom:2px;" id="modalJabatan">Pembina OSIS</div>
-                                        <div style="height: 38px; position: relative;">
-                                            <img id="modalSignature" src="" class="img-fluid" style="max-height:36px; width:auto; mix-blend-mode:multiply; display:block; margin:0 auto;" alt="">
-                                        </div>
-                                        <div style="border-top: 1.5px solid #0F172A; margin: 0 6px 3px 6px;"></div>
-                                        <strong class="d-block" id="modalPembina" style="font-family:'Georgia',serif; font-size:0.62rem; color:#0F172A; line-height:1.3;">Nama Pembina</strong>
-                                        <div style="font-size:0.42rem; color:#94A3B8; margin-top:1px;">NIP / NIK</div>
-                                    </div>
-
+                                </div>
                     </div>
                 </div>
             </div>
@@ -513,7 +601,9 @@
         </div>
     </div>
 </div>
-@endsection
+
+
+@endpush
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
@@ -608,28 +698,14 @@
 
                         // Populate modal preview fields
                         document.getElementById('modalName').innerText = toTitleCase(cert.nama_siswa);
-                        document.getElementById('modalNis').innerText = "NIS. " + cert.nis;
-                        document.getElementById('modalEkskul2').innerText = cert.ekskul;
                         
                         const prestasiText = cert.prestasi && cert.prestasi !== '-' ? cert.prestasi : 'Anggota/Peserta Aktif';
                         document.getElementById('modalJenis').innerText = cert.jenis_sertifikat.toUpperCase();
                         
-                        const dateParts = cert.tanggal.split(' ');
-                        const yrVal = dateParts[dateParts.length - 1];
-                        const yrNum = parseInt(yrVal);
-                        if (!isNaN(yrNum)) {
-                            document.getElementById('modalPeriode').innerText = `${yrNum}/${yrNum+1}`;
-                        } else {
-                            const currentYr = new Date().getFullYear();
-                            document.getElementById('modalPeriode').innerText = `${currentYr}/${currentYr+1}`;
-                        }
-                        
                         // Description text formatting
-                        document.getElementById('modalDescription').innerHTML = `Dinyatakan telah mengikuti dan aktif berprestasi dalam kegiatan Ekstrakurikuler <strong style="color: #0F172A;">${cert.ekskul}</strong> dengan predikat <span style="background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px;"><strong style="color: #b5860d;">"${prestasiText}"</strong></span> pada tahun pelajaran <strong style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</strong>.`;
+                        document.getElementById('modalDescription').innerHTML = cert.prestasi ? cert.prestasi.replace(/\n/g, '<br>') : '';
 
                         document.getElementById('modalTanggal').innerText = cert.tanggal;
-                        document.getElementById('modalPembina').innerText = cert.nama_pembina;
-                        document.getElementById('modalJabatan').innerText = cert.jabatan_pembina.toUpperCase();
                         document.getElementById('modalNomor').innerText = cert.nomor_sertifikat;
 
                         // Populate modal details table fields
@@ -662,14 +738,6 @@
                             document.getElementById('modalLogo').src = "https://via.placeholder.com/100?text=Logo";
                         }
 
-                        // Signature
-                        if (cert.signature_base64) {
-                            document.getElementById('modalSignature').src = cert.signature_base64;
-                            document.getElementById('modalSignature').style.display = 'block';
-                        } else {
-                            document.getElementById('modalSignature').style.display = 'none';
-                        }
-
                         // QR Code
                         document.getElementById('modalQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(cert.verify_url)}`;
 
@@ -697,6 +765,15 @@
                 });
             });
         });
+
+        // Auto-expand create certificate form inline if validation errors exist
+        @if ($errors->any())
+            const createFormCollapseEl = document.getElementById('createFormCollapse');
+            if (createFormCollapseEl) {
+                const bsCollapse = new bootstrap.Collapse(createFormCollapseEl, { show: true });
+                bsCollapse.show();
+            }
+        @endif
     });
 </script>
 @endsection

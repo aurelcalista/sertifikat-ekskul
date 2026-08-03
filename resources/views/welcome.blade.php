@@ -132,6 +132,88 @@
             transform: translateY(-20px) scale(1.1);
         }
     }
+
+    /* Certificate Template Elements */
+    .preview-border-outer {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        right: 6px;
+        bottom: 6px;
+        border: 1.5px solid #D4AF37;
+        z-index: 2;
+        pointer-events: none;
+    }
+    .preview-border-inner {
+        position: absolute;
+        top: 9px;
+        left: 9px;
+        right: 9px;
+        bottom: 9px;
+        border: 0.5px solid #0F172A;
+        z-index: 2;
+        pointer-events: none;
+    }
+    .preview-corner-accent-tl {
+        position: absolute;
+        top: 11px;
+        left: 11px;
+        width: 10px;
+        height: 10px;
+        border-top: 1.8px solid #D4AF37;
+        border-left: 1.8px solid #D4AF37;
+        z-index: 3;
+    }
+    .preview-corner-accent-tr {
+        position: absolute;
+        top: 11px;
+        right: 11px;
+        width: 10px;
+        height: 10px;
+        border-top: 1.8px solid #D4AF37;
+        border-right: 1.8px solid #D4AF37;
+        z-index: 3;
+    }
+    .preview-corner-accent-bl {
+        position: absolute;
+        bottom: 11px;
+        left: 11px;
+        width: 10px;
+        height: 10px;
+        border-bottom: 1.8px solid #D4AF37;
+        border-left: 1.8px solid #D4AF37;
+        z-index: 3;
+    }
+    .preview-corner-accent-br {
+        position: absolute;
+        bottom: 11px;
+        right: 11px;
+        width: 10px;
+        height: 10px;
+        border-bottom: 1.8px solid #D4AF37;
+        border-right: 1.8px solid #D4AF37;
+        z-index: 3;
+    }
+    .preview-gold-seal-badge {
+        background: radial-gradient(circle, #f39c12, #D4AF37);
+        border-radius: 50%;
+        position: relative;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border: 1px dashed #FFFFFF;
+    }
+    .preview-gold-seal-inner {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        border: 0.5px solid rgba(255,255,255,0.7);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 @endsection
 
@@ -168,59 +250,83 @@
                 <div class="position-absolute translate-middle-y end-0 top-0 bg-warning opacity-10 rounded-circle bg-glow-warning" style="width: 200px; height: 200px; filter: blur(40px);"></div>
                 
                 <!-- Certificate mockup preview -->
-                <div class="card card-custom p-4 text-center position-relative z-1 shadow hero-cert-card" style="max-width: 500px; margin: 0 auto; border: 8px double #E74C3C; border-radius: 12px; background: #fff;">
-                    <!-- Inner Border Line -->
-                    <div style="position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; border: 1px solid #FF6B35; border-radius: 6px; pointer-events: none;"></div>
-                    
-                    <!-- Header -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <i class="fa-solid fa-graduation-cap text-danger" style="font-size: 1.5rem;"></i>
-                        <span class="text-uppercase fw-bold text-muted" style="font-size: 0.65rem; letter-spacing: 1px;">Sertifikat Resmi</span>
-                        <i class="fa-solid fa-medal text-warning" style="font-size: 1.5rem;"></i>
-                    </div>
+                <div class="card card-custom p-4 text-center position-relative z-1 shadow hero-cert-card" style="max-width: 500px; margin: 0 auto; background-color: #FCFBF7; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; aspect-ratio: 297/210; overflow: hidden; display: flex; flex-direction: column;">
+                    <!-- Elegant Double Border Frame -->
+                    <div class="preview-border-outer"></div>
+                    <div class="preview-border-inner"></div>
 
-                    <!-- Certificate Title -->
-                    <h5 class="fw-bold mb-1 text-uppercase text-danger" style="font-size: 1rem; letter-spacing: 1.5px; font-family: 'Georgia', serif;">Sertifikat Penghargaan</h5>
-                    <div class="mx-auto bg-warning mb-3" style="width: 60px; height: 2px;"></div>
+                    <!-- Small Elegant Corner Brackets -->
+                    <div class="preview-corner-accent-tl"></div>
+                    <div class="preview-corner-accent-tr"></div>
+                    <div class="preview-corner-accent-bl"></div>
+                    <div class="preview-corner-accent-br"></div>
                     
-                    <span class="text-muted d-block small mb-2" style="font-size: 0.75rem; font-style: italic;">Diberikan Kepada:</span>
-                    
-                    <!-- Placeholder Name (Default) -->
-                    <h4 class="fw-bold my-1 text-dark" style="font-family: 'Georgia', serif; font-size: 1.35rem; border-bottom: 1.5px dashed #FF6B35; display: inline-block; padding-bottom: 2px; letter-spacing: 0.5px;">[ Nama Lengkap Siswa ]</h4>
-                    
-                    <!-- Certificate Body -->
-                    <p class="text-muted mx-auto my-3" style="font-size: 0.75rem; line-height: 1.6; max-width: 90%;">
-                        Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri kegiatan ekstrakurikuler sekolah.
-                    </p>
-
-                    <!-- Footer Details -->
-                    <div class="row align-items-end mt-4 pt-2 border-top border-light">
-                        <div class="col-4 text-start">
-                            <span class="text-muted d-block" style="font-size: 0.65rem;">Kode Verifikasi:</span>
-                            <strong class="text-danger" style="font-size: 0.7rem;">SK-2026-XXXXXX</strong>
-                        </div>
-                        <div class="col-4 text-center">
-                            <!-- Styled Gold Seal -->
-                            <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm" style="width: 42px; height: 42px; border: 2px dashed #d4af37;">
-                                <i class="fa-solid fa-star fs-6"></i>
+                    <!-- Content -->
+                    <div class="position-relative h-100 d-flex flex-column" style="z-index: 5; text-align: left;">
+                        <!-- Header: Logo + Subtitle + Seal -->
+                        <div class="d-flex justify-content-between align-items-center pb-2 mb-2" style="border-bottom: 1px solid #e8d5a3; width: 100%;">
+                            <div style="width:48px;">
+                                <img src="{{ asset('logos/logo-rakitai.png') }}" class="img-fluid" style="max-height: 44px; width: auto; mix-blend-mode: multiply;" alt="Logo">
+                            </div>
+                            <div class="text-center flex-grow-1">
+                                <p class="mb-0 text-uppercase fw-bold" style="font-size: 0.58rem; letter-spacing: 1px; color: #334155;">Lembaga Pendidikan Sertifikasi Ekstrakurikuler</p>
+                                <p class="mb-0" style="font-size: 0.48rem; letter-spacing: 0.5px; color: #94A3B8; margin-top: 1px;">Sertifikat Resmi Kegiatan Peserta Didik</p>
+                            </div>
+                            <div style="width:44px;">
+                                <div class="preview-gold-seal-badge" style="width: 44px; height: 44px; border-width: 1.5px;">
+                                    <div class="preview-gold-seal-inner" style="top: 2px; left: 2px; right: 2px; bottom: 2px;">
+                                        <span style="font-size: 14px; color: #FFFFFF;">★</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div style="border-bottom: 1px solid #ccc; width: 80px; margin-left: auto; height: 20px;"></div>
-                            <span class="text-muted d-block mt-1" style="font-size: 0.6rem;">Pembina Ekstrakurikuler</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Another card overlapping -->
-                <div class="card card-custom p-3 text-start position-absolute shadow border border-light hero-verify-card" style="max-width: 240px; right: -20px; bottom: -30px; z-index: 2; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="bg-success-subtle text-success p-2 rounded-circle">
-                            <i class="fa-solid fa-check"></i>
+                        <!-- Decorative top ornament -->
+                        <div class="text-center w-100 mb-1" style="margin-top: 2px;">
+                            <span style="color: #D4AF37; font-size: 0.65rem; letter-spacing: 6px;">✦ ✦ ✦</span>
                         </div>
-                        <div>
-                            <h6 class="fw-bold mb-0" style="font-size: 0.85rem;">Terverifikasi</h6>
-                            <span class="text-muted" style="font-size: 0.7rem;">Sertifikat Terdaftar</span>
+
+                        <!-- Title + Recipient -->
+                        <div class="text-center w-100" style="margin-bottom: 2px;">
+                            <h4 class="fw-bold mb-0 text-uppercase" style="font-family: 'Cormorant Garamond', 'Georgia', serif; color: #0F172A; font-size: 2rem; letter-spacing: 5px; line-height: 1;">Sertifikat</h4>
+                            <p class="text-uppercase fw-bold mb-0" style="font-family: 'Poppins', sans-serif; color: #D4AF37; letter-spacing: 4px; font-size: 0.55rem; margin-top: 2px;">Sertifikat Penghargaan</p>
+
+                            <!-- Thin gold rule -->
+                            <div style="display:flex; align-items:center; margin: 4px auto; width: 70%;">
+                                <div style="flex:1; height:1px; background: linear-gradient(to right, transparent, #D4AF37);"></div>
+                                <span style="color:#D4AF37; font-size:0.6rem; margin: 0 4px;">◆</span>
+                                <div style="flex:1; height:1px; background: linear-gradient(to left, transparent, #D4AF37);"></div>
+                            </div>
+
+                            <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.75rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
+                            <h5 class="mb-0" style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 2px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
+                            <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 4px auto 2px;"></div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="text-center px-4 w-100" style="margin: 2px 0 4px;">
+                            <p class="mb-0" style="line-height: 1.5; font-size: 0.72rem; color: #334155; font-family: 'Poppins', sans-serif;">
+                                Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri.
+                            </p>
+                        </div>
+
+                        <!-- Footer: QR | Nomor+Tanggal -->
+                        <div class="d-flex justify-content-between align-items-end w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
+                            <!-- QR Code -->
+                            <div class="text-start" style="width:68px;">
+                                <div class="border bg-white p-1 d-inline-block" style="border-color: #D4AF37 !important; border-radius:4px;">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sertifikat-ekskul.com/verify/SK-2026-XXXXXX" style="width:44px; height:44px; display:block;" alt="QR Code">
+                                </div>
+                                <div class="text-muted" style="font-size:0.4rem; margin-top:1px; font-family:'Poppins',sans-serif; line-height:1;">Pindai verifikasi</div>
+                            </div>
+
+                            <!-- Nomor & Tanggal -->
+                            <div class="text-end" style="font-family:'Poppins',sans-serif; line-height: 1.1;">
+                                <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
+                                <div class="fw-bold" style="font-size:0.68rem; color:#0F172A;">SK-2026-XXXXXX</div>
+                                <div style="font-size:0.45rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:2px;">Diterbitkan pada</div>
+                                <div class="fw-bold" style="font-size:0.65rem; color:#0F172A;">30 Juli 2026</div>
+                            </div>
                         </div>
                     </div>
                 </div>

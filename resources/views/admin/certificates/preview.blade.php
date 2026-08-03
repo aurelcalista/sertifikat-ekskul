@@ -208,17 +208,6 @@
                                     <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
                                     <h5 class="mb-0" id="prevName" style="font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 4px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
                                     <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 6px auto 3px;"></div>
-                                    <div class="fw-semibold" id="prevNis" style="font-size: 0.68rem; letter-spacing: 0.8px; font-family: 'Poppins', sans-serif; color: #475569;">NIS. -</div>
-                                </div>
-
-                                <!-- Info Badges row -->
-                                <div class="d-flex justify-content-center gap-2 w-100" style="margin: 4px 0;">
-                                    <div style="background: rgba(212,175,55,0.10); border: 1px solid #D4AF37; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #92600a; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                        🎓 Ekskul: <span id="prevEkskul2" style="color:#0F172A;">-</span>
-                                    </div>
-                                    <div style="background: rgba(15,23,42,0.06); border: 1px solid #CBD5E1; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #475569; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                        📅 Periode: <span id="prevPeriode" style="color:#0F172A;">-</span>
-                                    </div>
                                 </div>
 
                                 <!-- Description -->
@@ -232,8 +221,13 @@
                                     <span style="color: #D4AF37; font-size: 0.5rem; letter-spacing: 8px;">— ✦ —</span>
                                 </div>
 
-                                <!-- Footer: QR | Nomor+Tanggal | Tanda Tangan -->
-                                <div class="d-flex justify-content-between align-items-end w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
+                                <!-- Gold Ribbon Banner -->
+                                <div class="w-100" style="margin: auto 0; border-top: 1px solid #D4AF37; border-bottom: 1px solid #D4AF37; background: linear-gradient(135deg, #FAF6E8 0%, #FDF9EF 50%, #FAF6E8 100%); padding: 5px 0; text-align: center; flex-shrink: 0;">
+                                    <span style="color: #D4AF37; font-size: 0.7rem; letter-spacing: 8px;">◆ ―――― ★ ―――― ◆</span>
+                                </div>
+
+                                <!-- Footer: QR | Nomor+Tanggal -->
+                                <div class="d-flex justify-content-between align-items-center w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
 
                                     <!-- QR Code -->
                                     <div class="text-start" style="width:68px;">
@@ -243,24 +237,14 @@
                                         <div class="text-muted" style="font-size:0.42rem; margin-top:2px; font-family:'Poppins',sans-serif;">Pindai untuk verifikasi</div>
                                     </div>
 
-                                    <!-- Nomor & Tanggal center -->
-                                    <div class="text-center" style="font-family:'Poppins',sans-serif;">
+                                    <!-- Nomor & Tanggal -->
+                                    <div class="text-end" style="font-family:'Poppins',sans-serif; line-height: 1.1;">
                                         <div style="font-size:0.55rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
                                         <div class="fw-bold" style="font-size:0.72rem; color:#0F172A;" id="prevNomor">-</div>
                                         <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:4px;">Diterbitkan pada</div>
                                         <div class="fw-bold" style="font-size:0.7rem; color:#0F172A;" id="prevTanggal">-</div>
                                     </div>
 
-                                    <!-- Tanda Tangan Resmi -->
-                                    <div class="text-center" style="width:120px; font-family:'Poppins',sans-serif;">
-                                        <div style="font-size:0.5rem; color:#64748B; text-transform:uppercase; font-weight:600; letter-spacing:0.5px; margin-bottom:2px;" id="prevJabatan">Pembina OSIS</div>
-                                        <div style="height: 38px; position: relative;">
-                                            <img id="prevSignature" src="" class="img-fluid" style="max-height:36px; width:auto; mix-blend-mode:multiply; display:block; margin:0 auto;" alt="">
-                                        </div>
-                                        <div style="border-top: 1.5px solid #0F172A; margin: 0 6px 3px 6px;"></div>
-                                        <strong class="d-block" id="prevPembina" style="font-family:'Georgia',serif; font-size:0.62rem; color:#0F172A; line-height:1.3;">Nama Pembina</strong>
-                                        <div style="font-size:0.42rem; color:#94A3B8; margin-top:1px;">NIP / NIK</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -338,27 +322,12 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
 
             // Populate preview fields
             document.getElementById('prevName').innerText = toTitleCase(cert.nama_siswa);
-            document.getElementById('prevNis').innerText = "NIS. " + cert.nis;
-            document.getElementById('prevEkskul2').innerText = cert.ekskul;
-            
-            const prestasiText = cert.prestasi && cert.prestasi !== '-' ? cert.prestasi : 'Anggota/Peserta Aktif';
             document.getElementById('prevJenis').innerText = cert.jenis_sertifikat.toUpperCase();
             
-            const dateParts = cert.tanggal.split(' ');
-            const yrVal = dateParts[dateParts.length - 1];
-            const yrNum = parseInt(yrVal);
-            if (!isNaN(yrNum)) {
-                document.getElementById('prevPeriode').innerText = `${yrNum}/${yrNum+1}`;
-            } else {
-                const currentYr = new Date().getFullYear();
-                document.getElementById('prevPeriode').innerText = `${currentYr}/${currentYr+1}`;
-            }
-            
-            document.getElementById('prevDescription').innerHTML = `Dinyatakan telah mengikuti dan aktif berprestasi dalam kegiatan Ekstrakurikuler <strong style="color: #0F172A;">${cert.ekskul}</strong> dengan predikat <span style="background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px;"><strong style="color: #b5860d;">"${prestasiText}"</strong></span> pada tahun pelajaran <strong style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</strong>.`;
+            const prestasiHtml = cert.prestasi ? cert.prestasi.replace(/\n/g, '<br>') : '';
+            document.getElementById('prevDescription').innerHTML = prestasiHtml;
 
             document.getElementById('prevTanggal').innerText = cert.tanggal;
-            document.getElementById('prevPembina').innerText = cert.nama_pembina;
-            document.getElementById('prevJabatan').innerText = cert.jabatan_pembina.toUpperCase();
             document.getElementById('prevNomor').innerText = cert.nomor_sertifikat;
 
             // Populate status badge
@@ -377,13 +346,6 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
                 document.getElementById('prevLogo').style.display = 'inline-block';
             } else {
                 document.getElementById('prevLogo').src = "https://via.placeholder.com/100?text=Logo";
-            }
-
-            if (cert.signature_base64) {
-                document.getElementById('prevSignature').src = cert.signature_base64;
-                document.getElementById('prevSignature').style.display = 'inline-block';
-            } else {
-                document.getElementById('prevSignature').style.display = 'none';
             }
 
             // QR Code dynamic rendering via QRServer CDN

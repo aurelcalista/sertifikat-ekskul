@@ -302,10 +302,12 @@
                                 <span class="metadata-value text-uppercase">{{ $certificate->nama_siswa }}</span>
                             </div>
                             
+                            @if($certificate->nis && $certificate->nis !== '-')
                             <div class="metadata-item">
                                 <span class="metadata-label"><i class="fa-solid fa-id-card"></i> NIS</span>
                                 <span class="metadata-value">{{ $certificate->nis }}</span>
                             </div>
+                            @endif
                         </div>
 
                         <!-- Group 2: Detail Sertifikat -->
@@ -324,24 +326,22 @@
                                 <span class="metadata-value">{{ $certificate->nomor_sertifikat }}</span>
                             </div>
                             
+                            @if($certificate->ekskul && $certificate->ekskul !== '-')
                             <div class="metadata-item">
                                 <span class="metadata-label"><i class="fa-solid fa-running"></i> Ekstrakurikuler</span>
                                 <span class="metadata-value"><span class="ekskul-badge">{{ $certificate->ekskul }}</span></span>
                             </div>
+                            @endif
                             
                             <div class="metadata-item">
                                 <span class="metadata-label"><i class="fa-solid fa-ribbon"></i> Kategori / Peran</span>
                                 <span class="metadata-value">{{ $certificate->jenis_sertifikat }}</span>
                             </div>
                             
-                            <div class="metadata-item">
-                                <span class="metadata-label"><i class="fa-solid fa-trophy"></i> Prestasi</span>
-                                <span class="metadata-value">
-                                    @if($certificate->prestasi && $certificate->prestasi !== '-')
-                                        <span class="prestasi-badge">{{ $certificate->prestasi }}</span>
-                                    @else
-                                        <span class="text-muted small">Anggota / Peserta Aktif</span>
-                                    @endif
+                            <div class="metadata-item align-items-start flex-column">
+                                <span class="metadata-label mb-1"><i class="fa-solid fa-trophy"></i> Keterangan / Deskripsi</span>
+                                <span class="metadata-value w-100" style="text-align: left; font-weight: normal; line-height: 1.5;">
+                                    {!! nl2br(e($certificate->prestasi)) !!}
                                 </span>
                             </div>
                             

@@ -131,13 +131,20 @@
         @csrf
         @method('PUT')
 
-        <div class="row g-4">
+            <!-- Hidden validation requirements -->
+            <input type="hidden" name="nis" value="{{ $certificate->nis }}">
+            <input type="hidden" name="ekskul" value="{{ $certificate->ekskul }}">
+            <input type="hidden" name="nama_pembina" value="{{ $certificate->nama_pembina }}">
+            <input type="hidden" name="jabatan_pembina" value="{{ $certificate->jabatan_pembina }}">
+
+        <div class="row g-3">
+
             <!-- Data Siswa Section -->
             <div class="col-12">
-                <h5 class="fw-bold text-danger border-bottom pb-2 mb-3"><i class="fa-solid fa-user-graduate me-2"></i>1. Identitas Siswa</h5>
+                <h5 class="fw-bold text-danger border-bottom pb-2 mb-3"><i class="fa-solid fa-user-graduate me-2"></i>Identitas Penerima</h5>
             </div>
             
-            <div class="col-md-8">
+            <div class="col-12">
                 <label for="nama_siswa" class="form-label small fw-medium text-secondary">Nama Lengkap Siswa</label>
                 <input type="text" name="nama_siswa" id="nama_siswa" class="form-control @error('nama_siswa') is-invalid @enderror" value="{{ old('nama_siswa', $certificate->nama_siswa) }}" required placeholder="Masukkan nama siswa...">
                 @error('nama_siswa')
@@ -145,83 +152,59 @@
                 @enderror
             </div>
 
-            <div class="col-md-4">
-                <label for="nis" class="form-label small fw-medium text-secondary">NIS (Nomor Induk Siswa)</label>
-                <input type="text" name="nis" id="nis" class="form-control @error('nis') is-invalid @enderror" value="{{ old('nis', $certificate->nis) }}" required placeholder="2026xxxxxx">
-                @error('nis')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
             <!-- Detail Sertifikat Section -->
-            <div class="col-12 mt-5">
-                <h5 class="fw-bold text-danger border-bottom pb-2 mb-3"><i class="fa-solid fa-award me-2"></i>2. Detail Sertifikat & Kegiatan</h5>
+            <div class="col-12 mt-4">
+                <h5 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-award me-2"></i>Detail Sertifikat</h5>
             </div>
 
             <div class="col-md-4">
-                <label for="ekskul" class="form-label small fw-medium text-secondary">Ekstrakurikuler</label>
-                <input type="text" name="ekskul" id="ekskul" class="form-control @error('ekskul') is-invalid @enderror" value="{{ old('ekskul', $certificate->ekskul) }}" required placeholder="Pramuka, Futsal, Paskibra, dll">
-                @error('ekskul')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-4">
-                <label for="jenis_sertifikat" class="form-label small fw-medium text-secondary">Jenis Sertifikat</label>
-                <input type="text" name="jenis_sertifikat" id="jenis_sertifikat" class="form-control @error('jenis_sertifikat') is-invalid @enderror" value="{{ old('jenis_sertifikat', $certificate->jenis_sertifikat) }}" required placeholder="Sertifikat Kejuaraan, Penghargaan, dll">
-                @error('jenis_sertifikat')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-4">
-                <label for="nomor_sertifikat" class="form-label small fw-medium text-secondary">Nomor Sertifikat</label>
-                <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control @error('nomor_sertifikat') is-invalid @enderror" value="{{ old('nomor_sertifikat', $certificate->nomor_sertifikat) }}" required placeholder="124/SMK1/EKS/2026">
+                <label for="nomor_sertifikat" class="form-label small fw-medium text-secondary">
+                    Nomor Sertifikat <span class="badge bg-danger" style="font-size:0.6rem;">Unik</span>
+                </label>
+                <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control @error('nomor_sertifikat') is-invalid @enderror" value="{{ old('nomor_sertifikat', $certificate->nomor_sertifikat) }}" required placeholder="124/SMK1/2026">
                 @error('nomor_sertifikat')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="col-md-8">
-                <label for="prestasi" class="form-label small fw-medium text-secondary">Pencapaian / Prestasi <span class="text-muted">(Opsional)</span></label>
-                <input type="text" name="prestasi" id="prestasi" class="form-control @error('prestasi') is-invalid @enderror" value="{{ old('prestasi', $certificate->prestasi) }}" placeholder="Juara 1 Lomba Tingkat Kota, Anggota Aktif, dll">
-                @error('prestasi')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
             <div class="col-md-4">
-                <label for="tanggal" class="form-label small fw-medium text-secondary">Tanggal Terbit Sertifikat</label>
+                <label for="tanggal" class="form-label small fw-medium text-secondary">Tanggal Terbit</label>
                 <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal', $certificate->tanggal->format('Y-m-d')) }}" required>
                 @error('tanggal')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
-            <!-- Penanggung Jawab Section -->
-            <div class="col-12 mt-5">
-                <h5 class="fw-bold text-danger border-bottom pb-2 mb-3"><i class="fa-solid fa-signature me-2"></i>3. Pembina / Penanggung Jawab</h5>
-            </div>
-
-            <div class="col-md-6">
-                <label for="nama_pembina" class="form-label small fw-medium text-secondary">Nama Pembina</label>
-                <input type="text" name="nama_pembina" id="nama_pembina" class="form-control @error('nama_pembina') is-invalid @enderror" value="{{ old('nama_pembina', $certificate->nama_pembina) }}" required placeholder="Masukkan nama pembina...">
-                @error('nama_pembina')
+            <div class="col-md-4">
+                <label for="status" class="form-label small fw-medium text-secondary">Status Sertifikat</label>
+                <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" required>
+                    <option value="Aktif" {{ $certificate->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                    <option value="Draft" {{ $certificate->status == 'Draft' ? 'selected' : '' }}>Draft</option>
+                </select>
+                @error('status')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="col-md-6">
-                <label for="jabatan_pembina" class="form-label small fw-medium text-secondary">Jabatan Pembina</label>
-                <input type="text" name="jabatan_pembina" id="jabatan_pembina" class="form-control @error('jabatan_pembina') is-invalid @enderror" value="{{ old('jabatan_pembina', $certificate->jabatan_pembina) }}" required placeholder="Pembina Futsal, Koordinator Ekskul, dll">
-                @error('jabatan_pembina')
+            <div class="col-md-4">
+                <label for="jenis_sertifikat" class="form-label small fw-medium text-secondary">Jenis Sertifikat</label>
+                <input type="text" name="jenis_sertifikat" id="jenis_sertifikat" class="form-control @error('jenis_sertifikat') is-invalid @enderror" value="{{ old('jenis_sertifikat', $certificate->jenis_sertifikat) }}" required placeholder="Keikutsertaan, Kejuaraan...">
+                @error('jenis_sertifikat')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col-12">
+                <label for="prestasi" class="form-label small fw-medium text-secondary">Deskripsi / Teks Sertifikat</label>
+                <textarea name="prestasi" id="prestasi" class="form-control @error('prestasi') is-invalid @enderror" rows="3" required placeholder="Masukkan deskripsi sertifikat...">{{ old('prestasi', $certificate->prestasi) }}</textarea>
+                @error('prestasi')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Desain & Upload Section -->
-            <div class="col-12 mt-5">
-                <h5 class="fw-bold text-danger border-bottom pb-2 mb-3"><i class="fa-solid fa-image me-2"></i>4. Pengaturan Template & Berkas</h5>
+            <div class="col-12 mt-4">
+                <h5 class="fw-bold text-danger border-bottom pb-2 mb-2"><i class="fa-solid fa-image me-2"></i>Pengaturan Template & Berkas</h5>
             </div>
 
             <div class="col-md-4">
@@ -262,7 +245,7 @@
                 @endif
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="logo_sekolah_file" class="form-label small fw-medium text-secondary">Ganti Logo Sekolah <span class="text-muted">(Opsional)</span></label>
                 <input type="file" name="logo_sekolah_file" id="logo_sekolah_file" class="form-control @error('logo_sekolah_file') is-invalid @enderror">
                 <small class="text-muted" style="font-size: 0.75rem;">Format: PNG/JPG/JPEG, Maks: 1MB</small>
@@ -282,27 +265,6 @@
                     @endphp
                     <div class="mt-2">
                         <img src="{{ $logoBase64 ?? asset('storage/' . $certificate->logo_sekolah) }}" alt="Logo" class="img-thumbnail" style="max-height: 50px;">
-                    </div>
-                @endif
-            </div>
-
-            <div class="col-md-6">
-                <label for="tanda_tangan_file" class="form-label small fw-medium text-secondary">Ganti Tanda Tangan Pembina <span class="text-muted">(Opsional)</span></label>
-                <input type="file" name="tanda_tangan_file" id="tanda_tangan_file" class="form-control @error('tanda_tangan_file') is-invalid @enderror">
-                <small class="text-muted" style="font-size: 0.75rem;">Format: PNG transparan, Maks: 1MB</small>
-                @error('tanda_tangan_file')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-                @if($certificate->tanda_tangan)
-                    @php
-                        $sigBase64 = null;
-                        $path = storage_path('app/public/' . $certificate->tanda_tangan);
-                        if (file_exists($path)) {
-                            $sigBase64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents($path));
-                        }
-                    @endphp
-                    <div class="mt-2">
-                        <img src="{{ $sigBase64 ?? asset('storage/' . $certificate->tanda_tangan) }}" alt="Ttd" class="img-thumbnail" style="max-height: 50px; background-color: #eee;">
                     </div>
                 @endif
             </div>
@@ -384,27 +346,11 @@
                             <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
                             <h5 class="mb-0" id="prevName" style="font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 4px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
                             <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 6px auto 3px;"></div>
-                            <div class="fw-semibold" id="prevNis" style="font-size: 0.68rem; letter-spacing: 0.8px; font-family: 'Poppins', sans-serif; color: #475569;">NIS. -</div>
-                        </div>
-
-                        <!-- Info Badges row -->
-                        <div class="d-flex justify-content-center gap-2" style="margin: 4px 0;">
-                            <div style="background: rgba(212,175,55,0.10); border: 1px solid #D4AF37; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #92600a; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                🎓 Ekskul: <span id="prevEkskul2" style="color:#0F172A;">-</span>
-                            </div>
-                            <div style="background: rgba(15,23,42,0.06); border: 1px solid #CBD5E1; border-radius: 20px; padding: 2px 10px; font-size: 0.58rem; color: #475569; font-weight: 600; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">
-                                📅 Periode: <span id="prevPeriode" style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</span>
-                            </div>
                         </div>
 
                         <!-- Description -->
                         <div class="text-center px-4" style="margin: 2px 0 6px;">
-                            <p class="mb-0" style="line-height: 1.65; font-size: 0.78rem; color: #334155; font-family: 'Poppins', sans-serif;">
-                                Dinyatakan telah mengikuti dan aktif berprestasi dalam kegiatan Ekstrakurikuler
-                                <strong id="prevEkskul" style="color: #0F172A;"> - </strong>
-                                dengan predikat
-                                <span style="background: rgba(212,175,55,0.15); padding: 1px 6px; border-radius: 4px;"><strong id="prevPrestasi" style="color: #b5860d;">"Anggota/Peserta Aktif"</strong></span>
-                                pada tahun pelajaran <strong style="color:#0F172A;">{{ date('Y') }}/{{ date('Y')+1 }}</strong>.
+                            <p class="mb-0" id="prevPrestasi" style="line-height: 1.65; font-size: 0.78rem; color: #334155; font-family: 'Poppins', sans-serif;">
                             </p>
                         </div>
 
@@ -413,8 +359,13 @@
                             <span style="color: #D4AF37; font-size: 0.5rem; letter-spacing: 8px;">— ✦ —</span>
                         </div>
 
-                        <!-- Footer: QR | Nomor+Tanggal | Tanda Tangan -->
-                        <div class="d-flex justify-content-between align-items-end" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
+                        <!-- Gold Ribbon Banner -->
+                        <div style="margin: auto 0; border-top: 1px solid #D4AF37; border-bottom: 1px solid #D4AF37; background: linear-gradient(135deg, #FAF6E8 0%, #FDF9EF 50%, #FAF6E8 100%); padding: 5px 0; text-align: center; flex-shrink: 0;">
+                            <span style="color: #D4AF37; font-size: 0.7rem; letter-spacing: 8px;">◆ ―――― ★ ―――― ◆</span>
+                        </div>
+
+                        <!-- Footer: QR | Nomor+Tanggal -->
+                        <div class="d-flex justify-content-between align-items-center" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
 
                             <!-- QR Code (auto-generated) -->
                             <div class="text-start" style="width:68px;">
@@ -424,23 +375,12 @@
                                 <div class="text-muted" style="font-size:0.42rem; margin-top:2px; font-family:'Poppins',sans-serif;">Pindai untuk verifikasi</div>
                             </div>
 
-                            <!-- Nomor & Tanggal center -->
-                            <div class="text-center" style="font-family:'Poppins',sans-serif;">
+                            <!-- Nomor & Tanggal -->
+                            <div class="text-end" style="font-family:'Poppins',sans-serif; line-height: 1.1;">
                                 <div style="font-size:0.55rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
                                 <div class="fw-bold" style="font-size:0.72rem; color:#0F172A;" id="prevNomor">-</div>
                                 <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:4px;">Diterbitkan pada</div>
                                 <div class="fw-bold" style="font-size:0.7rem; color:#0F172A;" id="prevTanggal">-</div>
-                            </div>
-
-                            <!-- Tanda Tangan Resmi -->
-                            <div class="text-center" style="width:120px; font-family:'Poppins',sans-serif;">
-                                <div style="font-size:0.5rem; color:#64748B; text-transform:uppercase; font-weight:600; letter-spacing:0.5px; margin-bottom:2px;" id="prevJabatan">Pembina OSIS</div>
-                                <div style="height: 38px; position: relative;">
-                                    <img id="prevSignature" src="" class="img-fluid" style="max-height:36px; width:auto; mix-blend-mode:multiply; display:block; margin:0 auto;" alt="">
-                                </div>
-                                <div style="border-top: 1.5px solid #0F172A; margin: 0 6px 3px 6px;"></div>
-                                <strong class="d-block" id="prevPembina" style="font-family:'Georgia',serif; font-size:0.62rem; color:#0F172A; line-height:1.3;">Nama Pembina</strong>
-                                <div style="font-size:0.42rem; color:#94A3B8; margin-top:1px;">NIP / NIK</div>
                             </div>
 
                         </div>
@@ -555,7 +495,10 @@
                 }
             }
             
-            if (prevPrestasi) prevPrestasi.innerText = inputPrestasi?.value || 'Anggota/Peserta Aktif';
+            if (prevPrestasi) {
+                const prestasiHtml = (inputPrestasi?.value || '').replace(/\n/g, '<br>');
+                prevPrestasi.innerHTML = prestasiHtml;
+            }
             if (prevTanggal) prevTanggal.innerText = formatIndonesianDate(inputTanggal?.value);
             if (prevPembina) prevPembina.innerText = inputPembina?.value || '-';
             if (prevJabatan) prevJabatan.innerText = (inputJabatan?.value || '-').toUpperCase();

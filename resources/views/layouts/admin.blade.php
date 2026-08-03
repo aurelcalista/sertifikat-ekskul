@@ -425,11 +425,6 @@
                 </a>
             </li>
             <li class="nav-menu-item">
-                <a href="{{ route('admin.certificates.create') }}" class="nav-menu-link {{ Request::routeIs('admin.certificates.create') ? 'active' : '' }}">
-                    <i class="fa-solid fa-circle-plus"></i><span>Tambah Sertifikat</span>
-                </a>
-            </li>
-            <li class="nav-menu-item">
                 <a href="{{ route('admin.certificates.preview') }}" class="nav-menu-link {{ Request::routeIs('admin.certificates.preview') ? 'active' : '' }}">
                     <i class="fa-solid fa-magnifying-glass-chart"></i><span>Portal Cari & Preview</span>
                 </a>
@@ -495,6 +490,8 @@
             @yield('content')
         </section>
     </div>
+
+    @stack('modals')
 
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
