@@ -87,12 +87,19 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$request->has('template_id')) {
+            $defaultTemplate = \App\Models\Template::where('is_default', true)->first() ?: \App\Models\Template::first();
+            if ($defaultTemplate) {
+                $request->merge(['template_id' => $defaultTemplate->id]);
+            }
+        }
+
         $validated = $request->validate([
             'nama_siswa' => 'required|string|max:255',
             'nis' => 'required|string|max:50',
             'ekskul' => 'required|string|max:100',
             'jenis_sertifikat' => 'required|string|max:100',
-            'nomor_sertifikat' => 'required|string|max:100',
+            'nomor_sertifikat' => 'required|string|max:100|unique:certificates,nomor_sertifikat',
             'prestasi' => 'nullable|string|max:255',
             'tanggal' => 'required|date',
             'nama_pembina' => 'required|string|max:255',
@@ -102,6 +109,8 @@ class CertificateController extends Controller
             'background_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'logo_sekolah_file' => 'nullable|image|mimes:png,jpg,jpeg|max:1048',
             'tanda_tangan_file' => 'nullable|image|mimes:png|max:1048',
+        ], [
+            'nomor_sertifikat.unique' => 'Nomor sertifikat sudah digunakan. Gunakan nomor yang berbeda.',
         ]);
 
         $data = $validated;
@@ -147,12 +156,16 @@ class CertificateController extends Controller
     {
         $certificate = Certificate::findOrFail($id);
 
+        if (!$request->has('template_id')) {
+            $request->merge(['template_id' => $certificate->template_id]);
+        }
+
         $validated = $request->validate([
             'nama_siswa' => 'required|string|max:255',
             'nis' => 'required|string|max:50',
             'ekskul' => 'required|string|max:100',
             'jenis_sertifikat' => 'required|string|max:100',
-            'nomor_sertifikat' => 'required|string|max:100',
+            'nomor_sertifikat' => 'required|string|max:100|unique:certificates,nomor_sertifikat,' . $certificate->id,
             'prestasi' => 'nullable|string|max:255',
             'tanggal' => 'required|date',
             'nama_pembina' => 'required|string|max:255',
@@ -162,6 +175,8 @@ class CertificateController extends Controller
             'background_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'logo_sekolah_file' => 'nullable|image|mimes:png,jpg,jpeg|max:1048',
             'tanda_tangan_file' => 'nullable|image|mimes:png|max:1048',
+        ], [
+            'nomor_sertifikat.unique' => 'Nomor sertifikat sudah digunakan. Gunakan nomor yang berbeda.',
         ]);
 
         $data = $validated;
