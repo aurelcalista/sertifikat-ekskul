@@ -176,9 +176,8 @@
                 <tr>
                     <th>Kode</th>
                     <th>Nama Siswa</th>
-                    <th>NIS</th>
-                    <th>Ekskul</th>
-                    <th>Prestasi</th>
+                    <th>Jenis Sertifikat</th>
+                    <th>Deskripsi</th>
                     <th>Tanggal</th>
                     <th>Status</th>
                     <th class="text-end">Aksi</th>
@@ -192,9 +191,8 @@
                             <div class="text-muted" style="font-size: 0.75rem;">No. {{ $cert->nomor_sertifikat }}</div>
                         </td>
                         <td class="fw-semibold">{{ $cert->nama_siswa }}</td>
-                        <td>{{ $cert->nis }}</td>
-                        <td><span class="badge bg-secondary-subtle text-secondary px-2.5 py-1.5 rounded-pill">{{ $cert->ekskul }}</span></td>
-                        <td class="text-orange fw-medium">{{ $cert->prestasi ?? 'Peserta' }}</td>
+                        <td><span class="badge bg-primary-subtle text-primary px-2 py-1 rounded-pill">{{ $cert->jenis_sertifikat ?? '-' }}</span></td>
+                        <td class="text-muted" style="max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $cert->prestasi }}">{{ $cert->prestasi ?? '-' }}</td>
                         <td>{{ $cert->tanggal->translatedFormat('d M Y') }}</td>
                         <td>
                             @if($cert->status == 'Aktif')
@@ -232,7 +230,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center py-5 text-muted">
+                        <td colspan="7" class="text-center py-5 text-muted">
                             <i class="fa-solid fa-file-invoice fa-3x mb-3 d-block"></i>
                             <span>Sertifikat tidak ditemukan. Silakan tambahkan data baru atau ganti filter.</span>
                         </td>
