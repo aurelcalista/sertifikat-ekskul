@@ -386,6 +386,7 @@
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
             transition: all 0.3s ease;
         }
     </style>

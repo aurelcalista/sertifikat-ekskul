@@ -36,18 +36,16 @@
             letter-spacing: 0.5px;
         }
 
-        /* Unique Floating Glassmorphism Island Navbar */
+        /* Unified Floating Island Navbar */
         .navbar-custom {
             position: sticky;
             top: 15px;
             z-index: 1050;
-            background: rgba(255, 255, 255, 0.8) !important;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(231, 76, 60, 0.1);
+            background: #FFFFFF !important;
+            border: 1px solid #F3F4F6;
             border-radius: 50px;
             margin: 15px 10px 10px 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.01) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
             padding: 8px 20px !important;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
@@ -122,14 +120,18 @@
         }
         
         @media (max-width: 991.98px) {
+            .navbar-custom {
+                border-radius: 24px;
+            }
             .navbar-custom .navbar-collapse {
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                border-radius: 20px;
-                padding: 15px;
-                margin-top: 10px;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-                border: 1px solid rgba(231, 76, 60, 0.08);
+                background: transparent !important;
+                backdrop-filter: none !important;
+                border-radius: 0 !important;
+                padding: 12px 0 6px 0 !important;
+                margin-top: 10px !important;
+                box-shadow: none !important;
+                border: none !important;
+                border-top: 1px solid #F3F4F6 !important;
             }
             .navbar-custom .nav-item {
                 width: 100%;
@@ -183,10 +185,10 @@
         }
 
         .card-custom {
-            border: none;
+            border: 1px solid #F3F4F6;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            background: #FFFFFF;
             transition: all 0.3s ease;
         }
 

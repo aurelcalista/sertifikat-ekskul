@@ -250,7 +250,7 @@
                 <div class="position-absolute translate-middle-y end-0 top-0 bg-warning opacity-10 rounded-circle bg-glow-warning" style="width: 200px; height: 200px; filter: blur(40px);"></div>
                 
                 <!-- Certificate mockup preview -->
-                <div class="card card-custom p-4 text-center position-relative z-1 shadow hero-cert-card" style="max-width: 500px; margin: 0 auto; background-color: #FCFBF7; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; aspect-ratio: 297/210; overflow: hidden; display: flex; flex-direction: column;">
+                <div class="card card-custom p-4 text-center position-relative z-1 hero-cert-card" style="max-width: 500px; margin: 0 auto; background-color: #FFFFFF; border: 1px solid #F3F4F6; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border-radius: 8px; aspect-ratio: 297/210; overflow: hidden; display: flex; flex-direction: column;">
                     <!-- Elegant Double Border Frame -->
                     <div class="preview-border-outer"></div>
                     <div class="preview-border-inner"></div>

@@ -5,16 +5,16 @@
 @section('styles')
 <style>
     .preview-certificate-container {
-        background-color: #FCFAF5;
+        background-color: #FFFFFF;
         background-image: radial-gradient(rgba(200, 155, 60, 0.03) 1px, transparent 0), radial-gradient(rgba(200, 155, 60, 0.03) 1px, transparent 0);
         background-size: 8px 8px;
         background-position: 0 0, 4px 4px;
         position: relative;
         overflow: hidden;
         border-radius: 8px;
-        box-shadow: 0 12px 40px rgba(20, 33, 61, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
         padding: 1.25rem 1.5rem !important;
-        border: 1px solid rgba(200, 155, 60, 0.2);
+        border: 1px solid #F3F4F6;
     }
     @media (max-width: 991.98px) {
         .preview-certificate-container {

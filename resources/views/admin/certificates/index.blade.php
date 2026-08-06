@@ -167,7 +167,12 @@
                 <tr>
                     <th>Kode & No. Sertifikat</th>
                     <th>Nama Siswa</th>
+<<<<<<< HEAD
                     <th>Deskripsi / Teks Sertifikat</th>
+=======
+                    <th>Jenis Sertifikat</th>
+                    <th>Deskripsi</th>
+>>>>>>> d17b9ed44986acf11c0056920acd3dbe3e9fae0a
                     <th>Tanggal</th>
                     <th>Status</th>
                     <th class="text-end">Aksi</th>
@@ -181,7 +186,12 @@
                             <div class="text-muted" style="font-size: 0.75rem;">No. {{ $cert->nomor_sertifikat }}</div>
                         </td>
                         <td class="fw-semibold">{{ $cert->nama_siswa }}</td>
+<<<<<<< HEAD
                         <td class="text-secondary fw-medium" style="max-width: 300px; white-space: normal;">{{ Str::limit($cert->prestasi, 90) }}</td>
+=======
+                        <td><span class="badge bg-primary-subtle text-primary px-2 py-1 rounded-pill">{{ $cert->jenis_sertifikat ?? '-' }}</span></td>
+                        <td class="text-muted" style="max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $cert->prestasi }}">{{ $cert->prestasi ?? '-' }}</td>
+>>>>>>> d17b9ed44986acf11c0056920acd3dbe3e9fae0a
                         <td>{{ $cert->tanggal->translatedFormat('d M Y') }}</td>
                         <td>
                             @if($cert->status == 'Aktif')
@@ -219,7 +229,11 @@
                     </tr>
                 @empty
                     <tr>
+<<<<<<< HEAD
                         <td colspan="6" class="text-center py-5 text-muted">
+=======
+                        <td colspan="7" class="text-center py-5 text-muted">
+>>>>>>> d17b9ed44986acf11c0056920acd3dbe3e9fae0a
                             <i class="fa-solid fa-file-invoice fa-3x mb-3 d-block"></i>
                             <span>Sertifikat tidak ditemukan. Silakan tambahkan data baru atau ganti filter.</span>
                         </td>

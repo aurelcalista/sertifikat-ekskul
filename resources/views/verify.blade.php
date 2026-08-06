@@ -22,18 +22,17 @@
 
     /* Card Customization */
     .verify-card {
-        border: none;
         border-radius: 24px;
-        background: #ffffff;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.01);
-        border: 1px solid rgba(16, 185, 129, 0.12);
+        background: #FFFFFF;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        border: 1px solid #F3F4F6;
         overflow: hidden;
         position: relative;
     }
     
     .verify-card.invalid {
-        border-color: rgba(239, 68, 68, 0.12);
-        box-shadow: 0 20px 40px rgba(239, 68, 68, 0.02);
+        border-color: #F3F4F6;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
     }
 
     .card-glow-bar {
@@ -146,10 +145,10 @@
         color: #E74C3C;
         font-family: 'Courier New', Courier, monospace;
         letter-spacing: 0.5px;
-        background: #FFF5F5;
+        background: #F8FAFC;
         padding: 3px 10px;
         border-radius: 8px;
-        border: 1px solid #FFE3E3;
+        border: 1px solid #E2E8F0;
     }
 
     /* Badge Customizations */
@@ -177,10 +176,10 @@
 
     /* Troubleshooting styles */
     .troubleshoot-box {
-        background: #FFF5F5;
+        background: #F8FAFC;
         border-radius: 18px;
         padding: 22px;
-        border: 1px solid #FFE3E3;
+        border: 1px solid #F1F5F9;
     }
 
     .troubleshoot-item {
