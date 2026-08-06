@@ -84,6 +84,7 @@ class SiswaController extends Controller
                 'signature_base64' => $signature_base64,
                 'verify_url' => route('verify', $certificate->code),
                 'pdf_url' => route('download.pdf', $certificate->code),
+                'layout' => $certificate->template ? $certificate->template->layout : 'classic_gold',
             ]
         ]);
     }

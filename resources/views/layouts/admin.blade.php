@@ -401,14 +401,12 @@
             }
         </script>
 
-        <a href="{{ route('admin.dashboard') }}" class="sidebar-brand d-flex align-items-center gap-2 mb-4 py-2 text-decoration-none">
+        <a href="{{ route('admin.dashboard') }}" class="sidebar-brand d-flex align-items-center gap-2 mb-4 py-2 text-decoration-none" style="overflow: hidden;">
             <!-- Logo Emblem -->
-            <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain; flex-shrink: 0;">
-            <!-- Brand text -->
-            <div class="d-flex align-items-center">
-                <span class="fw-bold text-dark" style="font-size: 1.1rem; letter-spacing: -0.5px; line-height: 1;">Sertifikat</span>
-                <span class="fw-bold px-1 text-muted" style="font-size: 1.1rem; line-height: 1;">|</span>
-                <span class="fw-bold text-danger" style="font-size: 1.1rem; letter-spacing: -0.5px; line-height: 1;">Ekskul</span>
+            <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" style="height: 24px; width: auto; object-fit: contain; flex-shrink: 0;">
+            <!-- Small Sertifikat Label -->
+            <div>
+                <span class="text-uppercase fw-semibold" style="font-size: 0.65rem; color: #E74C3C; letter-spacing: 0.5px; background-color: #FEE2E2; padding: 2px 6px; border-radius: 6px; white-space: nowrap;">Sertifikat</span>
             </div>
         </a>
 
@@ -420,7 +418,7 @@
                 </a>
             </li>
             <li class="nav-menu-item">
-                <a href="{{ route('admin.certificates.index') }}" class="nav-menu-link {{ Request::routeIs('admin.certificates.index') || Request::routeIs('admin.certificates.edit') ? 'active' : '' }}">
+                <a href="{{ route('admin.certificates.index') }}" class="nav-menu-link {{ Request::routeIs('admin.certificates.index') || Request::routeIs('admin.certificates.edit') || Request::routeIs('admin.certificates.create') ? 'active' : '' }}">
                     <i class="fa-solid fa-file-invoice"></i><span>Data Sertifikat</span>
                 </a>
             </li>
@@ -474,9 +472,13 @@
                 
                 <!-- Admin Profile Info (Clickable Link to Profile Settings) -->
                 <a href="{{ route('admin.profile.edit') }}" class="d-flex align-items-center gap-2 text-decoration-none text-dark hover-opacity" title="Kelola Profil">
-                    <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">
-                        {{ substr(Auth::guard('admin')->user()->name, 0, 1) }}
-                    </div>
+                    @if(Auth::guard('admin')->user()->avatar)
+                        <img src="{{ asset('storage/' . Auth::guard('admin')->user()->avatar) }}" alt="Avatar" class="rounded-circle border" style="width: 40px; height: 40px; object-fit: cover;">
+                    @else
+                        <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">
+                            {{ substr(Auth::guard('admin')->user()->name, 0, 1) }}
+                        </div>
+                    @endif
                     <div class="d-none d-md-block text-start">
                         <span class="fw-semibold d-block small" style="color: var(--text-color);">{{ Auth::guard('admin')->user()->name }}</span>
                         <span class="text-muted small d-block" style="font-size: 0.75rem;">Administrator</span>

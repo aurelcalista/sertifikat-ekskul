@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'background_path', 'is_default'])]
+#[Fillable(['name', 'layout', 'background_path', 'is_default'])]
 class Template extends Model
 {
     use HasFactory;

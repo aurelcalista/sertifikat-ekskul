@@ -47,7 +47,9 @@ Route::middleware(AuthenticateAdmin::class)->prefix('admin')->name('admin.')->gr
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
 
-    // Profile
+    // Profile & Admin Accounts
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/store-admin', [ProfileController::class, 'storeAdmin'])->name('profile.store-admin');
+    Route::delete('/profile/admin/{id}', [ProfileController::class, 'destroyAdmin'])->name('profile.destroy-admin');
 });

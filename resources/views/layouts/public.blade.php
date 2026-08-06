@@ -234,12 +234,9 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('home') }}">
                 <!-- Logo Emblem -->
-                <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain; flex-shrink: 0;">
-                <!-- Brand text -->
-                <span class="fw-bold" style="color: #E74C3C; font-size: 1.15rem; letter-spacing: -0.5px;">Sertifikat</span>
-                <span class="fw-bold px-1 text-muted" style="font-size: 1.15rem;">|</span>
-                <span class="fw-bold text-dark" style="font-size: 1.15rem; letter-spacing: -0.5px;">Ekskul</span>
-                <span class="badge bg-danger text-white border border-danger ms-1 px-2.5 py-1 rounded-pill d-none d-sm-inline-block" style="font-size: 0.65rem; font-weight: 600;">Ekskul</span>
+                <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" style="height: 26px; width: auto; object-fit: contain; flex-shrink: 0;">
+                <!-- Small Sertifikat Label -->
+                <span class="text-uppercase fw-semibold" style="font-size: 0.65rem; color: #E74C3C; letter-spacing: 0.5px; background-color: #FEE2E2; padding: 2px 6px; border-radius: 6px; white-space: nowrap;">Sertifikat</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>

@@ -351,22 +351,7 @@
                             </div>
                         </div>
 
-                        <!-- Group 3: Penandatangan -->
-                        <div class="metadata-group text-start">
-                            <div class="metadata-group-title">
-                                <i class="fa-solid fa-file-signature"></i> Penandatangan
-                            </div>
-                            
-                            <div class="metadata-item">
-                                <span class="metadata-label"><i class="fa-solid fa-user-tie"></i> Nama Pembina</span>
-                                <span class="metadata-value">{{ $certificate->nama_pembina }}</span>
-                            </div>
-                            
-                            <div class="metadata-item">
-                                <span class="metadata-label"><i class="fa-solid fa-briefcase"></i> Jabatan</span>
-                                <span class="metadata-value text-muted">{{ $certificate->jabatan_pembina }}</span>
-                            </div>
-                        </div>
+
 
                         <!-- Action Buttons -->
                         <div class="mt-5 d-flex flex-wrap justify-content-center gap-3">

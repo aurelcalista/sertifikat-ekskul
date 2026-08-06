@@ -104,7 +104,7 @@ class CertificateController extends Controller
             'tanggal' => 'required|date',
             'nama_pembina' => 'required|string|max:255',
             'jabatan_pembina' => 'required|string|max:255',
-            'template_id' => 'required|exists:templates,id',
+            'template_id' => 'nullable|exists:templates,id',
             'status' => 'required|in:Aktif,Draft',
             'background_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'logo_sekolah_file' => 'nullable|image|mimes:png,jpg,jpeg|max:1048',
@@ -114,6 +114,11 @@ class CertificateController extends Controller
         ]);
 
         $data = $validated;
+
+        if (empty($data['template_id'])) {
+            $defaultTpl = Template::where('is_default', true)->first() ?: Template::first();
+            $data['template_id'] = $defaultTpl ? $defaultTpl->id : null;
+        }
 
         // Upload custom background
         if ($request->hasFile('background_file')) {
@@ -363,6 +368,7 @@ class CertificateController extends Controller
                 'pdf_url' => route('download.pdf', $certificate->code),
                 'edit_url' => route('admin.certificates.edit', $certificate->id),
                 'status' => $certificate->status,
+                'layout' => $certificate->template ? $certificate->template->layout : 'classic_gold',
             ]
         ]);
     }

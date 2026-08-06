@@ -15,6 +15,7 @@ class SettingController extends Controller
     public function index()
     {
         $admin = auth()->guard('admin')->user();
+        $allAdmins = \App\Models\Admin::latest()->get();
         $settings = [
             'app_name' => Setting::get('app_name', 'Sertifikat Ekskul'),
             'sekolah_default' => Setting::get('sekolah_default', ''),
@@ -24,7 +25,7 @@ class SettingController extends Controller
             'tanda_tangan_default' => Setting::get('tanda_tangan_default', null),
         ];
 
-        return view('admin.settings.index', compact('settings', 'admin'));
+        return view('admin.settings.index', compact('settings', 'admin', 'allAdmins'));
     }
 
     /**

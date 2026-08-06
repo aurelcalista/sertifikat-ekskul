@@ -19,19 +19,24 @@ class TemplateController extends Controller
     }
 
     /**
-     * Simpan template baru (upload gambar background).
+     * Simpan template baru (upload gambar background / pilih layout vector).
      */
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'background_file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'layout' => 'nullable|string|max:100',
+            'background_file' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $background_path = $request->file('background_file')->store('templates', 'public');
+        $background_path = null;
+        if ($request->hasFile('background_file')) {
+            $background_path = $request->file('background_file')->store('templates', 'public');
+        }
 
         Template::create([
             'name' => $request->name,
+            'layout' => $request->input('layout', 'classic_gold'),
             'background_path' => $background_path,
             'is_default' => false,
         ]);
@@ -52,7 +57,10 @@ class TemplateController extends Controller
         // Set template yang dipilih menjadi true
         $template->update(['is_default' => true]);
 
-        return redirect()->route('admin.templates.index')->with('success', "Template '{$template->name}' sekarang menjadi template default.");
+        // Update sertifikat tanpa background kustom ke template default baru
+        \App\Models\Certificate::whereNull('background_path')->update(['template_id' => $template->id]);
+
+        return redirect()->route('admin.templates.index')->with('success', "Template '{$template->name}' sekarang menjadi template default dan diterapkan pada sertifikat.");
     }
 
     /**

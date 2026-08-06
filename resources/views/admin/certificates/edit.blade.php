@@ -245,207 +245,187 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 bg-light">
-                <div class="preview-certificate-container p-3 p-md-4 mb-0 position-relative overflow-hidden" id="certificatePreviewArea" style="aspect-ratio: 297/210; min-height: 380px;">
-                    <!-- Template Background Image -->
-                    <img id="previewTemplateBg" src="{{ $certBgUrl }}" class="position-absolute top-0 start-0 w-100 h-100 {{ $certBgUrl ? '' : 'd-none' }}" style="object-fit: cover; z-index: 1;" alt="Background Template">
+<div class="preview-certificate-container bg-white position-relative overflow-hidden rounded-4 border shadow-sm p-4 text-center" style="aspect-ratio: 297 / 210; max-width: 660px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+    <!-- 1. Top-Left Technical Circular Line Pattern -->
+    <svg viewBox="0 0 250 250" style="position: absolute; top: 0; left: 0; width: 120px; height: 120px; z-index: 1; pointer-events: none;">
+        <g fill="none" stroke="#64748B" stroke-width="1.2" opacity="0.65">
+            <circle cx="0" cy="0" r="230" stroke-width="0.7"/>
+            <circle cx="0" cy="0" r="210" stroke-dasharray="4,4"/>
+            <circle cx="0" cy="0" r="190" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="170"/>
+            <circle cx="0" cy="0" r="150" stroke-dasharray="3,3"/>
+            <circle cx="0" cy="0" r="130" stroke-width="1.5"/>
+            <circle cx="0" cy="0" r="100"/>
+            <circle cx="0" cy="0" r="70" stroke-width="0.8"/>
+            <line x1="0" y1="0" x2="230" y2="0" stroke-width="1.2"/>
+            <line x1="0" y1="0" x2="212" y2="88"/>
+            <line x1="0" y1="0" x2="162" y2="162" stroke-width="1.2"/>
+            <line x1="0" y1="0" x2="88" y2="212"/>
+            <line x1="0" y1="0" x2="0" y2="230" stroke-width="1.2"/>
+            <circle cx="212" cy="88" r="3" fill="#64748B"/>
+            <circle cx="162" cy="162" r="3" fill="#64748B"/>
+            <circle cx="88" cy="212" r="3" fill="#64748B"/>
+        </g>
+    </svg>
 
-                    <!-- Navy Swoop Top-Right -->
-                    <svg class="custom-mockup-item" viewBox="0 0 400 300" style="position: absolute; top: 0; right: 0; width: 37%; height: auto; z-index: 1; pointer-events: none;">
-                        <path d="M 180,0 C 270,10 350,90 400,180 L 400,0 Z" fill="#14213D" />
-                        <path d="M 180,0 C 270,10 350,90 400,180" fill="none" stroke="#C89B3C" stroke-width="4" />
-                        <path d="M 160,0 C 250,10 330,90 380,180" fill="none" stroke="#C89B3C" stroke-width="1.5" />
-                    </svg>
+    <!-- 2. Top-Right Orange Geometric Angular Splash -->
+    <svg viewBox="0 0 350 300" style="position: absolute; top: 0; right: 0; width: 145px; height: 120px; z-index: 1; pointer-events: none;">
+        <g fill="#F15A3D">
+            <polygon points="120,0 350,0 350,220 280,180 260,250 210,170 170,220 140,110 80,140 100,50" />
+            <polygon points="260,190 350,120 350,270 290,260" fill="#D9482B"/>
+            <polygon points="180,210 240,290 280,240 220,180" fill="#FF6B4A"/>
+        </g>
+    </svg>
 
-                    <!-- Navy Swoop Bottom-Left -->
-                    <svg class="custom-mockup-item" viewBox="0 0 400 300" style="position: absolute; bottom: 0; left: 0; width: 37%; height: auto; z-index: 1; pointer-events: none;">
-                        <path d="M 0,120 C 50,210 130,290 220,300 L 0,300 Z" fill="#14213D" />
-                        <path d="M 0,120 C 50,210 130,290 220,300" fill="none" stroke="#C89B3C" stroke-width="4" />
-                        <path d="M 0,100 C 60,190 140,280 240,300" fill="none" stroke="#C89B3C" stroke-width="1.5" />
-                    </svg>
+    <!-- 3. Left Side Diagonal Gray Lines -->
+    <svg viewBox="0 0 60 220" style="position: absolute; top: 35%; left: 6px; width: 18px; height: 75px; z-index: 1; pointer-events: none;">
+        <g stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round">
+            <line x1="5" y1="20" x2="55" y2="45" />
+            <line x1="5" y1="40" x2="55" y2="65" />
+            <line x1="5" y1="60" x2="55" y2="85" />
+            <line x1="5" y1="80" x2="55" y2="105" />
+            <line x1="5" y1="100" x2="55" y2="125" />
+            <line x1="5" y1="120" x2="55" y2="145" />
+            <line x1="5" y1="140" x2="55" y2="165" />
+            <line x1="5" y1="160" x2="55" y2="185" />
+            <line x1="5" y1="180" x2="55" y2="205" />
+        </g>
+    </svg>
 
-                    <!-- Double Gold Borders -->
-                    <div class="custom-mockup-item" style="position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 2px solid #C89B3C; z-index: 2; pointer-events: none;"></div>
-                    <div class="custom-mockup-item" style="position: absolute; top: 9px; left: 9px; right: 9px; bottom: 9px; border: 0.75px solid #C89B3C; z-index: 2; pointer-events: none;"></div>
+    <!-- 4. Right Side Upward Stacked Chevrons -->
+    <svg viewBox="0 0 60 200" style="position: absolute; top: 35%; right: 6px; width: 18px; height: 80px; z-index: 1; pointer-events: none;">
+        <g fill="none" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+            <polyline points="10,35 30,15 50,35" stroke="#F15A3D" />
+            <polyline points="10,65 30,45 50,65" stroke="#F15A3D" />
+            <polyline points="10,95 30,75 50,95" stroke="#64748B" />
+            <polyline points="10,125 30,105 50,125" stroke="#64748B" />
+            <polyline points="10,155 30,135 50,155" stroke="#64748B" />
+            <polyline points="10,185 30,165 50,185" stroke="#CBD5E1" />
+        </g>
+    </svg>
 
-                    <!-- Geometric Corner Patterns -->
-                    <div class="custom-mockup-item" style="position: absolute; top: 9px; left: 9px; z-index: 3; pointer-events: none;">
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M 0,24 L 0,0 L 24,0 M 4,24 L 4,4 L 24,4 M 8,8 L 16,8 L 16,16 L 8,16" fill="none" stroke="#C89B3C" stroke-width="1.5" /></svg>
+    <!-- 5. Bottom Left Corner Diagonal Orange Lines -->
+    <svg viewBox="0 0 250 200" style="position: absolute; bottom: 0; left: 0; width: 120px; height: 90px; z-index: 1; pointer-events: none;">
+        <g stroke="#F15A3D" stroke-width="2.5" stroke-linecap="round">
+            <line x1="0" y1="200" x2="220" y2="20" stroke-width="3.5"/>
+            <line x1="0" y1="170" x2="190" y2="10" stroke-width="3"/>
+            <line x1="0" y1="140" x2="160" y2="0" stroke-width="2.5"/>
+            <line x1="0" y1="110" x2="130" y2="0" stroke-width="2"/>
+            <line x1="0" y1="80" x2="90" y2="0" stroke-width="1.5"/>
+            <line x1="0" y1="50" x2="50" y2="0" stroke-width="1"/>
+        </g>
+    </svg>
+
+    <!-- 6. Bottom Right Geometric L-shaped Grain Frame -->
+    <svg viewBox="0 0 250 250" style="position: absolute; bottom: 0; right: 0; width: 110px; height: 110px; z-index: 1; pointer-events: none;">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 40,240 L 240,240 L 240,40 M 70,240 L 240,240 L 240,70" stroke="#1E293B" stroke-width="2" />
+            <path d="M 10,240 L 240,240 L 240,10" stroke="#F15A3D" stroke-width="2" />
+            <path d="M 50,225 L 225,225 L 225,50" stroke="#F15A3D" stroke-width="1.5" />
+            <path d="M 80,210 L 160,210 L 160,180 L 180,180 L 180,160 L 210,160 L 210,80" stroke="#F15A3D" stroke-width="1.8" />
+            <g stroke="#F15A3D" stroke-width="1.5">
+                <line x1="160" y1="195" x2="85" y2="195" stroke-width="2"/>
+                <path d="M 115,195 Q 105,185 95,195 Q 105,205 115,195 Z" fill="#F15A3D" opacity="0.85"/>
+                <path d="M 130,195 Q 120,185 110,195 Q 120,205 130,195 Z" fill="#F15A3D" opacity="0.85"/>
+                <path d="M 145,195 Q 135,185 125,195 Q 135,205 145,195 Z" fill="#F15A3D" opacity="0.85"/>
+            </g>
+            <g stroke="#F15A3D" stroke-width="1.5">
+                <line x1="195" y1="160" x2="195" y2="85" stroke-width="2"/>
+                <path d="M 195,115 Q 185,105 195,95 Q 205,105 195,115 Z" fill="#F15A3D" opacity="0.85"/>
+                <path d="M 195,130 Q 185,120 195,110 Q 205,120 195,130 Z" fill="#F15A3D" opacity="0.85"/>
+                <path d="M 195,145 Q 185,135 195,125 Q 205,135 195,145 Z" fill="#F15A3D" opacity="0.85"/>
+            </g>
+        </g>
+    </svg>
+
+    <!-- CONTENT LAYER -->
+    <div class="position-relative w-100 h-100 d-flex flex-column justify-content-between" style="z-index: 5;">
+        <!-- Header Logo -->
+        <div class="text-center pt-1">
+            <img src="{{ asset('logos/logo-rakitai.png') }}" style="max-height: 44px; width: auto; display: inline-block;" alt="Logo Rakit AI">
+        </div>
+
+        <!-- Title Section -->
+        <div class="text-center my-1">
+            <h2 style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.95rem; font-weight: 700; color: #1F2A44; letter-spacing: 5px; margin: 0; text-transform: uppercase;">SERTIFIKAT</h2>
+            <p id="prevJenis" style="font-family: 'Poppins', sans-serif; font-size: 0.68rem; font-weight: 600; color: #F15A3D; letter-spacing: 3px; margin: 2px 0 4px 0; text-transform: uppercase;">SERTIFIKAT KEIKUTSERTAAN</p>
+            <div>
+                <span id="prevPillCode" style="border: 1.5px solid #1F2A44; border-radius: 14px; padding: 2px 14px; font-family: 'Poppins', sans-serif; font-size: 0.6rem; font-weight: 600; color: #1F2A44; display: inline-block;">Certificat No: -</span>
+            </div>
+        </div>
+
+        <!-- Recipient Section -->
+        <div class="text-center my-1">
+            <p style="font-family: 'Poppins', sans-serif; font-size: 0.68rem; color: #334155; margin-bottom: 2px;">Diberikan kepada:</p>
+            <h3 id="prevName" style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.65rem; font-weight: 700; color: #1F2A44; margin: 0; text-transform: uppercase; letter-spacing: 1px;">NAMA LENGKAP SISWA</h3>
+        </div>
+
+        <!-- Description Box -->
+        <div class="text-center px-4 my-2" style="margin-top: 12px !important;">
+            <p id="prevPrestasi" class="mb-0 text-secondary" style="font-family: 'Poppins', sans-serif; font-size: 0.68rem; line-height: 1.5;">Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri sekolah dengan predikat "Anggota/Peserta Aktif"</p>
+        </div>
+
+        <!-- Footer Bar -->
+        <div class="d-flex justify-content-between align-items-end w-100 pt-1" style="margin-top: auto;">
+            <!-- Left: QR Code -->
+            <div style="width: 30%; text-align: left;">
+                <div id="previewQrCode" style="width: 54px; height: 54px; border: 1.5px solid #CBD5E1; padding: 3px; border-radius: 8px; background: #FFFFFF; display: inline-block;"></div>
+            </div>
+
+            <!-- Center: Plain Gold Medal -->
+            <div style="width: 40%; text-align: center;">
+                <svg viewBox="0 0 100 130" style="width: 65px; height: 85px; display: inline-block; filter: drop-shadow(0px 3px 5px rgba(0,0,0,0.2));">
+    <defs>
+        <radialGradient id="gRadP_v3" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#FFF8DC" />
+            <stop offset="30%" stop-color="#FFD700" />
+            <stop offset="60%" stop-color="#DAA520" />
+            <stop offset="100%" stop-color="#8B6508" />
+        </radialGradient>
+        <radialGradient id="gEdgP_v3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFD700" />
+            <stop offset="100%" stop-color="#8B4513" />
+        </radialGradient>
+        <linearGradient id="rLP_v3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a3a7a" />
+            <stop offset="50%" stop-color="#2563EB" />
+            <stop offset="100%" stop-color="#1a3a7a" />
+        </linearGradient>
+        <linearGradient id="rRP_v3" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1a3a7a" />
+            <stop offset="50%" stop-color="#2563EB" />
+            <stop offset="100%" stop-color="#1a3a7a" />
+        </linearGradient>
+    </defs>
+    <polygon points="42,68 30,130 42,118 50,125" fill="url(#rLP_v3)" />
+    <polygon points="58,68 70,130 58,118 50,125" fill="url(#rRP_v3)" />
+    <circle cx="50" cy="50" r="40" fill="url(#gEdgP_v3)" stroke="#8B6508" stroke-width="1" stroke-dasharray="7.5 4.5" />
+    <circle cx="50" cy="50" r="37" fill="url(#gRadP_v3)" />
+    <circle cx="50" cy="50" r="33" fill="none" stroke="#B8860B" stroke-width="1.5" />
+    <circle cx="50" cy="50" r="31" fill="url(#gRadP_v3)" />
+    <circle cx="50" cy="50" r="27" fill="none" stroke="#B8860B" stroke-width="0.8" stroke-dasharray="3 2" />
+    <ellipse cx="40" cy="38" rx="10" ry="7" fill="#FFF8DC" opacity="0.35" />
+</svg>
+            </div>
+
+            <!-- Right: Date Only (NO KEPALA SEKOLAH TEXT) -->
+            <div style="width: 30%; text-align: right; padding-right: 5px;">
+                <div style="display: inline-block; text-align: right;">
+                    <div style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 0.82rem; color: #475569; font-style: italic; margin-bottom: 2px;">
+                        Diterbitkan pada tanggal
                     </div>
-                    <div class="custom-mockup-item" style="position: absolute; top: 9px; right: 9px; z-index: 3; transform: rotate(90deg); pointer-events: none;">
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M 0,24 L 0,0 L 24,0 M 4,24 L 4,4 L 24,4 M 8,8 L 16,8 L 16,16 L 8,16" fill="none" stroke="#C89B3C" stroke-width="1.5" /></svg>
+                    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 4px;">
+                        <span style="color: #94A3B8; font-size: 0.45rem;">&#9679; &#9679;</span>
+                        <span id="prevTanggal" style="font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; color: #0F172A;">-</span>
+                        <span style="color: #94A3B8; font-size: 0.45rem;">&#9679; &#9679;</span>
                     </div>
-                    <div class="custom-mockup-item" style="position: absolute; bottom: 9px; right: 9px; z-index: 3; transform: rotate(180deg); pointer-events: none;">
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M 0,24 L 0,0 L 24,0 M 4,24 L 4,4 L 24,4 M 8,8 L 16,8 L 16,16 L 8,16" fill="none" stroke="#C89B3C" stroke-width="1.5" /></svg>
-                    </div>
-                    <div class="custom-mockup-item" style="position: absolute; bottom: 9px; left: 9px; z-index: 3; transform: rotate(270deg); pointer-events: none;">
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M 0,24 L 0,0 L 24,0 M 4,24 L 4,4 L 24,4 M 8,8 L 16,8 L 16,16 L 8,16" fill="none" stroke="#C89B3C" stroke-width="1.5" /></svg>
-                    </div>
-
-                    <!-- Content -->
-                    <div class="position-relative h-100 d-flex flex-column" style="z-index: 5; gap: 0; text-align: left;">
-
-                        <!-- Header: Logo + Subtitle + Seal -->
-                        <div class="d-flex justify-content-between align-items-center pb-2" style="width: 100%;">
-                            <div style="width:48px;">
-                                <img id="prevLogo" src="" class="img-fluid" style="max-height: 44px; width: auto; mix-blend-mode: multiply;" alt="Logo">
-                            </div>
-                            <div class="text-center flex-grow-1">
-                                <p class="mb-0 text-uppercase fw-bold" style="font-size: 0.58rem; letter-spacing: 1px; color: #14213D; font-family:'Poppins', sans-serif;">Lembaga Pendidikan Sertifikasi Ekstrakurikuler</p>
-                                <p class="mb-0" style="font-size: 0.48rem; letter-spacing: 0.5px; color: #556270; margin-top: 1px; font-family:'Poppins', sans-serif;">Sertifikat Resmi Kegiatan Peserta Didik</p>
-                            </div>
-                            <div style="width: 44px; text-align: right;">
-                                <div class="custom-mockup-item" style="width: 32px; height: 32px; display: inline-block;">
-                                    <svg viewBox="0 0 100 100" width="100%" height="100%">
-                                        <circle cx="50" cy="50" r="45" fill="#C89B3C" />
-                                        <circle cx="50" cy="50" r="39" fill="#FCFAF5" />
-                                        <circle cx="50" cy="50" r="34" fill="#C89B3C" />
-                                        <polygon points="50,22 55,39 73,41 59,53 63,70 50,60 37,70 41,53 27,41 45,39" fill="#14213D" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Decorative horizontal gold divider under the header -->
-                        <div class="text-center w-100 custom-mockup-item" style="margin: 2px 0;">
-                            <svg width="60" height="6" viewBox="0 0 80 8" style="display: inline-block;">
-                                <line x1="0" y1="4" x2="32" y2="4" stroke="#C89B3C" stroke-width="0.75" />
-                                <polygon points="40,1 43,4 40,7 37,4" fill="#C89B3C" />
-                                <polygon points="48,2 50,4 48,6 46,4" fill="#C89B3C" />
-                                <polygon points="32,2 34,4 32,6 30,4" fill="#C89B3C" />
-                                <line x1="48" y1="4" x2="80" y2="4" stroke="#C89B3C" stroke-width="0.75" />
-                            </svg>
-                        </div>
-
-                        <!-- Title Section with ornaments above and below -->
-                        <div class="text-center w-100" style="margin-bottom: 2px; position: relative;">
-                            <!-- Decorative gold ornament above title -->
-                            <div class="text-center w-100 custom-mockup-item" style="margin-bottom: 1.5px;">
-                                <svg width="30" height="6" viewBox="0 0 80 8" style="display: inline-block;">
-                                    <line x1="0" y1="4" x2="32" y2="4" stroke="#C89B3C" stroke-width="0.5" />
-                                    <polygon points="40,2 43,4 40,6 37,4" fill="#C89B3C" />
-                                    <line x1="48" y1="4" x2="80" y2="4" stroke="#C89B3C" stroke-width="0.5" />
-                                </svg>
-                            </div>
-                            <h4 class="fw-bold mb-0 text-uppercase" style="font-family: 'Cormorant Garamond', 'Georgia', serif; color: #14213D; font-size: 1.85rem; letter-spacing: 6px; line-height: 1;">Sertifikat</h4>
-                            
-                            <div class="custom-mockup-item" style="border-top: 0.75px solid #C89B3C; border-bottom: 0.75px solid #C89B3C; padding: 2px 0; margin: 4px auto; width: 45%; text-align: center;">
-                                <p id="prevJenis" class="text-uppercase fw-bold mb-0" style="font-family: 'Poppins', sans-serif; color: #C89B3C; letter-spacing: 3px; font-size: 0.55rem;">SERTIFIKAT KEIKUTSERTAAN</p>
-                            </div>
-                            <!-- Decorative gold ornament below title -->
-                            <div class="text-center w-100 custom-mockup-item" style="margin-top: 1.5px;">
-                                <svg width="30" height="6" viewBox="0 0 80 8" style="display: inline-block;">
-                                    <line x1="0" y1="4" x2="32" y2="4" stroke="#C89B3C" stroke-width="0.5" />
-                                    <polygon points="40,2 43,4 40,6 37,4" fill="#C89B3C" />
-                                    <line x1="48" y1="4" x2="80" y2="4" stroke="#C89B3C" stroke-width="0.5" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- Recipient Section -->
-                        <div class="text-center w-100" style="position: relative; margin-top: 2px;">
-                            <!-- Subtle laurel wreath watermark behind the recipient name -->
-                            <div class="custom-mockup-item" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 90px; z-index: 1; opacity: 0.08; pointer-events: none;">
-                                <svg viewBox="0 0 200 130" width="100%" height="100%">
-                                    <path d="M 90,110 C 50,100 20,70 20,40 C 20,20 40,10 60,5" fill="none" stroke="#C89B3C" stroke-width="2" />
-                                    <path d="M 23,60 C 13,55 5,55 -2,60 C 3,63 13,63 23,60 Z" fill="#C89B3C" />
-                                    <path d="M 21,45 C 11,40 3,40 -4,45 C 1,48 11,48 21,45 Z" fill="#C89B3C" />
-                                    <path d="M 25,30 C 15,25 7,25 0,30 C 5,33 15,33 25,30 Z" fill="#C89B3C" />
-                                    <path d="M 110,110 C 150,100 180,70 180,40 C 180,20 160,10 140,5" fill="none" stroke="#C89B3C" stroke-width="2" />
-                                    <path d="M 177,60 C 187,55 195,55 202,60 C 197,63 187,63 177,60 Z" fill="#C89B3C" />
-                                    <path d="M 179,45 C 189,40 197,40 204,45 C 199,48 189,48 179,45 Z" fill="#C89B3C" />
-                                    <path d="M 175,30 C 185,25 193,25 200,30 C 195,33 185,33 175,30 Z" fill="#C89B3C" />
-                                </svg>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-center" style="margin-top: 4px; position: relative; z-index: 2;">
-                                <svg class="custom-mockup-item" width="18" height="10" viewBox="0 0 24 12" style="display: inline-block; margin-right: 6px;">
-                                    <path d="M 24,6 Q 12,0 0,6 Q 12,12 24,6 M 18,6 Q 12,3 6,6" fill="none" stroke="#C89B3C" stroke-width="1.2" />
-                                </svg>
-                                <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.75rem; color: #556270;">Dengan bangga diberikan kepada:</span>
-                                <svg class="custom-mockup-item" width="18" height="10" viewBox="0 0 24 12" style="display: inline-block; margin-left: 6px; transform: scaleX(-1);">
-                                    <path d="M 24,6 Q 12,0 0,6 Q 12,12 24,6 M 18,6 Q 12,3 6,6" fill="none" stroke="#C89B3C" stroke-width="1.2" />
-                                </svg>
-                            </div>
-
-                            <h5 class="mb-0" id="prevName" style="font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 2px; line-height: 1.1; color: #14213D !important; position: relative; z-index: 2;">Nama Lengkap Siswa</h5>
-                            
-                            <!-- Thin gold divider below the recipient name -->
-                            <div class="text-center custom-mockup-item" style="margin-top: 1px;">
-                                <svg width="30" height="6" viewBox="0 0 40 8" style="display: inline-block;">
-                                    <line x1="0" y1="4" x2="16" y2="4" stroke="#C89B3C" stroke-width="0.75" />
-                                    <polygon points="20,1 24,4 20,7 16,4" fill="#C89B3C" />
-                                    <line x1="24" y1="4" x2="40" y2="4" stroke="#C89B3C" stroke-width="0.75" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="text-center px-4 w-100" style="margin: 2px 0 4px;">
-                            <p class="mb-0 text-muted" id="prevPrestasi" style="line-height: 1.5; font-size: 0.72rem; font-family: 'Poppins', sans-serif;">
-                            </p>
-                        </div>
-
-                        <!-- Symmetrical Olive Branch + Book Badge at Bottom-Center -->
-                        <div class="text-center w-100 custom-mockup-item" style="margin-top: 2px; margin-bottom: 2px;">
-                            <svg width="180" height="30" viewBox="0 0 240 40" style="display: inline-block; vertical-align: middle;">
-                                <path d="M 90,20 Q 50,15 20,25" fill="none" stroke="#C89B3C" stroke-width="1.5" />
-                                <path d="M 80,19 C 75,15 70,15 65,17 C 70,20 75,20 80,19 Z" fill="#C89B3C" />
-                                <path d="M 65,17 C 60,13 55,13 50,15 C 55,18 60,18 65,17 Z" fill="#C89B3C" />
-                                <path d="M 50,15 C 45,11 40,11 35,13 C 40,16 45,16 50,15 Z" fill="#C89B3C" />
-                                <path d="M 75,18 C 72,12 67,10 62,12 C 66,16 70,17 75,18 Z" fill="#C89B3C" />
-                                <path d="M 60,16 C 57,10 52,8 47,10 C 51,14 55,15 60,16 Z" fill="#C89B3C" />
-                                <path d="M 150,20 Q 190,15 220,25" fill="none" stroke="#C89B3C" stroke-width="1.5" />
-                                <path d="M 160,19 C 165,15 170,15 175,17 C 170,20 165,20 160,19 Z" fill="#C89B3C" />
-                                <path d="M 175,17 C 180,13 185,13 190,15 C 185,18 180,18 175,17 Z" fill="#C89B3C" />
-                                <path d="M 190,15 C 195,11 200,11 205,13 C 200,16 195,16 190,15 Z" fill="#C89B3C" />
-                                <path d="M 165,18 C 168,12 173,10 178,12 C 174,16 170,17 165,18 Z" fill="#C89B3C" />
-                                <path d="M 180,16 C 183,10 188,8 193,12 C 189,14 185,15 180,16 Z" fill="#C89B3C" />
-                                <circle cx="120" cy="20" r="14" fill="#FCFAF5" stroke="#C89B3C" stroke-width="1.5" />
-                                <circle cx="120" cy="20" r="11" fill="none" stroke="#C89B3C" stroke-width="0.5" />
-                                <path d="M 119,16 Q 116,18 113,16 L 113,22 Q 116,24 119,22 Z" fill="none" stroke="#14213D" stroke-width="1.2" />
-                                <path d="M 121,16 Q 124,18 127,16 L 127,22 Q 124,24 121,22 Z" fill="none" stroke="#14213D" stroke-width="1.2" />
-                                <line x1="120" y1="16" x2="120" y2="22" stroke="#14213D" stroke-width="1.2" />
-                            </svg>
-                        </div>
-
-                        <!-- Footer: QR | Ornament | Nomor+Tanggal -->
-                        <div class="d-flex justify-content-between align-items-center w-100" style="padding-top: 4px; margin-top: auto; border-top: 1px solid rgba(232, 213, 163, 0.4);">
-
-                            <!-- Left: QR Code -->
-                            <div class="text-start" style="width: 25%;">
-                                <div class="border bg-white p-1 d-inline-block" style="border-color: #C89B3C !important; border-radius:4px;">
-                                    <div id="previewQrCode" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:0.35rem; color:#888;">QR</div>
-                                </div>
-                                <div class="text-muted" style="font-size:0.42rem; margin-top:1px; font-family:'Poppins',sans-serif;">Scan untuk Verifikasi</div>
-                            </div>
-
-                            <!-- Center: Horizontal Gold Ornament only (NO signature) -->
-                            <div class="text-center" style="width: 50%;">
-                                <svg class="custom-mockup-item" width="100" height="20" viewBox="0 0 120 24" style="display: inline-block;">
-                                    <path d="M 10,12 C 30,2 40,22 60,12 C 80,2 90,22 110,12" fill="none" stroke="#C89B3C" stroke-width="1" />
-                                    <circle cx="60" cy="12" r="4" fill="#C89B3C" />
-                                    <polygon points="60,2 64,8 60,10 56,8" fill="#C89B3C" />
-                                    <polygon points="60,22 64,16 60,14 56,16" fill="#C89B3C" />
-                                </svg>
-                            </div>
-
-                            <!-- Right: Nomor & Tanggal -->
-                            <div class="text-end" style="font-family:'Poppins',sans-serif; line-height: 1.1; width: 25%;">
-                                <div style="font-size:0.5rem; color:#556270; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
-                                <div class="fw-bold" style="font-size:0.68rem; color: #14213D;" id="prevNomor">-</div>
-                                
-                                <!-- Meta divider line -->
-                                <div class="custom-mockup-item" style="width: 80px; height: 1px; background-color: #C89B3C; margin: 3px 0 3px auto;"></div>
-
-                                <div style="font-size:0.5rem; color:#556270; text-transform:uppercase; letter-spacing:0.5px;">Diterbitkan pada</div>
-                                <div class="fw-bold" style="font-size:0.68rem; color: #14213D;" id="prevTanggal">-</div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <div style="height: 1.5px; background: linear-gradient(to right, transparent, #64748B, transparent); margin-top: 3px;"></div>
                 </div>
             </div>
-            <div class="modal-footer bg-light border-top px-4 py-3 justify-content-end">
+        </div>
+    </div>
+</div>
+<div class="modal-footer bg-light border-top px-4 py-3 justify-content-end">
                 <button type="button" class="btn btn-secondary rounded-3 btn-sm" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
@@ -535,7 +515,7 @@
             if (prevEkskul) prevEkskul.innerText = inputEkskul?.value || '-';
             if (prevEkskul2) prevEkskul2.innerText = inputEkskul?.value || '-';
             if (prevJenis) prevJenis.innerText = (inputJenis?.value || 'Sertifikat Keikutsertaan').toUpperCase();
-            if (prevNomor) prevNomor.innerText = inputNomor?.value || '-';
+            const prevPillCode = document.getElementById('prevPillCode'); if (prevPillCode) prevPillCode.innerText = 'Certificat No: ' + (inputNomor?.value || '-');
             
             if (prevPeriode) {
                 if (inputTanggal?.value) {

@@ -399,14 +399,9 @@
             <!-- Brand -->
             <div>
                 <a href="{{ route('home') }}" class="brand-header">
-                    <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="34" height="34" style="object-fit: contain;">
+                    <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" style="height: 28px; width: auto; object-fit: contain;">
                     <div>
-                        <div class="d-flex align-items-center">
-                            <span class="brand-text-large">Sertifikat</span>
-                            <span class="brand-text-divider px-1">|</span>
-                            <span class="brand-text-dark">Ekskul</span>
-                        </div>
-                        <span class="brand-sub">Penilaian Ekstrakurikuler</span>
+                        <span class="brand-sub" style="font-size: 0.7rem; color: #E74C3C; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; background-color: #FEE2E2; padding: 2px 6px; border-radius: 6px;">Sertifikat</span>
                     </div>
                 </a>
             </div>
@@ -544,14 +539,12 @@
                 
                 <!-- Card Header -->
                 <div class="card-header-custom text-center">
-                    <!-- School Logo (Replacing text and emblem box) -->
-                    <div class="mb-3">
-                        <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" width="70" height="70" style="object-fit: contain;">
+                    <!-- School Logo -->
+                    <div class="mb-2">
+                        <img src="{{ asset('logos/logo-rakitai.png') }}" alt="Logo" style="height: 40px; width: auto; object-fit: contain;">
                     </div>
-                    <div class="d-flex align-items-center justify-content-center mb-2">
-                        <span class="fw-bold" style="color: #E74C3C; font-size: 1.55rem; letter-spacing: -0.5px;">Sertifikat</span>
-                        <span class="fw-bold px-1 text-muted" style="font-size: 1.55rem;">|</span>
-                        <span class="fw-bold text-dark" style="font-size: 1.55rem; letter-spacing: -0.5px;">Ekskul</span>
+                    <div class="mb-2">
+                        <span class="text-uppercase fw-semibold" style="font-size: 0.7rem; color: #E74C3C; letter-spacing: 0.5px; background-color: #FEE2E2; padding: 2px 8px; border-radius: 6px; display: inline-block;">Sertifikat</span>
                     </div>
                     <p class="card-sub-custom">Masuk untuk melanjutkan ke dashboard manajemen</p>
                 </div>
