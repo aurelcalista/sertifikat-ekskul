@@ -28,26 +28,17 @@
         $upper_name = strtoupper($certificate->nama_siswa);
         $name_length = strlen($upper_name);
 
-        $fs = '38pt';
+        $fs = '36pt';
         if ($name_length > 40) {
-            $fs = '24pt';
+            $fs = '22pt';
         } elseif ($name_length > 30) {
-            $fs = '28pt';
+            $fs = '26pt';
         } elseif ($name_length > 20) {
-            $fs = '33pt';
+            $fs = '30pt';
         }
 
-        $medalSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" width="100" height="130">
-            <polygon points="42,68 30,130 42,118 50,125" fill="#1A3A7A" />
-            <polygon points="58,68 70,130 58,118 50,125" fill="#2563EB" />
-            <circle cx="50" cy="50" r="40" fill="#8B4513" stroke="#8B6508" stroke-width="1" />
-            <circle cx="50" cy="50" r="37" fill="#FFD700" />
-            <circle cx="50" cy="50" r="33" fill="none" stroke="#B8860B" stroke-width="1.5" />
-            <circle cx="50" cy="50" r="31" fill="#DAA520" />
-            <circle cx="50" cy="50" r="27" fill="none" stroke="#B8860B" stroke-width="0.8" />
-            <ellipse cx="40" cy="38" rx="10" ry="7" fill="#FFF8DC" opacity="0.45" />
-        </svg>';
-        $medal_base64 = 'data:image/svg+xml;base64,' . base64_encode($medalSvg);
+        $seal_base64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iNDgiIGhlaWdodD0iNDgiPgogICAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDYiIGZpbGw9IiNENEFGMzciIHN0cm9rZT0iI0RBQTUyMCIgc3Ryb2tlLXdpZHRoPSIyIiAvPgogICAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMiIgLz4KICAgIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjM4IiBmaWxsPSIjREFBNTIwIiAvPgogICAgPHBvbHlnb24gcG9pbnRzPSI1MCwyMCA1OCwzNiA3NiwzOCA2Myw1MSA2Niw2OSA1MCw2MCAzNCw2OSAzNyw1MSAyNCwzOCA0MiwzNiIgZmlsbD0iI0ZGRkZGRiIgLz4KPC9zdmc+';
+        $bg_base64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTIyIDc5MyIgd2lkdGg9IjExMjIiIGhlaWdodD0iNzk3Ij4KICAgIDxyZWN0IHg9IjIyIiB5PSIyMiIgd2lkdGg9IjEwNzgiIGhlaWdodD0iNzQ5IiBmaWxsPSJub25lIiBzdHJva2U9IiNENEFGMzciIHN0cm9rZS13aWR0aD0iMi41IiAvPgogICAgPHJlY3QgeD0iMzAiIHk9IjMwIiB3aWR0aD0iMTA2MiIgaGVpZ2h0PSI3MzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzBGMTcyQSIgc3Ryb2tlLXdpZHRoPSIxIiAvPgogICAgPHBvbHlsaW5lIHBvaW50cz0iNDQsMzUgMzUsMzUgMzUsNDQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLXdpZHRoPSIyLjUiIC8+CiAgICA8cG9seWxpbmUgcG9pbnRzPSIxMDg3LDQ0IDEwODcsMzUgMTA3OCwzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utd2lkdGg9IjIuNSIgLz4KICAgIDxwb2x5bGluZSBwb2ludHM9IjM1LDc0OSAzNSw3NTggNDQsNzU4IiBmaWxsPSJub25lIiBzdHJva2U9IiNENEFGMzciIHN0cm9rZS13aWR0aD0iMi41IiAvPgogICAgPHBvbHlsaW5lIHBvaW50cz0iMTA3OCw3NTggMTA4Nyw3NTggMTA4Nyw3NDkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLXdpZHRoPSIyLjUiIC8+Cjwvc3ZnPg==';
     @endphp
     <style>
         @page {
@@ -69,7 +60,7 @@
             width: 297mm;
             height: 210mm;
             position: relative;
-            background-color: #FCFAF5;
+            background-color: #FFFFFF;
             overflow: hidden;
             box-sizing: border-box;
         }
@@ -91,154 +82,185 @@
             height: 210mm;
             z-index: 10;
             box-sizing: border-box;
+            padding: 14mm 18mm;
         }
 
-        .header-section {
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .header-logo-cell {
+            width: 18%;
+            vertical-align: middle;
+            text-align: left;
+        }
+        .header-text-cell {
+            width: 64%;
+            vertical-align: middle;
             text-align: center;
-            padding-top: 14mm;
+        }
+        .header-seal-cell {
+            width: 18%;
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .inst-title {
+            font-size: 10.5pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #334155;
+            margin: 0;
+        }
+        .inst-subtitle {
+            font-size: 8pt;
+            color: #94A3B8;
+            letter-spacing: 0.5px;
+            margin: 2px 0 0 0;
+        }
+
+        .top-ornament {
+            text-align: center;
+            color: #D4AF37;
+            font-size: 10pt;
+            letter-spacing: 8px;
+            margin-top: 3mm;
         }
 
         .title-section {
             text-align: center;
-            margin-top: 3mm;
+            margin-top: 2mm;
         }
         .cert-title {
             font-family: 'Times-Bold', 'Georgia', serif;
-            font-size: 42pt;
+            font-size: 38pt;
             font-weight: bold;
-            color: #1F2A44;
-            letter-spacing: 9px;
+            color: #0F172A;
+            letter-spacing: 8px;
             margin: 0;
             text-transform: uppercase;
         }
         .cert-subtitle {
-            font-size: 15pt;
-            font-weight: bold;
-            color: #F15A3D;
-            letter-spacing: 5px;
-            margin: 4px 0 9px 0;
-            text-transform: uppercase;
-        }
-        .cert-pill {
-            border: 1.8pt solid #1F2A44;
-            border-radius: 16px;
-            padding: 4px 24px;
             font-size: 11pt;
             font-weight: bold;
-            color: #1F2A44;
-            display: inline-block;
+            color: #D4AF37;
+            letter-spacing: 4px;
+            margin: 2px 0 0 0;
+            text-transform: uppercase;
         }
 
-        .recipient-section {
-            text-align: center;
-            margin-top: 7mm;
+        .divider-table {
+            width: 50%;
+            margin: 3mm auto 2mm auto;
+            border-collapse: collapse;
         }
+        .divider-line {
+            border-bottom: 1pt solid #D4AF37;
+            width: 48%;
+        }
+        .divider-diamond {
+            color: #D4AF37;
+            font-size: 8pt;
+            width: 4%;
+            text-align: center;
+            padding: 0 4px;
+        }
+
         .given-to {
-            font-size: 13pt;
-            color: #334155;
-            margin: 0 0 2mm 0;
+            font-family: 'Times-Italic', 'Georgia', serif;
+            font-style: italic;
+            font-size: 12pt;
+            color: #64748B;
+            margin: 2mm 0 1mm 0;
+            text-align: center;
         }
         .recipient-name {
             font-family: 'Times-Bold', 'Georgia', serif;
             font-size: {{ $fs }};
             font-weight: bold;
-            color: #1F2A44;
-            margin: 0;
+            color: #1A1A2E;
+            margin: 2mm 0;
+            text-align: center;
             text-transform: uppercase;
             letter-spacing: 2px;
+        }
+        .name-underline {
+            width: 45%;
+            height: 1.5pt;
+            background-color: #D4AF37;
+            margin: 2.5mm auto 2mm auto;
         }
 
         .description-section {
             text-align: center;
-            width: 84%;
-            margin: 7mm auto 0 auto;
+            width: 82%;
+            margin: 4mm auto 0 auto;
         }
         .description-text {
-            font-size: 14pt;
-            line-height: 1.65;
+            font-size: 11.5pt;
+            line-height: 1.55;
             color: #334155;
             margin: 0;
         }
         .highlight-text {
-            color: #F15A3D;
+            color: #D4AF37;
             font-weight: bold;
         }
 
         .footer-wrapper {
             position: absolute;
-            bottom: 12mm;
-            left: 20mm;
-            width: 257mm;
+            bottom: 14mm;
+            left: 18mm;
+            width: 261mm;
             z-index: 20;
         }
-
         .footer-table {
             width: 100%;
             border-collapse: collapse;
         }
         .footer-qr-cell {
-            width: 30%;
+            width: 50%;
             vertical-align: bottom;
             text-align: left;
         }
-        .footer-center-cell {
-            width: 40%;
-            vertical-align: bottom;
-            text-align: center;
-        }
-        .footer-date-cell {
-            width: 30%;
+        .footer-info-cell {
+            width: 50%;
             vertical-align: bottom;
             text-align: right;
         }
 
         .qr-code-img {
-            width: 72px;
-            height: 72px;
-            border: 1.8px solid #CBD5E1;
-            padding: 3px;
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            border: 1.2pt solid #D4AF37;
+            padding: 2px;
             background-color: #FFFFFF;
             display: inline-block;
+            vertical-align: bottom;
         }
-
-        .medal-img {
-            width: 82px;
-            height: 108px;
-            display: inline-block;
-        }
-
-        .date-box {
-            display: inline-block;
-            text-align: right;
-        }
-        .date-label {
-            font-family: 'Times-Italic', 'Georgia', serif;
-            font-size: 12.5pt;
-            color: #475569;
-            font-style: italic;
-            margin-bottom: 3px;
-            text-align: right;
-        }
-        .date-value-wrap {
-            text-align: right;
-            white-space: nowrap;
-        }
-        .date-dot {
-            font-size: 9pt;
+        .qr-caption {
+            font-size: 7pt;
             color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-left: 6px;
+            vertical-align: bottom;
         }
-        .date-text {
-            font-size: 13.5pt;
+
+        .info-label {
+            font-size: 7.5pt;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1px;
+        }
+        .info-val {
+            font-size: 10pt;
             font-weight: bold;
             color: #0F172A;
-            margin: 0 5px;
-        }
-        .date-line {
-            height: 1.8px;
-            background-color: #64748B;
-            margin-top: 4px;
-            width: 100%;
+            margin-bottom: 2px;
         }
     </style>
 </head>
@@ -246,34 +268,54 @@
 
     <div class="certificate-container">
 
-        <!-- Rakit AI Vector Background Frame -->
-        <img class="bg-template" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTIyIDc5MyIgd2lkdGg9IjExMjIiIGhlaWdodD0iNzkzIj4KICAgIDwhLS0gMS4gVG9wLUxlZnQgVGVjaG5pY2FsIENpcmN1bGFyIExpbmUgUGF0dGVybiAtLT4KICAgIDxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY0NzQ4QiIgc3Ryb2tlLXdpZHRoPSIxLjIiIG9wYWNpdHk9IjAuNjUiPgogICAgICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyMzAiIHN0cm9rZS13aWR0aD0iMC43Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIxMCIgc3Ryb2tlLWRhc2hhcnJheT0iNCw0Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjE5MCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KICAgICAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMTcwIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjE1MCIgc3Ryb2tlLWRhc2hhcnJheT0iMywzIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjEzMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgICAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMTAwIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjcwIiBzdHJva2Utd2lkdGg9IjAuOCIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjIzMCIgeTI9IjAiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgICAgICAgPGxpbmUgeDE9IjAiIHkxPSIwIiB4Mj0iMjEyIiB5Mj0iODgiLz4KICAgICAgICA8bGluZSB4MT0iMCIgeTE9IjAiIHgyPSIxNjIiIHkyPSIxNjIiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgICAgICAgPGxpbmUgeDE9IjAiIHkxPSIwIiB4Mj0iODgiIHkyPSIyMTIiLz4KICAgICAgICA8bGluZSB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMjMwIiBzdHJva2Utd2lkdGg9IjEuMiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjIxMiIgY3k9Ijg4IiByPSIzIiBmaWxsPSIjNjQ3NDhCIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTYyIiBjeT0iMTYyIiByPSIzIiBmaWxsPSIjNjQ3NDhCIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iODgiIGN5PSIyMTIiIHI9IjMiIGZpbGw9IiM2NDc0OEIiLz4KICAgIDwvZz4KCiAgICA8IS0tIDIuIFRvcC1SaWdodCBPcmFuZ2UgR2VvbWV0cmljIEFuZ3VsYXIgU3BsYXNoIC0tPgogICAgPGcgZmlsbD0iI0YxNUEzRCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzcyLCAwKSI+CiAgICAgICAgPHBvbHlnb24gcG9pbnRzPSIxMjAsMCAzNTAsMCAzNTAsMjIwIDI4MCwxODAgMjYwLDI1MCAyMTAsMTcwIDE3MCwyMjAgMTQwLDExMCA4MCwxNDAgMTAwLDUwIiAvPgogICAgICAgIDxwb2x5Z29uIHBvaW50cz0iMjYwLDE5MCAzNTAsMTIwIDM1MCwyNzAgMjkwLDI2MCIgZmlsbD0iI0Q5NDgyQiIvPgogICAgICAgIDxwb2x5Z29uIHBvaW50cz0iMTgwLDIxMCAyNDAsMjkwIDI4MCwyNDAgMjIwLDE4MCIgZmlsbD0iI0ZGNkI0QSIvPgogICAgPC9nPgoKICAgIDwhLS0gMy4gTGVmdCBTaWRlIERpYWdvbmFsIEdyYXkgTGluZXMgLS0+CiAgICA8ZyBzdHJva2U9IiM5NEEzQjgiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwLCAyNjApIj4KICAgICAgICA8bGluZSB4MT0iNSIgeTE9IjIwIiB4Mj0iNTUiIHkyPSI0NSIgLz4KICAgICAgICA8bGluZSB4MT0iNSIgeTE9IjQwIiB4Mj0iNTUiIHkyPSI2NSIgLz4KICAgICAgICA8bGluZSB4MT0iNSIgeTE9IjYwIiB4Mj0iNTUiIHkyPSI4NSIgLz4KICAgICAgICA8bGluZSB4MT0iNSIgeTE9IjgwIiB4Mj0iNTUiIHkyPSIxMDUiIC8+CiAgICAgICAgPGxpbmUgeDE9IjUiIHkxPSIxMDAiIHgyPSI1NSIgeTI9IjEyNSIgLz4KICAgICAgICA8bGluZSB4MT0iNSIgeTE9IjEyMCIgeDI9IjU1IiB5Mj0iMTQ1IiAvPgogICAgICAgIDxsaW5lIHgxPSI1IiB5MT0iMTQwIiB4Mj0iNTUiIHkyPSIxNjUiIC8+CiAgICAgICAgPGxpbmUgeDE9IjUiIHkxPSIxNjAiIHgyPSI1NSIgeTI9IjE4NSIgLz4KICAgICAgICA8bGluZSB4MT0iNSIgeTE9IjE4MCIgeDI9IjU1IiB5Mj0iMjA1IiAvPgogICAgPC9nPgoKICAgIDwhLS0gNC4gUmlnaHQgU2lkZSBVcHdhcmQgU3RhY2tlZCBDaGV2cm9ucyAtLT4KICAgIDxnIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwNTUsIDI2MCkiPgogICAgICAgIDxwb2x5bGluZSBwb2ludHM9IjEwLDM1IDMwLDE1IDUwLDM1IiBzdHJva2U9IiNGMTVBM0QiIC8+CiAgICAgICAgPHBvbHlsaW5lIHBvaW50cz0iMTAsNjUgMzAsNDUgNTAsNjUiIHN0cm9rZT0iI0YxNUEzRCIgLz4KICAgICAgICA8cG9seWxpbmUgcG9pbnRzPSIxMCw5NSAzMCw3NSA1MCw5NSIgc3Ryb2tlPSIjNjQ3NDhCIiAvPgogICAgICAgIDxwb2x5bGluZSBwb2ludHM9IjEwLDEyNSAzMCwxMDUgNTAsMTI1IiBzdHJva2U9IiM2NDc0OEIiIC8+CiAgICAgICAgPHBvbHlsaW5lIHBvaW50cz0iMTAsMTU1IDMwLDEzNSA1MCwxNTUiIHN0cm9rZT0iIzY0NzQ4QiIgLz4KICAgICAgICA8cG9seWxpbmUgcG9pbnRzPSIxMCwxODUgMzAsMTY1IDUwLDE4NSIgc3Ryb2tlPSIjQ0JENUUxIiAvPgogICAgPC9nPgoKICAgIDwhLS0gNS4gQm90dG9tIExlZnQgQ29ybmVyIERpYWdvbmFsIE9yYW5nZSBMaW5lcyAtLT4KICAgIDxnIHN0cm9rZT0iI0YxNUEzRCIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwgNTkzKSI+CiAgICAgICAgPGxpbmUgeDE9IjAiIHkxPSIyMDAiIHgyPSIyMjAiIHkyPSIyMCIgc3Ryb2tlLXdpZHRoPSIzLjUiLz4KICAgICAgICA8bGluZSB4MT0iMCIgeTE9IjE3MCIgeDI9IjE5MCIgeTI9IjEwIiBzdHJva2Utd2lkdGg9IjMiLz4KICAgICAgICA8bGluZSB4MT0iMCIgeTE9IjE0MCIgeDI9IjE2MCIgeTI9IjAiIHN0cm9rZS13aWR0aD0iMi41Ii8+CiAgICAgICAgPGxpbmUgeDE9IjAiIHkxPSIxMTAiIHgyPSIxMzAiIHkyPSIwIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgICA8bGluZSB4MT0iMCIgeTE9IjgwIiB4Mj0iOTAiIHkyPSIwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNTAiIHgyPSI1MCIgeTI9IjAiIHN0cm9rZS13aWR0aD0iMSIvPgogICAgPC9nPgoKICAgIDwhLS0gNi4gQm90dG9tIFJpZ2h0IEdlb21ldHJpYyBMLXNoYXBlZCBHcmFpbiBGcmFtZSAtLT4KICAgIDxnIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODcyLCA1NDMpIj4KICAgICAgICA8cGF0aCBkPSJNIDQwLDI0MCBMIDI0MCwyNDAgTCAyNDAsNDAgTSA3MCwyNDAgTCAyNDAsMjQwIEwgMjQwLDcwIiBzdHJva2U9IiMxRTI5M0IiIHN0cm9rZS13aWR0aD0iMiIgLz4KICAgICAgICA8cGF0aCBkPSJNIDEwLDI0MCBMIDI0MCwyNDAgTCAyNDAsMTAiIHN0cm9rZT0iI0YxNUEzRCIgc3Ryb2tlLXdpZHRoPSIyIiAvPgogICAgICAgIDxwYXRoIGQ9Ik0gNTAsMjI1IEwgMjI1LDIyNSBMIDIyNSw1MCIgc3Ryb2tlPSIjRjE1QTNEIiBzdHJva2Utd2lkdGg9IjEuNSIgLz4KICAgICAgICA8cGF0aCBkPSJNIDgwLDIxMCBMIDE2MCwyMTAgTCAxNjAsMTgwIEwgMTgwLDE4MCBMIDE4MCwxNjAgTCAyMTAsMTYwIEwgMjEwLDgwIiBzdHJva2U9IiNGMTVBM0QiIHN0cm9rZS13aWR0aD0iMS44IiAvPgogICAgICAgIDxnIHN0cm9rZT0iI0YxNUEzRCIgc3Ryb2tlLXdpZHRoPSIxLjUiPgogICAgICAgICAgICA8bGluZSB4MT0iMTYwIiB5MT0iMTk1IiB4Mj0iODUiIHkyPSIxOTUiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICAgICAgICA8cGF0aCBkPSJNIDExNSwxOTUgUSAxMDUsMTg1IDk1LDE5NSBRIDEwNSwyMDUgMTE1LDE5NSBaIiBmaWxsPSIjRjE1QTNEIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0gMTMwLDE5NSBRIDEyMCwxODUgMTEwLDE5NSBRIDEyMCwyMDUgMTMwLDE5NSBaIiBmaWxsPSIjRjE1QTNEIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0gMTQ1LDE5NSBRIDEzNSwxODUgMTI1LDE5NSBRIDEzNSwyMDUgMTQ1LDE5NSBaIiBmaWxsPSIjRjE1QTNEIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICAgICAgPC9nPgogICAgICAgIDxnIHN0cm9rZT0iI0YxNUEzRCIgc3Ryb2tlLXdpZHRoPSIxLjUiPgogICAgICAgICAgICA8bGluZSB4MT0iMTk1IiB5MT0iMTYwIiB4Mj0iMTk1IiB5Mj0iODUiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICAgICAgICA8cGF0aCBkPSJNIDE5NSwxMTUgUSAxODUsMTA1IDE5NSw5NSBRIDIwNSwxMDUgMTk1LDExNSBaIiBmaWxsPSIjRjE1QTNEIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0gMTk1LDEzMCBRIDE4NSwxMjAgMTk1LDExMCBRIDIwNSwxMjAgMTk1LDEzMCBaIiBmaWxsPSIjRjE1QTNEIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0gMTk1LDE0NSBRIDE4NSwxMzUgMTk1LDEyNSBRIDIwNSwxMzUgMTk1LDE0NSBaIiBmaWxsPSIjRjE1QTNEIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=" alt="Background Vector">
+        <!-- Elegant Double Frame SVG Background -->
+        <img class="bg-template" src="{{ $bg_base64 }}" alt="Background Frame">
 
         <div class="content-layer">
-            <!-- Header Logo -->
-            <div class="header-section">
-                @if($logo_data)
-                    <img src="{{ $logo_data }}" style="max-height: 58px; width: auto;" alt="Logo">
-                @else
-                    <img src="{{ public_path('logos/logo-rakitai.png') }}" style="max-height: 58px; width: auto;" alt="Logo">
-                @endif
-            </div>
+            <!-- Header Table -->
+            <table class="header-table">
+                <tr>
+                    <td class="header-logo-cell">
+                        @if($logo_data)
+                            <img src="{{ $logo_data }}" style="max-height: 48px; width: auto;" alt="Logo">
+                        @else
+                            <img src="{{ public_path('logos/logo-rakitai.png') }}" style="max-height: 48px; width: auto;" alt="Logo">
+                        @endif
+                    </td>
+                    <td class="header-text-cell">
+                        <p class="inst-title">Lembaga Pendidikan Sertifikasi Ekstrakurikuler</p>
+                        <p class="inst-subtitle">Sertifikat Resmi Kegiatan Peserta Didik</p>
+                    </td>
+                    <td class="header-seal-cell">
+                        <img src="{{ $seal_base64 }}" style="width: 44px; height: 44px;" alt="Gold Seal">
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Header Bottom Line -->
+            <div style="border-bottom: 1pt solid #E8D5A3; margin-top: 3mm; width: 100%;"></div>
+
+            <!-- Decorative Top Ornament -->
+            <div class="top-ornament">✦ ✦ ✦</div>
 
             <!-- Title & Subtitle -->
             <div class="title-section">
-                <h2 class="cert-title">SERTIFIKAT</h2>
-                <p class="cert-subtitle">{{ strtoupper($certificate->jenis_sertifikat ?? 'SERTIFIKAT KEIKUTSERTAAN') }}</p>
+                <h1 class="cert-title">SERTIFIKAT</h1>
+                <p class="cert-subtitle">{{ strtoupper($certificate->jenis_sertifikat ?? 'SERTIFIKAT PENGHARGAAN') }}</p>
                 
-                <div style="text-align: center; margin-top: 3.5mm;">
-                    <span class="cert-pill">Certificat No: {{ $certificate->nomor_sertifikat }}</span>
-                </div>
+                <table class="divider-table">
+                    <tr>
+                        <td class="divider-line"></td>
+                        <td class="divider-diamond">◆</td>
+                        <td class="divider-line"></td>
+                    </tr>
+                </table>
             </div>
 
             <!-- Recipient Section -->
-            <div class="recipient-section">
-                <p class="given-to">Diberikan kepada:</p>
-                <h3 class="recipient-name">{{ $upper_name }}</h3>
-            </div>
+            <p class="given-to">Dengan bangga diberikan kepada:</p>
+            <h2 class="recipient-name">{{ $upper_name }}</h2>
+            <div class="name-underline"></div>
 
             <!-- Description Box -->
             <div class="description-section">
@@ -289,24 +331,18 @@
 
         <!-- Bottom Footer Wrapper -->
         <div class="footer-wrapper">
+            <div style="border-top: 1pt solid #E8D5A3; padding-top: 2.5mm; width: 100%;"></div>
             <table class="footer-table">
                 <tr>
                     <td class="footer-qr-cell">
                         <img src="{{ $qr_base64 }}" class="qr-code-img" alt="QR Code">
+                        <span class="qr-caption">Pindai verifikasi</span>
                     </td>
-                    <td class="footer-center-cell">
-                        <img src="{{ $medal_base64 }}" class="medal-img" alt="Gold Medal">
-                    </td>
-                    <td class="footer-date-cell">
-                        <div class="date-box">
-                            <div class="date-label">Diterbitkan pada tanggal</div>
-                            <div class="date-value-wrap">
-                                <span class="date-dot">&#9679; &#9679;</span>
-                                <span class="date-text">{{ $certificate->tanggal->translatedFormat('d F Y') }}</span>
-                                <span class="date-dot">&#9679; &#9679;</span>
-                            </div>
-                            <div class="date-line"></div>
-                        </div>
+                    <td class="footer-info-cell">
+                        <div class="info-label">Nomor Sertifikat</div>
+                        <div class="info-val">{{ $certificate->nomor_sertifikat }}</div>
+                        <div class="info-label" style="margin-top: 2px;">Diterbitkan pada</div>
+                        <div class="info-val" style="margin-bottom: 0;">{{ $certificate->tanggal->translatedFormat('d F Y') }}</div>
                     </td>
                 </tr>
             </table>

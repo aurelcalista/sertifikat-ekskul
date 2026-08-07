@@ -154,9 +154,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-4 bg-light">
-<div class="preview-certificate-container bg-white position-relative overflow-hidden rounded-4 border shadow-sm p-4 text-center" style="aspect-ratio: 297 / 210; max-width: 660px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
-    <!-- 1. Top-Left Technical Circular Line Pattern -->
-    <svg viewBox="0 0 250 250" style="position: absolute; top: 0; left: 0; width: 120px; height: 120px; z-index: 1; pointer-events: none;">
+<div class="preview-certificate-container bg-white position-relative overflow-hidden rounded-4 border shadow-sm p-4 text-center" style="aspect-ratio: 297 / 210; max-width: 720px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; justify-content: space-between;">
+    <!-- SVG Background Elements -->
+    <svg viewBox="0 0 250 250" style="position: absolute; top: 0; left: 0; width: 130px; height: 130px; z-index: 1; pointer-events: none;">
         <g fill="none" stroke="#64748B" stroke-width="1.2" opacity="0.65">
             <circle cx="0" cy="0" r="230" stroke-width="0.7"/>
             <circle cx="0" cy="0" r="210" stroke-dasharray="4,4"/>
@@ -176,18 +176,14 @@
             <circle cx="88" cy="212" r="3" fill="#64748B"/>
         </g>
     </svg>
-
-    <!-- 2. Top-Right Orange Geometric Angular Splash -->
-    <svg viewBox="0 0 350 300" style="position: absolute; top: 0; right: 0; width: 145px; height: 120px; z-index: 1; pointer-events: none;">
+    <svg viewBox="0 0 350 300" style="position: absolute; top: 0; right: 0; width: 160px; height: 135px; z-index: 1; pointer-events: none;">
         <g fill="#F15A3D">
             <polygon points="120,0 350,0 350,220 280,180 260,250 210,170 170,220 140,110 80,140 100,50" />
             <polygon points="260,190 350,120 350,270 290,260" fill="#D9482B"/>
             <polygon points="180,210 240,290 280,240 220,180" fill="#FF6B4A"/>
         </g>
     </svg>
-
-    <!-- 3. Left Side Diagonal Gray Lines -->
-    <svg viewBox="0 0 60 220" style="position: absolute; top: 35%; left: 6px; width: 18px; height: 75px; z-index: 1; pointer-events: none;">
+    <svg viewBox="0 0 60 220" style="position: absolute; top: 35%; left: 8px; width: 20px; height: 80px; z-index: 1; pointer-events: none;">
         <g stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round">
             <line x1="5" y1="20" x2="55" y2="45" />
             <line x1="5" y1="40" x2="55" y2="65" />
@@ -200,9 +196,7 @@
             <line x1="5" y1="180" x2="55" y2="205" />
         </g>
     </svg>
-
-    <!-- 4. Right Side Upward Stacked Chevrons -->
-    <svg viewBox="0 0 60 200" style="position: absolute; top: 35%; right: 6px; width: 18px; height: 80px; z-index: 1; pointer-events: none;">
+    <svg viewBox="0 0 60 200" style="position: absolute; top: 35%; right: 8px; width: 20px; height: 85px; z-index: 1; pointer-events: none;">
         <g fill="none" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
             <polyline points="10,35 30,15 50,35" stroke="#F15A3D" />
             <polyline points="10,65 30,45 50,65" stroke="#F15A3D" />
@@ -212,9 +206,7 @@
             <polyline points="10,185 30,165 50,185" stroke="#CBD5E1" />
         </g>
     </svg>
-
-    <!-- 5. Bottom Left Corner Diagonal Orange Lines -->
-    <svg viewBox="0 0 250 200" style="position: absolute; bottom: 0; left: 0; width: 120px; height: 90px; z-index: 1; pointer-events: none;">
+    <svg viewBox="0 0 250 200" style="position: absolute; bottom: 0; left: 0; width: 130px; height: 100px; z-index: 1; pointer-events: none;">
         <g stroke="#F15A3D" stroke-width="2.5" stroke-linecap="round">
             <line x1="0" y1="200" x2="220" y2="20" stroke-width="3.5"/>
             <line x1="0" y1="170" x2="190" y2="10" stroke-width="3"/>
@@ -224,9 +216,7 @@
             <line x1="0" y1="50" x2="50" y2="0" stroke-width="1"/>
         </g>
     </svg>
-
-    <!-- 6. Bottom Right Geometric L-shaped Grain Frame -->
-    <svg viewBox="0 0 250 250" style="position: absolute; bottom: 0; right: 0; width: 110px; height: 110px; z-index: 1; pointer-events: none;">
+    <svg viewBox="0 0 250 250" style="position: absolute; bottom: 0; right: 0; width: 120px; height: 120px; z-index: 1; pointer-events: none;">
         <g fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path d="M 40,240 L 240,240 L 240,40 M 70,240 L 240,240 L 240,70" stroke="#1E293B" stroke-width="2" />
             <path d="M 10,240 L 240,240 L 240,10" stroke="#F15A3D" stroke-width="2" />
@@ -247,88 +237,71 @@
         </g>
     </svg>
 
-    <!-- CONTENT LAYER -->
     <div class="position-relative w-100 h-100 d-flex flex-column justify-content-between" style="z-index: 5;">
-        <!-- Header Logo -->
-        <div class="text-center pt-1">
-            <img src="{{ asset('logos/logo-rakitai.png') }}" style="max-height: 44px; width: auto; display: inline-block;" alt="Logo Rakit AI">
+        <div class="text-center pt-1" style="margin-bottom: 10px;">
+            <img id="prevLogo" src="{{ asset('logos/logo-rakitai.png') }}" style="max-height: 42px; width: auto; display: inline-block;" alt="Logo Rakit AI">
         </div>
-
-        <!-- Title Section -->
         <div class="text-center my-1">
-            <h2 style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.95rem; font-weight: 700; color: #1F2A44; letter-spacing: 5px; margin: 0; text-transform: uppercase;">SERTIFIKAT</h2>
-            <p id="prevJenis" style="font-family: 'Poppins', sans-serif; font-size: 0.68rem; font-weight: 600; color: #F15A3D; letter-spacing: 3px; margin: 2px 0 4px 0; text-transform: uppercase;">SERTIFIKAT KEIKUTSERTAAN</p>
+            <h2 style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 2.05rem; font-weight: 700; color: #1F2A44; letter-spacing: 6px; margin: 0 0 4px 0; text-transform: uppercase;">SERTIFIKAT</h2>
+            <p id="prevJenis" style="font-family: 'Poppins', sans-serif; font-size: 0.72rem; font-weight: 600; color: #F15A3D; letter-spacing: 3px; margin: 3px 0 8px 0; text-transform: uppercase;">SERTIFIKAT KEIKUTSERTAAN</p>
             <div>
-                <span id="prevPillCode" style="border: 1.5px solid #1F2A44; border-radius: 14px; padding: 2px 14px; font-family: 'Poppins', sans-serif; font-size: 0.6rem; font-weight: 600; color: #1F2A44; display: inline-block;">Certificat No: -</span>
+                <span id="prevPillCode" style="border: 1.5px solid #1F2A44; border-radius: 14px; padding: 2px 14px; font-family: 'Poppins', sans-serif; font-size: 0.62rem; font-weight: 600; color: #1F2A44; display: inline-block;">Certificat No: -</span>
             </div>
         </div>
-
-        <!-- Recipient Section -->
         <div class="text-center my-1">
-            <p style="font-family: 'Poppins', sans-serif; font-size: 0.68rem; color: #334155; margin-bottom: 2px;">Diberikan kepada:</p>
-            <h3 id="prevName" style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.65rem; font-weight: 700; color: #1F2A44; margin: 0; text-transform: uppercase; letter-spacing: 1px;">NAMA LENGKAP SISWA</h3>
+            <p style="font-family: 'Poppins', sans-serif; font-size: 0.72rem; color: #475569; margin-bottom: 4px; letter-spacing: 0.5px;">Diberikan kepada:</p>
+            <h3 id="prevName" style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.75rem; font-weight: 700; color: #1F2A44; margin: 2px 0 0 0; text-transform: uppercase; letter-spacing: 1px;">NAMA LENGKAP SISWA</h3>
         </div>
-
-        <!-- Description Box -->
         <div class="text-center px-4 my-2" style="margin-top: 12px !important;">
-            <p id="prevDescription" class="mb-0 text-secondary" style="font-family: 'Poppins', sans-serif; font-size: 0.68rem; line-height: 1.5;">Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri sekolah dengan predikat "Anggota/Peserta Aktif"</p>
+            <p id="prevDescription" class="mb-0 text-secondary" style="font-family: 'Poppins', sans-serif; font-size: 0.78rem; line-height: 1.7; letter-spacing: 0.2px; margin-top: 8px; margin-bottom: 8px;">Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri.</p>
         </div>
-
-        <!-- Footer Bar -->
-        <div class="d-flex justify-content-between align-items-end w-100 pt-1" style="margin-top: auto;">
-            <!-- Left: QR Code -->
+        <div class="d-flex justify-content-between align-items-end w-100 pt-2" style="margin-top: auto;">
             <div style="width: 30%; text-align: left;">
-                <img id="prevQrCode" src="" style="width: 54px; height: 54px; border: 1.5px solid #CBD5E1; padding: 3px; border-radius: 8px; background: #FFFFFF; display: inline-block;" alt="QR Code">
+                <img id="prevQrCode" src="" style="width: 58px; height: 58px; border: 1.5px solid #CBD5E1; padding: 3px; border-radius: 8px; background: #FFFFFF; display: inline-block;" alt="QR Code">
             </div>
-
-            <!-- Center: Plain Gold Medal -->
             <div style="width: 40%; text-align: center;">
-                <svg viewBox="0 0 100 130" style="width: 65px; height: 85px; display: inline-block; filter: drop-shadow(0px 3px 5px rgba(0,0,0,0.2));">
-    <defs>
-        <radialGradient id="gRadP_v3" cx="40%" cy="35%" r="60%">
-            <stop offset="0%" stop-color="#FFF8DC" />
-            <stop offset="30%" stop-color="#FFD700" />
-            <stop offset="60%" stop-color="#DAA520" />
-            <stop offset="100%" stop-color="#8B6508" />
-        </radialGradient>
-        <radialGradient id="gEdgP_v3" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#FFD700" />
-            <stop offset="100%" stop-color="#8B4513" />
-        </radialGradient>
-        <linearGradient id="rLP_v3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1a3a7a" />
-            <stop offset="50%" stop-color="#2563EB" />
-            <stop offset="100%" stop-color="#1a3a7a" />
-        </linearGradient>
-        <linearGradient id="rRP_v3" x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#1a3a7a" />
-            <stop offset="50%" stop-color="#2563EB" />
-            <stop offset="100%" stop-color="#1a3a7a" />
-        </linearGradient>
-    </defs>
-    <polygon points="42,68 30,130 42,118 50,125" fill="url(#rLP_v3)" />
-    <polygon points="58,68 70,130 58,118 50,125" fill="url(#rRP_v3)" />
-    <circle cx="50" cy="50" r="40" fill="url(#gEdgP_v3)" stroke="#8B6508" stroke-width="1" stroke-dasharray="7.5 4.5" />
-    <circle cx="50" cy="50" r="37" fill="url(#gRadP_v3)" />
-    <circle cx="50" cy="50" r="33" fill="none" stroke="#B8860B" stroke-width="1.5" />
-    <circle cx="50" cy="50" r="31" fill="url(#gRadP_v3)" />
-    <circle cx="50" cy="50" r="27" fill="none" stroke="#B8860B" stroke-width="0.8" stroke-dasharray="3 2" />
-    <ellipse cx="40" cy="38" rx="10" ry="7" fill="#FFF8DC" opacity="0.35" />
-</svg>
+                <svg viewBox="0 0 100 130" style="width: 68px; height: 88px; display: inline-block; filter: drop-shadow(0px 3px 5px rgba(0,0,0,0.25));">
+                    <defs>
+                        <radialGradient id="gRadP_adminPrev" cx="40%" cy="35%" r="60%">
+                            <stop offset="0%" stop-color="#FFF8DC" />
+                            <stop offset="30%" stop-color="#FFD700" />
+                            <stop offset="60%" stop-color="#DAA520" />
+                            <stop offset="100%" stop-color="#8B6508" />
+                        </radialGradient>
+                        <radialGradient id="gEdgP_adminPrev" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#FFD700" />
+                            <stop offset="100%" stop-color="#8B4513" />
+                        </radialGradient>
+                        <linearGradient id="rLP_adminPrev" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#1a3a7a" />
+                            <stop offset="50%" stop-color="#2563EB" />
+                            <stop offset="100%" stop-color="#1a3a7a" />
+                        </linearGradient>
+                        <linearGradient id="rRP_adminPrev" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#1a3a7a" />
+                            <stop offset="50%" stop-color="#2563EB" />
+                            <stop offset="100%" stop-color="#1a3a7a" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="42,68 30,130 42,118 50,125" fill="url(#rLP_adminPrev)" />
+                    <polygon points="58,68 70,130 58,118 50,125" fill="url(#rRP_adminPrev)" />
+                    <circle cx="50" cy="50" r="40" fill="url(#gEdgP_adminPrev)" stroke="#8B6508" stroke-width="1" stroke-dasharray="7.5 4.5" />
+                    <circle cx="50" cy="50" r="37" fill="url(#gRadP_adminPrev)" />
+                    <circle cx="50" cy="50" r="33" fill="none" stroke="#B8860B" stroke-width="1.5" />
+                    <circle cx="50" cy="50" r="31" fill="url(#gRadP_adminPrev)" />
+                    <circle cx="50" cy="50" r="27" fill="none" stroke="#B8860B" stroke-width="0.8" stroke-dasharray="3 2" />
+                    <ellipse cx="40" cy="38" rx="10" ry="7" fill="#FFF8DC" opacity="0.35" />
+                </svg>
             </div>
-
-            <!-- Right: Date Only (NO KEPALA SEKOLAH TEXT) -->
             <div style="width: 30%; text-align: right; padding-right: 5px;">
                 <div style="display: inline-block; text-align: right;">
-                    <div style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 0.82rem; color: #475569; font-style: italic; margin-bottom: 2px;">
-                        Diterbitkan pada tanggal
-                    </div>
+                    <div style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 0.88rem; color: #475569; font-style: italic; margin-bottom: 3px;">Diterbitkan pada tanggal</div>
                     <div style="display: flex; align-items: center; justify-content: flex-end; gap: 4px;">
                         <span style="color: #94A3B8; font-size: 0.45rem;">&#9679; &#9679;</span>
-                        <span id="prevTanggal" style="font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; color: #0F172A;">-</span>
+                        <span id="prevTanggal" style="font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 700; color: #0F172A;">-</span>
                         <span style="color: #94A3B8; font-size: 0.45rem;">&#9679; &#9679;</span>
                     </div>
-                    <div style="height: 1.5px; background: linear-gradient(to right, transparent, #64748B, transparent); margin-top: 3px;"></div>
+                    <div style="height: 1.5px; background: linear-gradient(to right, transparent, #64748B, transparent); margin-top: 4px;"></div>
                 </div>
             </div>
         </div>
@@ -418,36 +391,14 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
 
             document.getElementById('prevTanggal').innerText = cert.tanggal;
             if (document.getElementById('prevPillCode')) document.getElementById('prevPillCode').innerText = 'Certificat No: ' + (cert.nomor_sertifikat || '-');
+            if (document.getElementById('prevNumber')) document.getElementById('prevNumber').innerText = cert.nomor_sertifikat || '-';
 
-            // Dynamic Font Sizing based on name and description lengths
+            // Dynamic Font Sizing
             const nameLen = namaSiswa.length;
-            const descLen = cert.prestasi ? cert.prestasi.length : 0;
-            let fs = '3rem';
-            if (descLen > 180) {
-                if (nameLen > 35) {
-                    fs = '1.6rem';
-                } else if (nameLen > 25) {
-                    fs = '1.9rem';
-                } else {
-                    fs = '2.2rem';
-                }
-            } else if (descLen > 120) {
-                if (nameLen > 35) {
-                    fs = '1.8rem';
-                } else if (nameLen > 25) {
-                    fs = '2.1rem';
-                } else {
-                    fs = '2.4rem';
-                }
-            } else {
-                if (nameLen > 40) {
-                    fs = '1.8rem';
-                } else if (nameLen > 30) {
-                    fs = '2.1rem';
-                } else if (nameLen > 20) {
-                    fs = '2.5rem';
-                }
-            }
+            let fs = '2.5rem';
+            if (nameLen > 35) fs = '1.7rem';
+            else if (nameLen > 25) fs = '2.0rem';
+            else if (nameLen > 18) fs = '2.2rem';
             document.getElementById('prevName').style.fontSize = fs;
 
             // Populate status badge

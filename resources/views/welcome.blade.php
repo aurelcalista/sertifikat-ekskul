@@ -250,82 +250,174 @@
                 <div class="position-absolute translate-middle-y end-0 top-0 bg-warning opacity-10 rounded-circle bg-glow-warning" style="width: 200px; height: 200px; filter: blur(40px);"></div>
                 
                 <!-- Certificate mockup preview -->
-                <div class="card card-custom p-4 text-center position-relative z-1 hero-cert-card" style="max-width: 500px; margin: 0 auto; background-color: #FFFFFF; border: 1px solid #F3F4F6; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border-radius: 8px; aspect-ratio: 297/210; overflow: hidden; display: flex; flex-direction: column;">
-                    <!-- Elegant Double Border Frame -->
-                    <div class="preview-border-outer"></div>
-                    <div class="preview-border-inner"></div>
+                <div class="card card-custom text-center position-relative z-1 hero-cert-card" style="max-width: 520px; margin: 0 auto; background-color: #FFFFFF; border: 1px solid #F3F4F6; box-shadow: 0 12px 40px rgba(20, 33, 61, 0.08); border-radius: 8px; aspect-ratio: 297/210; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 1.1rem 1.3rem !important;">
+                    <!-- SVG Background Elements -->
+                    <svg viewBox="0 0 250 250" style="position: absolute; top: 0; left: 0; width: 130px; height: 130px; z-index: 1; pointer-events: none;">
+                        <g fill="none" stroke="#64748B" stroke-width="1.2" opacity="0.65">
+                            <circle cx="0" cy="0" r="230" stroke-width="0.7"/>
+                            <circle cx="0" cy="0" r="210" stroke-dasharray="4,4"/>
+                            <circle cx="0" cy="0" r="190" stroke-width="1.2"/>
+                            <circle cx="0" cy="0" r="170"/>
+                            <circle cx="0" cy="0" r="150" stroke-dasharray="3,3"/>
+                            <circle cx="0" cy="0" r="130" stroke-width="1.5"/>
+                            <circle cx="0" cy="0" r="100"/>
+                            <circle cx="0" cy="0" r="70" stroke-width="0.8"/>
+                            <line x1="0" y1="0" x2="230" y2="0" stroke-width="1.2"/>
+                            <line x1="0" y1="0" x2="212" y2="88"/>
+                            <line x1="0" y1="0" x2="162" y2="162" stroke-width="1.2"/>
+                            <line x1="0" y1="0" x2="88" y2="212"/>
+                            <line x1="0" y1="0" x2="0" y2="230" stroke-width="1.2"/>
+                            <circle cx="212" cy="88" r="3" fill="#64748B"/>
+                            <circle cx="162" cy="162" r="3" fill="#64748B"/>
+                            <circle cx="88" cy="212" r="3" fill="#64748B"/>
+                        </g>
+                    </svg>
+                    <svg viewBox="0 0 350 300" style="position: absolute; top: 0; right: 0; width: 160px; height: 135px; z-index: 1; pointer-events: none;">
+                        <g fill="#F15A3D">
+                            <polygon points="120,0 350,0 350,220 280,180 260,250 210,170 170,220 140,110 80,140 100,50" />
+                            <polygon points="260,190 350,120 350,270 290,260" fill="#D9482B"/>
+                            <polygon points="180,210 240,290 280,240 220,180" fill="#FF6B4A"/>
+                        </g>
+                    </svg>
+                    <svg viewBox="0 0 60 220" style="position: absolute; top: 35%; left: 8px; width: 20px; height: 80px; z-index: 1; pointer-events: none;">
+                        <g stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round">
+                            <line x1="5" y1="20" x2="55" y2="45" />
+                            <line x1="5" y1="40" x2="55" y2="65" />
+                            <line x1="5" y1="60" x2="55" y2="85" />
+                            <line x1="5" y1="80" x2="55" y2="105" />
+                            <line x1="5" y1="100" x2="55" y2="125" />
+                            <line x1="5" y1="120" x2="55" y2="145" />
+                            <line x1="5" y1="140" x2="55" y2="165" />
+                            <line x1="5" y1="160" x2="55" y2="185" />
+                            <line x1="5" y1="180" x2="55" y2="205" />
+                        </g>
+                    </svg>
+                    <svg viewBox="0 0 60 200" style="position: absolute; top: 35%; right: 8px; width: 20px; height: 85px; z-index: 1; pointer-events: none;">
+                        <g fill="none" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+                            <polyline points="10,35 30,15 50,35" stroke="#F15A3D" />
+                            <polyline points="10,65 30,45 50,65" stroke="#F15A3D" />
+                            <polyline points="10,95 30,75 50,95" stroke="#64748B" />
+                            <polyline points="10,125 30,105 50,125" stroke="#64748B" />
+                            <polyline points="10,155 30,135 50,155" stroke="#64748B" />
+                            <polyline points="10,185 30,165 50,185" stroke="#CBD5E1" />
+                        </g>
+                    </svg>
+                    <svg viewBox="0 0 250 200" style="position: absolute; bottom: 0; left: 0; width: 130px; height: 100px; z-index: 1; pointer-events: none;">
+                        <g stroke="#F15A3D" stroke-width="2.5" stroke-linecap="round">
+                            <line x1="0" y1="200" x2="220" y2="20" stroke-width="3.5"/>
+                            <line x1="0" y1="170" x2="190" y2="10" stroke-width="3"/>
+                            <line x1="0" y1="140" x2="160" y2="0" stroke-width="2.5"/>
+                            <line x1="0" y1="110" x2="130" y2="0" stroke-width="2"/>
+                            <line x1="0" y1="80" x2="90" y2="0" stroke-width="1.5"/>
+                            <line x1="0" y1="50" x2="50" y2="0" stroke-width="1"/>
+                        </g>
+                    </svg>
+                    <svg viewBox="0 0 250 250" style="position: absolute; bottom: 0; right: 0; width: 120px; height: 120px; z-index: 1; pointer-events: none;">
+                        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M 40,240 L 240,240 L 240,40 M 70,240 L 240,240 L 240,70" stroke="#1E293B" stroke-width="2" />
+                            <path d="M 10,240 L 240,240 L 240,10" stroke="#F15A3D" stroke-width="2" />
+                            <path d="M 50,225 L 225,225 L 225,50" stroke="#F15A3D" stroke-width="1.5" />
+                            <path d="M 80,210 L 160,210 L 160,180 L 180,180 L 180,160 L 210,160 L 210,80" stroke="#F15A3D" stroke-width="1.8" />
+                            <g stroke="#F15A3D" stroke-width="1.5">
+                                <line x1="160" y1="195" x2="85" y2="195" stroke-width="2"/>
+                                <path d="M 115,195 Q 105,185 95,195 Q 105,205 115,195 Z" fill="#F15A3D" opacity="0.85"/>
+                                <path d="M 130,195 Q 120,185 110,195 Q 120,205 130,195 Z" fill="#F15A3D" opacity="0.85"/>
+                                <path d="M 145,195 Q 135,185 125,195 Q 135,205 145,195 Z" fill="#F15A3D" opacity="0.85"/>
+                            </g>
+                            <g stroke="#F15A3D" stroke-width="1.5">
+                                <line x1="195" y1="160" x2="195" y2="85" stroke-width="2"/>
+                                <path d="M 195,115 Q 185,105 195,95 Q 205,105 195,115 Z" fill="#F15A3D" opacity="0.85"/>
+                                <path d="M 195,130 Q 185,120 195,110 Q 205,120 195,130 Z" fill="#F15A3D" opacity="0.85"/>
+                                <path d="M 195,145 Q 185,135 195,125 Q 205,135 195,145 Z" fill="#F15A3D" opacity="0.85"/>
+                            </g>
+                        </g>
+                    </svg>
 
-                    <!-- Small Elegant Corner Brackets -->
-                    <div class="preview-corner-accent-tl"></div>
-                    <div class="preview-corner-accent-tr"></div>
-                    <div class="preview-corner-accent-bl"></div>
-                    <div class="preview-corner-accent-br"></div>
-                    
-                    <!-- Content -->
-                    <div class="position-relative h-100 d-flex flex-column" style="z-index: 5; text-align: left;">
-                        <!-- Header: Logo + Subtitle + Seal -->
-                        <div class="d-flex justify-content-between align-items-center pb-2 mb-2" style="border-bottom: 1px solid #e8d5a3; width: 100%;">
-                            <div style="width:48px;">
-                                <img src="{{ asset('logos/logo-rakitai.png') }}" class="img-fluid" style="max-height: 44px; width: auto; mix-blend-mode: multiply;" alt="Logo">
-                            </div>
-                            <div class="text-center flex-grow-1">
-                                <p class="mb-0 text-uppercase fw-bold" style="font-size: 0.58rem; letter-spacing: 1px; color: #334155;">Lembaga Pendidikan Sertifikasi Ekstrakurikuler</p>
-                                <p class="mb-0" style="font-size: 0.48rem; letter-spacing: 0.5px; color: #94A3B8; margin-top: 1px;">Sertifikat Resmi Kegiatan Peserta Didik</p>
-                            </div>
-                            <div style="width:44px;">
-                                <div class="preview-gold-seal-badge" style="width: 44px; height: 44px; border-width: 1.5px;">
-                                    <div class="preview-gold-seal-inner" style="top: 2px; left: 2px; right: 2px; bottom: 2px;">
-                                        <span style="font-size: 14px; color: #FFFFFF;">★</span>
-                                    </div>
-                                </div>
+                    <!-- Content Layer -->
+                    <div class="position-relative w-100 h-100 d-flex flex-column justify-content-between" style="z-index: 5;">
+                        <!-- Logo -->
+                        <div class="text-center" style="margin-bottom: 2px;">
+                            <img src="{{ asset('logos/logo-rakitai.png') }}" style="max-height: 36px; width: auto; display: inline-block;" alt="Logo Rakit AI">
+                        </div>
+
+                        <!-- Header Titles & Pill -->
+                        <div class="text-center my-0">
+                            <h2 style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.65rem; font-weight: 700; color: #1F2A44; letter-spacing: 5px; margin: 0 0 1px 0; text-transform: uppercase;">SERTIFIKAT</h2>
+                            <p style="font-family: 'Poppins', sans-serif; font-size: 0.6rem; font-weight: 600; color: #F15A3D; letter-spacing: 2.5px; margin: 1px 0 4px 0; text-transform: uppercase;">KEIKUTSERTAAN</p>
+                            <div>
+                                <span style="border: 1.2px solid #1F2A44; border-radius: 12px; padding: 1px 12px; font-family: 'Poppins', sans-serif; font-size: 0.52rem; font-weight: 600; color: #1F2A44; display: inline-block;">Certificat No: 124/SMK1/EKS/2026</span>
                             </div>
                         </div>
 
-                        <!-- Decorative top ornament -->
-                        <div class="text-center w-100 mb-1" style="margin-top: 2px;">
-                            <span style="color: #D4AF37; font-size: 0.65rem; letter-spacing: 6px;">✦ ✦ ✦</span>
+                        <!-- Recipient Section -->
+                        <div class="text-center my-0">
+                            <p style="font-family: 'Poppins', sans-serif; font-size: 0.6rem; color: #475569; margin-bottom: 1px; letter-spacing: 0.5px;">Diberikan kepada:</p>
+                            <h3 style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.45rem; font-weight: 700; color: #1F2A44; margin: 1px 0 0 0; text-transform: uppercase; letter-spacing: 1px;">Nama Lengkap Siswa</h3>
                         </div>
 
-                        <!-- Title + Recipient -->
-                        <div class="text-center w-100" style="margin-bottom: 2px;">
-                            <h4 class="fw-bold mb-0 text-uppercase" style="font-family: 'Cormorant Garamond', 'Georgia', serif; color: #0F172A; font-size: 2rem; letter-spacing: 5px; line-height: 1;">Sertifikat</h4>
-                            <p class="text-uppercase fw-bold mb-0" style="font-family: 'Poppins', sans-serif; color: #D4AF37; letter-spacing: 4px; font-size: 0.55rem; margin-top: 2px;">Sertifikat Penghargaan</p>
-
-                            <!-- Thin gold rule -->
-                            <div style="display:flex; align-items:center; margin: 4px auto; width: 70%;">
-                                <div style="flex:1; height:1px; background: linear-gradient(to right, transparent, #D4AF37);"></div>
-                                <span style="color:#D4AF37; font-size:0.6rem; margin: 0 4px;">◆</span>
-                                <div style="flex:1; height:1px; background: linear-gradient(to left, transparent, #D4AF37);"></div>
-                            </div>
-
-                            <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.75rem; color: #64748B;">Dengan bangga diberikan kepada:</div>
-                            <h5 class="mb-0" style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; font-weight: 400; letter-spacing: 1.5px; margin-top: 2px; line-height: 1.1; color: #1a1a2e !important;">Nama Lengkap Siswa</h5>
-                            <div style="width: 60%; height: 1.5px; background: linear-gradient(to right, transparent, #D4AF37, transparent); margin: 4px auto 2px;"></div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="text-center px-4 w-100" style="margin: 2px 0 4px;">
-                            <p class="mb-0" style="line-height: 1.5; font-size: 0.72rem; color: #334155; font-family: 'Poppins', sans-serif;">
-                                Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri.
+                        <!-- Description text -->
+                        <div class="text-center px-2 px-md-3 my-0" style="margin-top: 3px !important; margin-bottom: 3px !important;">
+                            <p class="mb-0 text-secondary" style="font-family: 'Poppins', sans-serif; font-size: 0.65rem; line-height: 1.45; letter-spacing: 0.1px;">
+                                Atas keikutsertaan, dedikasi, serta pencapaian prestasi luar biasa dalam program pengembangan diri sekolah dengan predikat <span style="color: #F15A3D; font-weight: 700;">"Anggota/Peserta Aktif"</span>
                             </p>
                         </div>
 
-                        <!-- Footer: QR | Nomor+Tanggal -->
-                        <div class="d-flex justify-content-between align-items-end w-100" style="border-top: 1px solid #e8d5a3; padding-top: 6px; margin-top: auto;">
+                        <!-- Footer Layer: QR Code | Gold Medal Ribbon | Tanggal -->
+                        <div class="d-flex justify-content-between align-items-end w-100 pt-1" style="margin-top: auto;">
                             <!-- QR Code -->
-                            <div class="text-start" style="width:68px;">
-                                <div class="border bg-white p-1 d-inline-block" style="border-color: #D4AF37 !important; border-radius:4px;">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sertifikat-ekskul.com/verify/SK-2026-XXXXXX" style="width:44px; height:44px; display:block;" alt="QR Code">
+                            <div style="width: 30%; text-align: left;">
+                                <div style="width: 48px; height: 48px; border: 1.2px solid #CBD5E1; padding: 2px; border-radius: 6px; background: #FFFFFF; display: inline-block;">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sertifikat-ekskul.com/verify/SK-2026-XXXXXX" style="width: 100%; height: 100%; display: block;" alt="QR Code">
                                 </div>
-                                <div class="text-muted" style="font-size:0.4rem; margin-top:1px; font-family:'Poppins',sans-serif; line-height:1;">Pindai verifikasi</div>
                             </div>
 
-                            <!-- Nomor & Tanggal -->
-                            <div class="text-end" style="font-family:'Poppins',sans-serif; line-height: 1.1;">
-                                <div style="font-size:0.5rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px;">Nomor Sertifikat</div>
-                                <div class="fw-bold" style="font-size:0.68rem; color:#0F172A;">SK-2026-XXXXXX</div>
-                                <div style="font-size:0.45rem; color:#94A3B8; text-transform:uppercase; letter-spacing:0.5px; margin-top:2px;">Diterbitkan pada</div>
-                                <div class="fw-bold" style="font-size:0.65rem; color:#0F172A;">30 Juli 2026</div>
+                            <!-- Center Gold Medal Ribbon SVG -->
+                            <div style="width: 40%; text-align: center;">
+                                <svg viewBox="0 0 100 130" style="width: 52px; height: 66px; display: inline-block; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.2));">
+                                    <defs>
+                                        <radialGradient id="gRadP_home" cx="40%" cy="35%" r="60%">
+                                            <stop offset="0%" stop-color="#FFF8DC" />
+                                            <stop offset="30%" stop-color="#FFD700" />
+                                            <stop offset="60%" stop-color="#DAA520" />
+                                            <stop offset="100%" stop-color="#8B6508" />
+                                        </radialGradient>
+                                        <radialGradient id="gEdgP_home" cx="50%" cy="50%" r="50%">
+                                            <stop offset="0%" stop-color="#FFD700" />
+                                            <stop offset="100%" stop-color="#8B4513" />
+                                        </radialGradient>
+                                        <linearGradient id="rLP_home" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#1a3a7a" />
+                                            <stop offset="50%" stop-color="#2563EB" />
+                                            <stop offset="100%" stop-color="#1a3a7a" />
+                                        </linearGradient>
+                                        <linearGradient id="rRP_home" x1="100%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="#1a3a7a" />
+                                            <stop offset="50%" stop-color="#2563EB" />
+                                            <stop offset="100%" stop-color="#1a3a7a" />
+                                        </linearGradient>
+                                    </defs>
+                                    <polygon points="42,68 30,130 42,118 50,125" fill="url(#rLP_home)" />
+                                    <polygon points="58,68 70,130 58,118 50,125" fill="url(#rRP_home)" />
+                                    <circle cx="50" cy="50" r="40" fill="url(#gEdgP_home)" stroke="#8B6508" stroke-width="1" stroke-dasharray="7.5 4.5" />
+                                    <circle cx="50" cy="50" r="37" fill="url(#gRadP_home)" />
+                                    <circle cx="50" cy="50" r="33" fill="none" stroke="#B8860B" stroke-width="1.5" />
+                                    <circle cx="50" cy="50" r="31" fill="url(#gRadP_home)" />
+                                    <circle cx="50" cy="50" r="27" fill="none" stroke="#B8860B" stroke-width="0.8" stroke-dasharray="3 2" />
+                                    <ellipse cx="40" cy="38" rx="10" ry="7" fill="#FFF8DC" opacity="0.35" />
+                                </svg>
+                            </div>
+
+                            <!-- Right Date -->
+                            <div style="width: 30%; text-align: right; padding-right: 2px;">
+                                <div style="display: inline-block; text-align: right;">
+                                    <div style="font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 0.72rem; color: #475569; font-style: italic; margin-bottom: 1px;">Diterbitkan pada tanggal</div>
+                                    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 3px;">
+                                        <span style="color: #94A3B8; font-size: 0.4rem;">&#9679; &#9679;</span>
+                                        <span style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; font-weight: 700; color: #0F172A;">05 August 2026</span>
+                                        <span style="color: #94A3B8; font-size: 0.45rem;">&#9679; &#9679;</span>
+                                    </div>
+                                    <div style="height: 1.5px; background: linear-gradient(to right, transparent, #64748B, transparent); margin-top: 2px;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
